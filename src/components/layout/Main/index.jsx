@@ -16,9 +16,11 @@ export default function MainApp(){
 
     function tour(){
         introJs().setOptions({
+            nextLabel: "Avançar",
+			prevLabel: "Anterior",
             steps: [{
               title: 'Welcome',
-              intro: 'Hello World! 👋',
+              intro: 'Este é o Temperium',
               element:document.querySelector("#tela1")
             },
             {
@@ -34,12 +36,17 @@ export default function MainApp(){
           }).start();
     }
 
+    tour()
+
 
     return (
         <main className={style.main_app}>
             <div className='card'></div>
             <div id="tour" className={style.content}>
-                <div id="tela1"></div>
+                <div id="tela1">
+                  <p id="font-custom" className="bg-gray-light text-gray-dark m-3 p-3 text-4xl eve">Mesma Coisa</p>
+                  <p className="bg-gray-light text-gray-dark m-3 p-3 text-4xl">Mesma Coisa</p>
+                </div>
                 <div id="tela2"></div>
                 <div id="tela3"></div>
                 <button onClick={tour} className="bg-gray-dark">TOUR</button>
