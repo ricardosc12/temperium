@@ -1,0 +1,78 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: rgb(3, 0, 7);
+}
+
+.header > svg {
+    filter: invert(95%) sepia(95%) saturate(21%) hue-rotate(348deg) brightness(102%) contrast(110%);
+}
+
+.header .windowOptions {
+    display: flex;
+}
+
+.header .windowOptions > :nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    /* background-color: red; */
+}
+
+.header .windowOptions > :nth-child(1)::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 1px;
+    background-color: white;
+}
+
+.header .windowOptions > :nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    /* background-color: red; */
+}
+
+.header .windowOptions > :nth-child(2)::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 12px;
+    border: 1px solid white;
+}
+
+.header .windowOptions > :nth-child(3) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    transform-origin: center;
+    transform: rotateZ(45deg);
+    /* background-color: red; */
+}
+
+.header .windowOptions > :nth-child(3)::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 1px;
+    background: white;
+}
+
+.header .windowOptions > :nth-child(3)::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 15px;
+    background: white;
+}
+

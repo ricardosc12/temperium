@@ -1,9 +1,10 @@
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
+import solidSvg from 'vite-plugin-solid-svg'
 const path = require('path')
 
 export default defineConfig({
-  plugins: [solidPlugin()],
+  plugins: [solidPlugin(), solidSvg()],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   // prevent vite from obscuring rust errors

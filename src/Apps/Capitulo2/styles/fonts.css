@@ -1,0 +1,28 @@
+@font-face {
+    font-family: Everett;
+    font-weight: 400;
+    src: url("/public/fonts/Everett-Regular.otf") format("opentype");
+  }
+  @font-face {
+    font-family: Everett;
+    font-weight: 300;
+    src: url("/public/fonts/Everett-Light.otf") format("opentype");
+  }
+  @font-face {
+    font-family: Everett;
+    font-weight: 600;
+    src: url("/public/fonts/Everett-Jana.otf") format("opentype");
+  }
+  @font-face {
+    font-family: Everett;
+    font-weight: 700;
+    src: url("/public/fonts/Everett-Medium.otf") format("opentype");
+  }
+  
+  @font-face {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    src: url("/public/fonts/Roboto-Medium.ttf") format('truetype');
+  }
+  

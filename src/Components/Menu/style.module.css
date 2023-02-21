@@ -1,0 +1,92 @@
+.menu_capitulos {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    padding: 2em 0;
+    transform: translateX(-120px);
+    pointer-events: none;
+    transition: transform 0.25s;
+    background-color: rgba(0,0,0,.3);
+    backdrop-filter: blur(5 px);
+    box-shadow: 0px 5px 20px rgba(0,0,0,.5);
+}
+
+.expand_menu {
+    pointer-events: all;
+    transform: translateX(0px);
+    transition: transform 0.25;
+}
+
+.black_screen {
+    pointer-events: none;
+    display: flex;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+}
+
+.black_screen_active {
+    opacity: 1;
+}
+
+.menu_capitulos > div {
+    cursor: pointer;
+    display: flex;
+    width: 90px;
+    height: 80px;
+    background-color: black;
+    margin: 10px 0px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_capitulos > div:hover {
+    background-color: rgba(40,40,40);
+}
+
+.button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 1rem;
+    left: 1rem;
+    border-radius: 12px;
+    background-color: rgba(250,250,250);
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.button_disable {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+.button:hover {
+    box-shadow: 0px 0px 15px #5F72BE;
+}
+
+.button > :nth-child(2) {
+    display: none;
+}
+
+.button:hover > :nth-child(2) {
+    display: flex;
+}
+
+.button:hover > :nth-child(1) {
+    display: none;
+}

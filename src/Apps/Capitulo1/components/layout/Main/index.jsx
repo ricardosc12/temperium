@@ -36,7 +36,7 @@ export default function MainApp(){
           }).start();
     }
 
-    tour()
+    // tour()
 
 
     return (

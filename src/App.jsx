@@ -1,17 +1,28 @@
 import { createSignal } from "solid-js";
 import { invoke } from "@tauri-apps/api/tauri";
-import './styles/tailwind.css'
-import './styles/fonts.css'
-import './styles/base.css'
-import Header from "@/components/molecules/Header";
-import MainApp from "@/components/layout/Main";
+import Cap1 from "./Apps/Capitulo1";
+import Cap2 from "./Apps/Capitulo2";
+import MenuCapitulos from "./Components/Menu";
 
 function App() {
 
+	const [cap, setCap] = createSignal(1)
+
 	return (
-		<div className="main">
-			<Header/>
-			<MainApp/>
+		<div className="eve">
+			<Switch fallback={<div>Not Found</div>}>
+				
+				<Match when={cap() === 1}>
+					<Cap1 />
+				</Match>
+
+				<Match when={cap() === 2}>
+					<Cap2 />
+				</Match>
+
+			</Switch>
+
+			<MenuCapitulos handleChange={setCap}/>
 		</div>
 	)
 }

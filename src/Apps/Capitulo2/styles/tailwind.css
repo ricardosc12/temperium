@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .eve {
+    font-family: Everett;
+    font-weight: 400;
+  }
+  .eve-li {
+    font-family: Everett;
+    font-weight: 300;
+  }
+  .eve-md {
+    font-family: Everett;
+    font-weight: 700;
+  }
+  .eve-jn {
+    font-family: Everett;
+    font-weight: 600;
+  }
+}
