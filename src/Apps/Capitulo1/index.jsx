@@ -4,12 +4,13 @@ import './styles/base.css'
 
 import MainApp from "./components/layout/Main";
 import Header from "./components/molecules/Header";
+import Tour from './components/molecules/Tour';
 
 export default function Cap1(){
 	return (
 		<div className="main">
+			<Tour/>
 			<Header/>
-			<div className='bg-primary'>CAPITULO 1</div>
 			<MainApp/>
 		</div>
 	)

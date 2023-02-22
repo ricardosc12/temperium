@@ -1,0 +1,69 @@
+.sidebar {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0px;
+    top: 0px;
+    left: 0px;
+    width: 65px;
+    height: 100%;
+    background-color: #111825;
+}
+
+.sidebar > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modules {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+}
+
+.icon {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+
+.icon::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 35px;
+    border-radius: 10px;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.icon:hover::before {
+    background-color: #283039;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.icon > svg {
+    filter: invert(91%) sepia(7%) saturate(132%) hue-rotate(163deg) brightness(84%) contrast(85%);
+}
+
+.config {
+    bottom: 20px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+
+.logo .icon {
+    margin-bottom: 20px;
+}
+
+.logo .icon > svg {
+    filter: drop-shadow( 0px 0px 10px #7F23E7) invert(91%) sepia(7%) saturate(132%) hue-rotate(163deg) brightness(84%) contrast(85%) ;
+}
