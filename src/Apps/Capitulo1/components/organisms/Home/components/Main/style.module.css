@@ -6,3 +6,12 @@
     flex: 1;
     height: 100%;
 }
+
+.area {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    min-height: 400px;
+    height: auto;
+    /* border: 1px solid red; */
+}

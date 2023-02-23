@@ -3,19 +3,27 @@ lockfileVersion: 5.4
 specifiers:
   '@tauri-apps/api': ^1.2.0
   '@tauri-apps/cli': ^1.2.2
+  '@thisbeyond/solid-dnd': ^0.7.4
   autoprefixer: ^10.4.13
+  immer: ^9.0.19
   intro.js: ^6.0.0
   postcss: ^8.4.21
   solid-js: ^1.4.7
+  solid-zustand: ^1.5.0
   tailwindcss: ^3.2.6
   vite: ^4.0.0
   vite-plugin-solid: ^2.3.0
   vite-plugin-solid-svg: ^0.6.0
+  zustand: ^4.3.3
 
 dependencies:
   '@tauri-apps/api': 1.2.0
+  '@thisbeyond/solid-dnd': 0.7.4_solid-js@1.6.10
+  immer: 9.0.19
   intro.js: 6.0.0
   solid-js: 1.6.10
+  solid-zustand: 1.5.0_snezoounu6gbyfv76cp3tq4ohe
+  zustand: 4.3.3_immer@9.0.19
 
 devDependencies:
   '@tauri-apps/cli': 1.2.3
@@ -703,6 +711,14 @@ packages:
       '@tauri-apps/cli-win32-x64-msvc': 1.2.3
     dev: true
 
+  /@thisbeyond/solid-dnd/0.7.4_solid-js@1.6.10:
+    resolution: {integrity: sha512-jgV9EtR3gAtVsILG8p1OAGrhHIgnK4W04YxpyLgJRCDKEFYQWuDrMdUe8F5Kc6pcVXlC4IMXr4cB8fS2Ut3/Ow==}
+    peerDependencies:
+      solid-js: ^1.5
+    dependencies:
+      solid-js: 1.6.10
+    dev: false
+
   /@trysound/sax/0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
@@ -1095,6 +1111,10 @@ packages:
     resolution: {integrity: sha512-DV5Ln36z34NNTDgnz0EWGBLZENelNAtkiFA4kyNOG2tDI6Mz1uSWiq1wAKdyjnJwyDiDO7Fa2SO1CTxPXL8VxA==}
     dev: true
 
+  /immer/9.0.19:
+    resolution: {integrity: sha512-eY+Y0qcsB4TZKwgQzLaE/lqYMlKhv5J9dyd2RhhtGhNo2njPXDqU9XPfcNfa3MIDsdtZt5KlkIsirlo4dHsWdQ==}
+    dev: false
+
   /intro.js/6.0.0:
     resolution: {integrity: sha512-ZUiR6BoLSvPSlLG0boewnWVgji1fE1gBvP/pyw5pgCKXEDQz1mMeUxarggClPNs71UTq364LwSk9zxz17A9gaQ==}
     dev: false
@@ -1383,6 +1403,16 @@ packages:
       solid-js: 1.6.10
     dev: true
 
+  /solid-zustand/1.5.0_snezoounu6gbyfv76cp3tq4ohe:
+    resolution: {integrity: sha512-SkbYulMm1ASWAad8y7/o4ZAdL4JhK7TnaVk5y/N8PmnowVyGJDClILUfB9/pVBlzEb/oQkfvOH86VgHV4saA4w==}
+    peerDependencies:
+      solid-js: '>=1.4.0'
+      zustand: ^4.1.0
+    dependencies:
+      solid-js: 1.6.10
+      zustand: 4.3.3_immer@9.0.19
+    dev: false
+
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
@@ -1481,6 +1511,12 @@ packages:
       picocolors: 1.0.0
     dev: true
 
+  /use-sync-external-store/1.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dev: false
+
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
@@ -1575,3 +1611,19 @@ packages:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
     engines: {node: '>= 6'}
     dev: true
+
+  /zustand/4.3.3_immer@9.0.19:
+    resolution: {integrity: sha512-x2jXq8S0kfLGNwGh87nhRfEc2eZy37tSatpSoSIN+O6HIaBhgQHSONV/F9VNrNcBcKQu/E80K1DeHDYQC/zCrQ==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      immer: 9.0.19
+      use-sync-external-store: 1.2.0
+    dev: false

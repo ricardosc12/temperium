@@ -23,6 +23,6 @@
 }
 
 .tour > svg {
-    margin-right: 5px;
+    margin-right: 8px;
     filter: invert(40%) sepia(100%) saturate(3600%) hue-rotate(259deg) brightness(90%) contrast(60%);
 }

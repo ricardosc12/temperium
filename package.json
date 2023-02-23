@@ -21,7 +21,11 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1.2.0",
+    "@thisbeyond/solid-dnd": "^0.7.4",
+    "immer": "^9.0.19",
     "intro.js": "^6.0.0",
-    "solid-js": "^1.4.7"
+    "solid-js": "^1.4.7",
+    "solid-zustand": "^1.5.0",
+    "zustand": "^4.3.3"
   }
 }

@@ -1,4 +1,9 @@
 
+  
+* {
+  user-select: none;
+}
+
 body {
     background-color: #F5F7FA !important;
   }
@@ -7,7 +12,8 @@ body {
     font-family: Everett;
     font-weight: 400;
   } */
-  
+
+
   .main {
       display: flex;
       position: absolute;
