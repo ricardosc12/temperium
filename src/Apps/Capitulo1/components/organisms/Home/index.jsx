@@ -17,16 +17,28 @@ import { CLASS_NAME } from "./storage";
 
 export default function HomePage(){
 
-    const { dispatch:{ addInside, removeInside} } = useStore(state=>state.change)
+    const { dispatch:{ addInside, removeInside, transferSide} } = useStore(state=>state.change)
 
     const [atual, setAtual] = createSignal(null)
 
     const onDragEnd = ({ droppable, draggable }) => {
         setAtual(null)
-        if (droppable && !draggable?.id?.includes('i')) {
-            addInside(draggable.id)
+        console.log(droppable?.id)
+        console.log(draggable?.id)
+        if (droppable) {
+            if(draggable?.id?.includes('i') && draggable.id.split('/')[1] != droppable.id) {
+                transferSide({drop:{
+                    from: draggable.id.split('/')[1],
+                    to: droppable.id
+                    },
+                    drag:draggable.id.split('-')[1]
+                })
+            }
+            else if (!draggable?.id?.includes('i')){
+                addInside({drag:draggable.id,drop:droppable.id})
+            }
         } else if (!droppable) {
-            removeInside(draggable.id.split('-')[1])
+            removeInside({drop:draggable.data.drop, drag:draggable.id.split('-')[1]})
         }
     };
 
