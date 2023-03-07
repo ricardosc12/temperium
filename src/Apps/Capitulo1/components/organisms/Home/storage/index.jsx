@@ -48,5 +48,7 @@ export const CLASS_NAME = {
     oc:"Organização Computacional",
     bd:"Banco de Dados",
     meta:"Meta-Heurística",
-    comp:"Compiladores"
+    comp:"Compiladores",
+    comp_sm1_atv1: "Compiladores - Estudo",
+    comp_sm1_atv2: "Compiladores - Trabalho Prático"
 }

@@ -34,33 +34,38 @@ const Droppable = ({id,...props}) => {
     );
 };
 
+const DroppableArea=({id, title, inside})=>{
+    return (
+        <Droppable id={id} className={'border-black-fundo mx-2'}>
+            <h1 className='m-2 color-black-fundo'>{title}</h1>
+            <div className={style.area}>
+                <For each={Object.values(inside[id]||{})}>
+                    {(item)=>{
+                        return <Draggable id={item.id} drop={item.drop}/>
+                    }}
+                </For>
+            </div>
+        </Droppable>
+    )
+}
+
 export default function Main(){
 
     const inside = useStore(state=>state.dados.inside)
 
     return (
         <div className={style.main} id="main_content">
-            <Droppable id="seg" className={'border-green mx-5'}>
-                <h1 className='m-2'>Segunda-Feira</h1>
-                <div className={style.area}>
-                    <For each={Object.values(inside['seg']||{})}>
-                        {(item)=>{
-                            return <Draggable id={item.id} drop={item.drop}/>
-                        }}
-                    </For>
-                </div>
-            </Droppable>
 
-            <Droppable id="terc" className={'border-green mx-5'}>
-                <h1 className='m-2'>Terça-Feira</h1>
-                <div className={style.area}>
-                    <For each={Object.values(inside['terc']||{})}>
-                        {(item)=>{
-                            return <Draggable id={item.id} drop={item.drop}/>
-                        }}
-                    </For>
-                </div>
-            </Droppable>
+            <DroppableArea id="seg" title="Segunda-Feira" inside={inside}/>
+
+            <DroppableArea id="terc" title="Terça-Feira" inside={inside}/>
+
+            <DroppableArea id="quart" title="Quarta-Feira" inside={inside}/>
+
+            <DroppableArea id="quint" title="Quinta-Feira" inside={inside}/>
+
+            <DroppableArea id="sext" title="Sexta-Feira" inside={inside}/>
+
         </div>
     )
 }

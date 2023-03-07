@@ -12,7 +12,9 @@ export default function MainApp(){
     return (
         <main className={style.main_app}>
 			<div className={style.content}>
+
 				<Sidebar setRoute={setRoute}/>
+
 				<div className={style.main_content}>
 					<Switch fallback={<div>Not Found</div>}>
 					
@@ -26,6 +28,7 @@ export default function MainApp(){
 
 					</Switch>
 				</div>
+				
 			</div>
         </main>
     )

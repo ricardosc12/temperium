@@ -1,28 +1,22 @@
 import style from './style.module.css'
-import {
-    createDraggable,
-} from "@thisbeyond/solid-dnd";
-
-const Draggable = ({id,children}) => {
-    const draggable = createDraggable(id);
-    return (
-        <div use:draggable className={`
-        cursor-pointer
-        ${draggable.isActiveDraggable?'opacity-75 border-green':''}`}>
-            {children}
-        </div>
-    );
-};
+import { AtividadeIcon } from '@/Apps/Capitulo1/assets/Icons';
+import { CardAtividade } from './Card';
 
 export default function Atividades(){
     return (
         <div className={style.atividades} id="atividades">
-            <h2 className='m-3 ml-5 mb-6 text-icons-header-hover tracking-wider'>Atividades</h2>
+            <div className='m-3 ml-5 mb-6 flex-row flex justify-between'>
+                <h2 className='eve-md'>Disciplinas</h2>
+                <div className='flex justify-center items-center background-black-destaq p-1 rounded-md'>
+                    <AtividadeIcon/>
+                </div>
+            </div>
             <div className={style.atividades_list}>
-                <Draggable id={'po'}><div><p>
+                <CardAtividade id={'comp'} label={'Compiladores'}/>
+                {/* <Draggable id={'po'}><div><p>
                     Programação Orientada a Objetos
-                    </p></div></Draggable>
-                <Draggable id={'oc'}><div><p>
+                    </p></div></Draggable> */}
+                {/* <Draggable id={'oc'}><div><p>
                     Organização Computacional
                     </p></div></Draggable>
                 <Draggable id={'bd'}><div><p>
@@ -33,7 +27,7 @@ export default function Atividades(){
                     </p></div></Draggable>
                 <Draggable id={'comp'}><div><p>
                     Compiladores
-                    </p></div></Draggable>
+                    </p></div></Draggable> */}
             </div>
         </div>
     )

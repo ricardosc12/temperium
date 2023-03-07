@@ -10,7 +10,8 @@
 .area {
     display: flex;
     flex-direction: column;
-    min-width: 250px;
+    min-width: 150px;
+    max-width: 150px;
     min-height: 350px;
     height: auto;
     /* border: 1px solid red; */
