@@ -1,6 +1,7 @@
 .main {
     display: flex;
     position: relative;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex: 1;
@@ -15,4 +16,24 @@
     min-height: 350px;
     height: auto;
     /* border: 1px solid red; */
+}
+
+.button_modal button {
+    display: flex;
+    align-items: center;
+    margin-top: 4rem;
+    background-color: rgb(104, 30, 153);
+    box-shadow: 1px 1px 10px rgba(73, 24, 105,.5);
+    padding: 5px 15px;
+    border-radius: 10px;
+    letter-spacing: 0.05rem;
+    color: white;
+}
+
+.button_modal button:hover {
+    background-color: rgb(133, 61, 180);
+}
+
+.button_modal button > svg {
+    margin-right: 5px;
 }
