@@ -1,6 +1,6 @@
 {
-    "version": "v1.1.0",
-    "notes": "Correção título modal",
+    "version": "v1.2.0",
+    "notes": "Testando 1.2.0",
     "pub_date": "2020-06-22T19:25:57Z",
     "platforms": {
       "darwin-x86_64": {
@@ -16,8 +16,8 @@
         "url": "https://github.com/lemarier/tauri-test/releases/download/v1.0.0/app.AppImage.tar.gz"
       },
       "windows-x86_64": {
-        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTYXNGRUxadlNxc0Yyc0VYQ2JYZHlZNXA1Z1RDSDFwWllXZ05EbmdBK1BJZTRYVjNaZUc5ZWZPRGtwYmtyMkEvcXZlMVRQTUlVNFpoMVQvaWdDaFJoZG5HaTF5R2R5N0FJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc4NDkwOTg2CWZpbGU6dGVtcGVyaXVtXzEuMS4wX3g2NF9lbi1VUy5tc2kuemlwCnR5aTB0YzVma1JwRVpSR3AxYzVtcmVYeFgrQk9WQ3JhNmhoVUNBUTVMS0t0WHcxYmNtdW5neXZDQjVVZTNrdEs0REpHS0ZOdkE4NnpmaXk3amdlbkJRPT0K",
-        "url": "https://github.com/ricardosc12/temperium/raw/master/src-tauri/target/release/bundle/msi/temperium_1.1.0_x64_en-US.msi.zip"
+        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTYXNGRUxadlNxc0NXUGF6elFTNFZWMGNIQzJrQUdjVEoxVS9qN3VjamQ2OUZ2alFhV3hBUE9tZ2JiUXo1QStsdUpCNVIrT0thWjJ3dFlFV25nQStvSHRwZDFJZWtBMVFFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc4NDkxMjI3CWZpbGU6dGVtcGVyaXVtXzEuMi4wX3g2NF9lbi1VUy5tc2kuemlwCjJSZ2FWVmd6S0FuNHJJV3YvTDUvQTVUT2w5eHd1VXZPbkh4ZkJTUS9pM0VJYkxJSXVNd2NpNU5RYXBiaWhFSFNYanRFM29LV09tTnhNbmltWFlYSkF3PT0K",
+        "url": "https://github.com/ricardosc12/temperium/raw/master/src-tauri/target/release/bundle/msi/temperium_1.2.0_x64_en-US.msi.zip"
       }
     }
 }
