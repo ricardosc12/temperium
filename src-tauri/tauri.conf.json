@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "temperium",
-    "version": "1.1.0"
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -59,7 +59,7 @@
       "endpoints": [
           "https://raw.githubusercontent.com/ricardosc12/temperium/master/updater/index.json"
       ],
-      "dialog": true,
+      "dialog": false,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEI2NTExQUZFRDlBRDE4MDUKUldRRkdLM1ovaHBSdG1zUExaUEZ1UTN3TGhCWDhDVjJqYVJwTUJENVRUMXQ1dDExWUhwTVY3QzAK"
     },
     "windows": [
