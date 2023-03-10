@@ -11,24 +11,24 @@ function App() {
 
 	const [cap, setCap] = createSignal(1)
 
-	createEffect(()=>{
-		(async()=>{
-			try {
-				const { shouldUpdate, manifest } = await checkUpdate()
-				if (shouldUpdate) {
-				  // display dialog
-				  console.log(shouldUpdate)
-				  const update = await installUpdate()
-				  console.log(update)
-				  // install complete, restart the app
-				//   await relaunch()
-				}
-			  } catch (error) {
-				console.log(error)
-			  }
-		})();
+	// createEffect(()=>{
+	// 	(async()=>{
+	// 		try {
+	// 			const { shouldUpdate, manifest } = await checkUpdate()
+	// 			if (shouldUpdate) {
+	// 			  // display dialog
+	// 			  console.log(shouldUpdate)
+	// 			  const update = await installUpdate()
+	// 			  console.log(update)
+	// 			  // install complete, restart the app
+	// 			//   await relaunch()
+	// 			}
+	// 		  } catch (error) {
+	// 			console.log(error)
+	// 		  }
+	// 	})();
 
-	})
+	// })
 
 	return (
 		<div className="eve">
