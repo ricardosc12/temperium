@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "temperium",
-    "version": "0.0.0"
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -33,7 +33,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "temperium.vercel.app",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -55,7 +55,12 @@
       "csp": null
     },
     "updater": {
-      "active": false
+      "active": true,
+      "endpoints": [
+          "https://gist.githubusercontent.com/ricardosc12/571e940b271d14eb3722e47f575deb89/raw/45952c7d51bc96813fb88371abc03a72b9bad4d1/windows"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEI2NTExQUZFRDlBRDE4MDUKUldRRkdLM1ovaHBSdG1zUExaUEZ1UTN3TGhCWDhDVjJqYVJwTUJENVRUMXQ1dDExWUhwTVY3QzAK"
     },
     "windows": [
       {
