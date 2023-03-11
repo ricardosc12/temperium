@@ -58,6 +58,7 @@ const ModalUpdate=()=>{
     async function update(){
         try {
             const { shouldUpdate, manifest } = await checkUpdate()
+            console.log('antes', shouldUpdate)
             if (shouldUpdate) {
               // display dialog
               const update = await installUpdate()
@@ -101,7 +102,7 @@ export default function Main(){
             <div className={style.button_modal}>
                 <button onClick={open}>
                     <svg className='icon-svg' width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v6.1q0 3.8-2.263 6.913T12 22Z"/></svg>
-                    <p>Modal 1.2.0</p>
+                    <p>Modal 1.3.0</p>
                 </button>
             </div>
 
