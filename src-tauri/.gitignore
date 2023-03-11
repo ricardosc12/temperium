@@ -1,10 +1,17 @@
 /target/*
 !/target/release/
+!/target/debug/
 
 /target/release/bundle/msi/*
 !/target/release/bundle/msi/*.zip
+/target/debug/bundle/msi/*
+!/target/debug/bundle/msi/*.zip
 
 /target/release/*
 !/target/release/bundle/
 /target/release/bundle/*
 !/target/release/bundle/msi/
+/target/debug/*
+!/target/debug/bundle/
+/target/debug/bundle/*
+!/target/debug/bundle/msi/
