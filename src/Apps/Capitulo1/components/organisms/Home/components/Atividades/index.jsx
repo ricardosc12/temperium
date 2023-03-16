@@ -7,7 +7,7 @@ export default function Atividades(){
         <div className={style.atividades} id="atividades">
             <div className='m-3 ml-5 mb-6 flex-row flex justify-between'>
                 <h2 className='eve-md'>Disciplinas</h2>
-                <div className='flex justify-center items-center background-black-destaq p-1 rounded-md'>
+                <div className='flex justify-center items-center bg-black-destaq p-1 rounded-md'>
                     <AtividadeIcon/>
                 </div>
             </div>

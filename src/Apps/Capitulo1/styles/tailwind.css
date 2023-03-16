@@ -5,13 +5,13 @@
 @layer components {
 
 	/* CORES */
-
-	.background-black-fundo { background: #171F23 !important; }
-	.background-black-destaq { background: #2C3539 !important; }
-	.background-black-border { background: #2C3539 !important; }
-	.background-white-fundo { background: #FCFFFF !important; }
-	.background-text-primary { background: #FCFFFF !important; }
-	.background-text-secondary { background: #C1C5C7 !important; }
+	.bg-black-dark { background: #0a0e0f !important; }
+	.bg-black-fundo { background: #171F23 !important; }
+	.bg-black-destaq { background: #2C3539 !important; }
+	.bg-black-border { background: #2C3539 !important; }
+	.bg-white-fundo { background: #FCFFFF !important; }
+	.bg-text-primary { background: #FCFFFF !important; }
+	.bg-text-secondary { background: #C1C5C7 !important; }
 
 	.color-black-fundo { color: #171F23 !important; }
 	.color-black-destaq { color: #2C3539 !important; }
@@ -71,4 +71,19 @@
 		color: rgba(250,250,250);
 		font-size: 0.9rem;
 	}
+
+	.btn-base {
+		letter-spacing: 0.025em;
+		padding-top: 0.25rem;
+		padding-bottom: 0.25rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		border-radius: 0.375rem;
+		align-items: center;
+		display: flex;
+		background: #171F23;
+		color: #FCFFFF;
+
+		@apply space-x-2 hover:bg-black-destaq
+	  }
 }

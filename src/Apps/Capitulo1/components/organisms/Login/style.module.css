@@ -1,0 +1,42 @@
+.button_modal button {
+    display: flex;
+    align-items: center;
+    margin-top: 4rem;
+    background-color: rgb(104, 30, 153);
+    box-shadow: 1px 1px 10px rgba(73, 24, 105,.5);
+    padding: 5px 15px;
+    border-radius: 10px;
+    letter-spacing: 0.05rem;
+    color: white;
+}
+
+.button_modal button:hover {
+    background-color: rgb(133, 61, 180);
+}
+
+.button_modal button > svg {
+    margin-right: 5px;
+}
+
+.header {
+    display: flex;
+    width: 80vw;
+}
+
+.content {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 80vw;
+    border: 8px solid var(--black-fundo);
+    border-top: 0px;
+}
+
+.blur {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(3px);
+}

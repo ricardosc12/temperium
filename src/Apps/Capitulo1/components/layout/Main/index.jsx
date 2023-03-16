@@ -3,6 +3,7 @@ import introJs from 'intro.js'
 import Sidebar from '../../molecules/Sidebar'
 import { createSignal } from 'solid-js'
 import HomePage from '../../organisms/Home'
+import AuthPage from '../../organisms/Auth'
 import CalendarPage from '../../organisms/Calendar'
 
 export default function MainApp(){
@@ -24,6 +25,10 @@ export default function MainApp(){
 
 						<Match when={route() === 'calendar'}>
 							<CalendarPage />
+						</Match>
+
+						<Match when={route() === 'auth'}>
+							<AuthPage />
 						</Match>
 
 					</Switch>

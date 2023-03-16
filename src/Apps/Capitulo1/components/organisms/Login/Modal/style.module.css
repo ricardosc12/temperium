@@ -1,0 +1,11 @@
+.modal_login {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: auto;
+    max-height: calc(100vh - 2rem);
+    background: var(--black-fundo);
+    border-radius: 8px;
+    padding-bottom: 3em !important;
+    /* border: 1px solid var(--text-secondary); */
+}

@@ -2,10 +2,13 @@
 import { render } from "solid-js/web";
 import App from "./App";
 import { Router } from "@solidjs/router";
+import { AuthProvider } from "./storage/Auth";
 
 render(() => 
     <Router>
-        <App />
+        <AuthProvider>
+            <App />
+        </AuthProvider>
     </Router>, 
     document.getElementById("root")
 );

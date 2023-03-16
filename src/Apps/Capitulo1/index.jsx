@@ -5,6 +5,7 @@ import './styles/base.css'
 import MainApp from "./components/layout/Main";
 import Header from "./components/molecules/Header";
 import Tour from './components/molecules/Tour';
+import Footer from './components/molecules/Footer';
 
 export default function Cap1(){
 	return (
@@ -12,6 +13,7 @@ export default function Cap1(){
 			<Tour/>
 			<Header/>
 			<MainApp/>
+			<Footer/>
 		</div>
 	)
 }

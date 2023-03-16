@@ -3,6 +3,8 @@
     position: absolute;
     justify-content: center;
     align-items: center;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0);
@@ -17,6 +19,8 @@
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
 
+    padding: 0.875rem;
+
     transform: translateY(960px) translateZ(0);
 
     transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
@@ -26,3 +30,40 @@
 
     box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 14%), 0px 24px 38px 3px rgb(0 0 0 / 8%), 0px 9px 46px 8px rgb(0 0 0 / 4%);
 }
+/* 'flex w-full items-center justify-between h-8 px-4 mt-2' */
+.header_modal {
+    display: flex;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+    padding: 0px .4rem;
+    padding-left: 0.5rem;
+}
+
+.header_modal > button {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.header_modal > button::after {
+    content: '';
+    position: absolute;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    max-width: 0px;
+    max-height: 0px;
+    background-color: rgba(255,255,255,.1);
+    border-radius: 100%;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.header_modal > button:hover::after{
+    max-width: calc(100% + 10px);
+    max-height: calc(100% + 10px);
+    transition: all 50ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
