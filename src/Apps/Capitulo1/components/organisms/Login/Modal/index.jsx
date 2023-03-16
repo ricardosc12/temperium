@@ -33,7 +33,7 @@ export default function ModalSign(){
 
     return (
         <div className={style.modal_login}>
-            <HeaderModal title={"Termo de concentimento"}/>
+            <HeaderModal title={"Termo de consentimento"}/>
             <div className='px-2 overflow-y-scroll'>
                 <h5 className='color-text-secondary'>Temperium - Daniel Mendes / Ricardo Spínola</h5>
                 <h5 className='color-text-secondary'>Universidade Federal de Viçosa - Campus Florestal</h5>
