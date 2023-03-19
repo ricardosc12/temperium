@@ -2,48 +2,6 @@ import { createModal } from '@/Apps/Capitulo1/components/molecules/Modal';
 import style from './style.module.css'
 import Header from '../../molecules/Header';
 import ModalSign from './Modal';
-import { createSignal, on, createEffect } from 'solid-js';
-
-// const ModalSignin=()=>{
-
-//     const { auth, setAuthStorage } = useAuth()
-
-//     function get(){
-
-//         console.log(getLogin())
-//     }
-
-//     function callback(e){
-//         const responsePayload = parseJwt(e.credential);
-//         const data_login = {
-//             nome: responsePayload.name,
-//             email: responsePayload.email,
-//             image: responsePayload.picture
-//         }
-//         secureLocalStorage.setItem('@id',data_login)
-//         setAuthStorage(prev=>({...prev, user: data_login}))
-//     }
-
-//     function sign(){
-
-//         google.accounts.id.initialize({
-//             client_id: '1056413810692-eoq4oklo337jq5vrcbk8h42ng52odhml.apps.googleusercontent.com',
-//             callback: callback
-//         });
-
-//         google.accounts.id.prompt();
-
-//     }
-
-//     return (
-//         <div className='flex flex-col'>
-//             <button className='my-5' onClick={sign}>Sign</button>
-//             <button className='my-5' onClick={get}>GET</button>
-//         </div>
-
-
-//     )
-// }
 
 export default function LoginPage(){
 

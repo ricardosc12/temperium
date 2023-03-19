@@ -1,3 +1,4 @@
+import { getUser } from "@/api/user"
 import { useAuth } from "@/storage/Auth"
 import { secureLocalStorage } from "@/utils/secureLocalStorage"
 
@@ -9,6 +10,11 @@ export default function AuthPage(){
     function logout(){
         secureLocalStorage.removeItem('@id')
         setAuthStorage(prev=>({...prev, user:undefined}))
+    }
+
+    async function get(){
+        const resp = await getUser({id: 'lucao'})
+        console.log(resp)
     }
 
     return (
@@ -24,6 +30,7 @@ export default function AuthPage(){
             >
                     SAIR
             </button>
+            <button onClick={get}>getUser</button>
         </div>
     )
 }
