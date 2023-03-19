@@ -7,7 +7,11 @@ class ClientDB {
             accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
             secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY
         }}) 
-        return new DynamoDBClient({ region: "us-east-2"})
+        return new DynamoDBClient({ region: "us-east-2", 
+        credentials:{
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        }})
     }
 }
 
