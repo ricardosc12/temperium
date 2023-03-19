@@ -2,6 +2,7 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 
 class ClientDB {
     static client () {
+        console.log(process.env)
         if(import.meta.env.DEV === true) return new DynamoDBClient({ region: "us-east-2",
         credentials: {
             accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
