@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "temperium",
-    "version": "1.0.1"
+    "version": "1.0.2"
   },
   "tauri": {
     "allowlist": {
@@ -68,7 +68,7 @@
         "height": 800,
         "resizable": true,
         "title": "temperium",
-        "width": 1200
+        "width": 1340
       }
     ]
   }
