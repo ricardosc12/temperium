@@ -1,13 +1,15 @@
 {
   "name": "temperium",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "pos_update": "tauri build && node scripts/build.js",
+    "prod": "node scripts/version.js"
   },
   "license": "MIT",
   "devDependencies": {

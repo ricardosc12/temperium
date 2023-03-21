@@ -24,13 +24,13 @@ function App() {
 
 	return (
 		<div className="eve">
-			<Switch>
+			{/* <Switch>
 
-				<Match when={!auth().user}>
+				<Match when={!true}>
 					<LoginPage/>
 				</Match>
 
-				<Match when={auth().user}>
+				<Match when={true}> */}
 					<Switch fallback={<div>Not Found</div>}>
 						
 						<Match when={cap() === 1}>
@@ -42,9 +42,9 @@ function App() {
 						</Match>
 
 					</Switch>
-				</Match>
+				{/* </Match>
 
-			</Switch>
+			</Switch> */}
 
 
 			<MenuCapitulos handleChange={setCap}/>
