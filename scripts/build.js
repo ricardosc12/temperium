@@ -45,7 +45,7 @@ async function main(){
             updater.notes = `${note || ""}`
             updater.platforms['windows-x86_64'].signature = signature
             updater.platforms['windows-x86_64'].url = 
-            `https://github.com/ricardosc12/temperium/raw/master/src-tauri/target/debug/bundle/msi/temperium_${version}_x64_en-US.msi.zip`
+            `https://github.com/ricardosc12/temperium/raw/master/src-tauri/target/release/bundle/msi/temperium_${version}_x64_en-US.msi.zip`
 
             writeFile(package_config, package)
             writeFile(updater_config, updater)
