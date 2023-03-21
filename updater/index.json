@@ -1,6 +1,6 @@
 {
-  "version": "v1.4.0",
-  "notes": "'final",
+  "version": "v1.1.0",
+  "notes": "",
   "platforms": {
     "darwin-x86_64": {
       "signature": "",
@@ -15,8 +15,8 @@
       "url": "https://github.com/lemarier/tauri-test/releases/download/v1.0.0/app.AppImage.tar.gz"
     },
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTYXNGRUxadlNxc09qNVBoYzlTeFhIeWgyOStTZVUxZi81R1pWUDRiMG8xa2V3dXRJUmhwc0xJemZyRUNGV084dUhPNmdURjlpa05LQmxRenpZOUM1MnczZ3JGcTFkNEFnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc5MzY0NjU4CWZpbGU6dGVtcGVyaXVtXzEuNC4wX3g2NF9lbi1VUy5tc2kuemlwCnI3Y3orNnpEZXZkRVpRMkYwOXg5QmQycFlRRVFsNjFnN2RsVjh5WWFhQlI2NmVqYVBLbmV6VExGK2pmTUhXU21XQmZ2MThxUDJWWkxzdWVBdi9pQ0F3PT0K",
-      "url": "https://github.com/ricardosc12/temperium/raw/master/src-tauri/target/release/bundle/msi/temperium_1.4.0_x64_en-US.msi.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTYXNGRUxadlNxc0k3U21MRDU0V2JFQVptUXNST1VZVExPQ2xWTXo4NU5oM2V2U1RKYU4yZnNaS3JrUkw1Y0pZaStaSTk2aFViVDkveDZaNlRsNzJNKzhab28zTitBRkE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc5MzY0Nzc0CWZpbGU6dGVtcGVyaXVtXzEuMS4wX3g2NF9lbi1VUy5tc2kuemlwCi9FeHBhbCtsWjlVSXVNeG4yOXFPUzI4c2o0NlpHSlJlTXUwMUNMUWVxanBxdlRMVDJNVFo4UjJQMUVoZ2dDMCtIcUpJOUV3MnFDWGNvMCtraXF4dUJRPT0K",
+      "url": "https://github.com/ricardosc12/temperium/raw/master/src-tauri/target/release/bundle/msi/temperium_1.1.0_x64_en-US.msi.zip"
     }
   }
 }
