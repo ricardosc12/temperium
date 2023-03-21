@@ -30,6 +30,7 @@ async function main(){
 
     const package_config = './package.json'
     const updater_config = './updater/index.json'
+    const version_config = 'src/config/version.js'
     const signature = `src-tauri/target/release/bundle/msi/temperium_${version}_x64_en-US.msi.zip.sig`
 
     try {
@@ -49,6 +50,7 @@ async function main(){
 
             writeFile(package_config, package)
             writeFile(updater_config, updater)
+            writeFile(version_config, `export const VERSION = '${version}'`)
 
         })
         .catch(err=>{
