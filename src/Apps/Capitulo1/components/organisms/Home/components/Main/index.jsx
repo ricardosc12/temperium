@@ -13,12 +13,12 @@ import { createEffect, createMemo, createSignal, For, Show, Switch } from 'solid
 
  
 const Draggable = ({id, drop}) => {
-    const draggable = createDraggable(id,{drop:drop});
+    const draggable = createDraggable(`i${drop}atividade:${id}`,{drop:drop, atividade:id, inside:true});
     return (
         <div use:draggable className={`
         atividade atividade_p m-2
         ${draggable.isActiveDraggable?'opacity-75':''}`}>
-            {CLASS_NAME[id?.split('-')[1]]}
+            {CLASS_NAME[id]}
         </div>
     );
 };
@@ -39,13 +39,13 @@ const Droppable = ({id, ...props}) => {
     );
 };
 
-const DroppableArea=({id, title, inside, ...props})=>{
+const DroppableArea=({id, title, inside, semana,dia, ...props})=>{
 
     return (
         <Droppable id={id} className={'border-black-fundo mx-2'}>
             <h1 className='m-2 color-black-fundo'>{title}</h1>
             <div className={style.area}>
-                <For each={Object.values(inside[id]||{})}>
+                <For each={Object.values(inside[semana]?.[dia]||{})}>
                     {(item)=>{
                         return <Draggable id={item.id} drop={item.drop}/>
                     }}
@@ -76,28 +76,27 @@ export default function Main(){
     return (
         <div className={style.main} id="main_content">
 
-            <SemanalSelector semanas={semanas} handleWeek={handleWeek}/>
+            <SemanalSelector semanas={semanas} week={week} inside={inside} handleWeek={handleWeek}/>
+
+            <div className='m-auto'>
                 <For each={semanas}>
                     {(semana)=>{
                         return (
                             <div className={`flex flex-row black-scroll ${week()!=semana?"hidden":""}`}>
-                                <DroppableArea id={id(semana,`seg`)} title="Segunda-Feira" inside={inside}/>
+                                <DroppableArea id={id(semana,`seg`)} dia={'seg'} semana={semana} title="Segunda-Feira" inside={inside}/>
 
-                                <DroppableArea id={id(semana,`terc`)} title="Terça-Feira" inside={inside}/>
+                                <DroppableArea id={id(semana,`terc`)} dia={'terc'} semana={semana} title="Terça-Feira" inside={inside}/>
 
-                                <DroppableArea id={id(semana,`quart`)} title="Quarta-Feira" inside={inside}/>
+                                <DroppableArea id={id(semana,`quart`)} dia={'quart'} semana={semana} title="Quarta-Feira" inside={inside}/>
 
-                                <DroppableArea id={id(semana,`quint`)} title="Quinta-Feira" inside={inside}/>
+                                <DroppableArea id={id(semana,`quint`)} dia={'quint'} semana={semana} title="Quinta-Feira" inside={inside}/>
 
-                                <DroppableArea id={id(semana,`sext`)} title="Sexta-Feira" inside={inside}/>
+                                <DroppableArea id={id(semana,`sext`)} dia={'sext'} semana={semana} title="Sexta-Feira" inside={inside}/>
                             </div>
                         )
                     }}
                 </For>
-
-            <pre><code>{JSON.stringify(inside,undefined,2)}</code></pre>
-
-            {/* <Teste week={id(week,`seg`)}/> */}
+            </div>
 
         </div>
     )
