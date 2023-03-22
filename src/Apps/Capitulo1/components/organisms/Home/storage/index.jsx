@@ -9,13 +9,24 @@ export const useStore = create(set=>({
     },
     change: {
         dispatch: {
-            addInside:({drag,drop})=>set(produce((state)=>{
-                state.dados.inside = {...state.dados.inside, 
-                    [drop]:{...state.dados.inside[drop], [`i/${drop}/-${drag}`]:{
-                        id:`i/${drop}/-${drag}`,
-                        drop:drop
-                    }}
+            addInside:({drag,drop:[semana,dia]})=>set(produce((state)=>{
+                state.dados.inside = 
+                {
+                    ...state.dados.inside, 
+                        [semana]:{...state.dados.inside[semana], 
+                            [dia]:{...state.dados.inside[semana]?.[dia], 
+                                [drag]:{
+                                    id: `i:truedrag:${drag}`,
+                                }
+                            }
+                        }
                 }
+                // state.dados.inside = {...state.dados.inside, 
+                //     [drop]:{...state.dados.inside[drop], [`i/${drop}/-${drag}`]:{
+                //         id:`i/${drop}/-${drag}`,
+                //         drop:drop
+                //     }}
+                // }
             })),
             removeInside:({drop,drag})=>set(produce((state)=>{
                 const items = {...state.dados.inside}

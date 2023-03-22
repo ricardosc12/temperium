@@ -23,23 +23,28 @@ export default function HomePage(){
 
     const onDragEnd = ({ droppable, draggable }) => {
         setAtual(null)
-        console.log(droppable?.id)
-        console.log(draggable?.id)
-        if (droppable) {
-            if(draggable?.id?.includes('i') && draggable.id.split('/')[1] != droppable.id) {
-                transferSide({drop:{
-                    from: draggable.id.split('/')[1],
-                    to: droppable.id
-                    },
-                    drag:draggable.id.split('-')[1]
-                })
-            }
-            else if (!draggable?.id?.includes('i')){
-                addInside({drag:draggable.id,drop:droppable.id})
-            }
-        } else if (!droppable) {
-            removeInside({drop:draggable.data.drop, drag:draggable.id.split('-')[1]})
+        if(droppable) {
+            const [ semana, dia ] = droppable?.id.split(/week:|dia:/).filter(Boolean)
+            addInside({drag:draggable.id,drop:[semana, dia]})
+            console.log(semana, dia)
         }
+        // console.log(droppable?.id)
+        // console.log(draggable?.id)
+        // if (droppable) {
+        //     if(draggable?.id?.includes('i') && draggable.id.split('/')[1] != droppable.id) {
+        //         transferSide({drop:{
+        //             from: draggable.id.split('/')[1],
+        //             to: droppable.id
+        //             },
+        //             drag:draggable.id.split('-')[1]
+        //         })
+        //     }
+        //     else if (!draggable?.id?.includes('i')){
+        //         addInside({drag:draggable.id,drop:droppable.id})
+        //     }
+        // } else if (!droppable) {
+        //     removeInside({drop:draggable.data.drop, drag:draggable.id.split('-')[1]})
+        // }
     };
 
     const onDragStart=({draggable})=>{

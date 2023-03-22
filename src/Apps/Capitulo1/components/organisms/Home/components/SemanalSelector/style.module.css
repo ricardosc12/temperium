@@ -1,0 +1,70 @@
+.main_selector_semanal {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--black-fundo);
+    width: 100%;
+    height: 24px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.main_selector_semanal > div {
+    cursor: pointer;
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    background: var(--black-destaq);
+    color: var(--text-primary);
+    margin: 0.3rem;
+    margin-right: -30px;
+    height: 100%;
+    min-width: 130px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.main_selector_semanal > div::before{
+    z-index: 0;
+    content: '';
+    position: absolute;
+    display: flex;
+    background-color: var(--black-fundo);
+    width: 30px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 100%;
+}
+
+.main_selector_semanal > div:hover {
+    background-color: var(--black-shadow);
+}
+
+.main_selector_semanal > div:nth-child(1) {
+    margin-left: -30px;
+}
+
+.main_selector_semanal > div > p {
+    display: flex;
+    position: relative;
+    margin-top: 2px;
+    margin-left: 40px;
+    font-size: 12px;
+}
+
+.main_selector_semanal > div > span {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    right: 5px;
+    height: 14px;
+    width: 15px;
+    font-size: 12px;
+    color: var(--black-fundo);
+    border-radius: 5px;
+    background-color: var(--text-secondary);
+}
