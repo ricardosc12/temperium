@@ -37,7 +37,7 @@ export function CardAtividade({id, label}){
         <div>
             <div className={style.card_atividade}>
                 <div className="flex items-center justify-between w-full">
-                    <h4 className="text-sm">{label}</h4>
+                    <h2 className="text-sm">{label}</h2>
                     <div className={style.icon_card_atividade}>
                         <ArrowIcon/>
                     </div>
