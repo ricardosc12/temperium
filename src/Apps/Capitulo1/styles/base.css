@@ -16,6 +16,7 @@
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 /* Track */
@@ -196,3 +197,25 @@ body {
       margin-top: 2rem;
     }
      */
+    .black-scroll {
+      overflow-y: scroll;
+    }
+    .black-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    
+    /* Track */
+    .black-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    /* Handle */
+    .black-scroll::-webkit-scrollbar-thumb {
+      border-radius: 30px;
+      background: var(--black-destaq);
+    }
+    
+    /* Handle on hover */
+    .black-scroll::-webkit-scrollbar-thumb:hover {
+      background: var(--black-shadow);
+    }

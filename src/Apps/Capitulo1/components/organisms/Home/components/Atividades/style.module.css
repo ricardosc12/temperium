@@ -23,7 +23,8 @@
     margin: 0px 0px 15px 0px;
     padding: 0px 10px;
     border-radius: 5px;
-    background-color: rgba(255,255,255,.1);
+    /* background-color: rgba(255,255,255,.1); */
+    box-shadow: 0px 0px 1px 0.03rem var(--text-secondary);
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 

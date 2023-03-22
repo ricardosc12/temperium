@@ -9,34 +9,45 @@ export const useStore = create(set=>({
     },
     change: {
         dispatch: {
-            addInside:({drag,drop})=>set(produce((state)=>{
-                state.dados.inside = {...state.dados.inside, 
-                    [drop]:{...state.dados.inside[drop], [`i/${drop}/-${drag}`]:{
-                        id:`i/${drop}/-${drag}`,
-                        drop:drop
-                    }}
+            addInside:({atividade,drop:[semana,dia]})=>set(produce((state)=>{
+                state.dados.inside = 
+                {
+                    ...state.dados.inside, 
+                        [semana]:{...state.dados.inside[semana], 
+                            [dia]:{...state.dados.inside[semana]?.[dia], 
+                                [atividade]:{
+                                    id: `${atividade}`,
+                                    drop: `week:${semana}dia:${dia}`
+                                }
+                            }
+                        }
                 }
             })),
-            removeInside:({drop,drag})=>set(produce((state)=>{
-                const items = {...state.dados.inside}
-                if(items[drop]?.[`i/${drop}/-${drag}`]) {
-                    delete items[drop][`i/${drop}/-${drag}`]
-                    state.dados.inside = {...items}
-                }
-            })),
-            transferSide:({drag,drop:{from,to}})=>set(produce((state)=>{
-
-                if(state.dados.inside[to]?.[`i/${to}/-${drag}`]) {return}
+            removeInside:({atividade,from:[semana,dia]})=>set(produce((state)=>{
 
                 const items = {...state}
 
-                delete items.dados.inside[from][`i/${from}/-${drag}`]
+                delete items.dados.inside[semana][dia][atividade]
 
-                items.dados.inside = {...items.dados.inside, 
-                    [to]:{...items.dados.inside[to], [`i/${to}/-${drag}`]:{
-                        id:`i/${to}/-${drag}`,
-                        drop:to
-                    }}
+            })),
+
+            transferSide:({atividade, to:[toWeek, toDay], from: [fromWeek, fromDay]})=>set(produce((state)=>{
+
+                const items = {...state}
+
+                delete items.dados.inside[fromWeek][fromDay][atividade]
+
+                items.dados.inside = 
+                {
+                    ...items.dados.inside, 
+                        [toWeek]:{...items.dados.inside[toWeek], 
+                            [toDay]:{...items.dados.inside[toWeek]?.[toDay], 
+                                [atividade]:{
+                                    id: `${atividade}`,
+                                    drop: `week:${toWeek}dia:${toDay}`
+                                }
+                            }
+                        }
                 }
             }))
         }
