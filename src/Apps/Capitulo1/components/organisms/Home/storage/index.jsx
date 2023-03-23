@@ -33,6 +33,8 @@ export const useStore = create(set=>({
 
             transferSide:({atividade, to:[toWeek, toDay], from: [fromWeek, fromDay]})=>set(produce((state)=>{
 
+                if(state.dados.inside[toWeek]?.[toDay]?.[atividade]) return
+
                 const items = {...state}
 
                 delete items.dados.inside[fromWeek][fromDay][atividade]
