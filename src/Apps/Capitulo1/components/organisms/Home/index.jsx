@@ -25,6 +25,7 @@ export default function HomePage(){
         setAtual(null)
         if(droppable) {
             const { atividade, inside, drop } = draggable.data
+            
 
             const [ toWeek, toDay ] = droppable?.id.split(/week:|dia:/).filter(Boolean)
             const [ fromWeek, fromDay ] = drop?.split(/week:|dia:/).filter(Boolean) || [false, false]
@@ -43,6 +44,7 @@ export default function HomePage(){
         }
         else {
             const { atividade, drop } = draggable.data
+            if(!drop) return
             removeInside({
                 atividade: atividade,
                 from: drop.split(/week:|dia:/).filter(Boolean)
@@ -51,7 +53,8 @@ export default function HomePage(){
     };
 
     const onDragStart=({draggable})=>{
-        setAtual(draggable.id.includes("i")?CLASS_NAME[draggable.id.split('-')[1]]:CLASS_NAME[draggable.id])
+        const atividade = draggable.data.atividade || draggable.id
+        setAtual(CLASS_NAME[atividade])
     }
 
     return (
