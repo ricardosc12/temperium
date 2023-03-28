@@ -39,13 +39,12 @@ const Droppable = ({id, ...props}) => {
     );
 };
 
-const DroppableArea=({id, title, inside, semana,dia, ...props})=>{
+const DroppableArea=({id, title, inside, semana, dia, interval, ...props})=>{
 
     return (
-        <Droppable id={id} className={'border-black-fundo mx-2'}>
-            <h1 className='m-2 color-black-fundo'>{title}</h1>
+        <Droppable id={id} className="w-full h-full">
             <div className={style.area}>
-                <For each={Object.values(inside[semana]?.[dia]||{})}>
+                <For each={Object.values(inside[semana]?.[dia]?.[interval]||{})}>
                     {(item)=>{
                         return <Draggable id={item.id} drop={item.drop}/>
                     }}
@@ -69,9 +68,17 @@ export default function Main(){
         setWeek(e)
     }
 
-    const id = (week, dia) => {
-        return ()=>`week:${week}dia:${dia}`
+    const id = (week, dia, interval) => {
+        return ()=>`week:${week}dia:${dia}interval:${interval}`
     }
+
+    const lines = [
+        '7', '8', '9', '10', '11', '12'
+    ];
+    // '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18:30', '19:20', '20:30', '21:20'
+    const col = [
+        "dom", "seg", "ter", "qua", "qui", "sex", "sab"
+    ];
 
     return (
         <div className={style.main} id="main_content">
@@ -81,17 +88,25 @@ export default function Main(){
             <div className='m-auto'>
                 <For each={semanas}>
                     {(semana)=>{
-                        return (
+                        return ( 
                             <div className={`flex flex-row black-scroll ${week()!=semana?"hidden":""}`}>
-                                <DroppableArea id={id(semana,`seg`)} dia={'seg'} semana={semana} title="Segunda-Feira" inside={inside}/>
-
-                                <DroppableArea id={id(semana,`terc`)} dia={'terc'} semana={semana} title="Terça-Feira" inside={inside}/>
-
-                                <DroppableArea id={id(semana,`quart`)} dia={'quart'} semana={semana} title="Quarta-Feira" inside={inside}/>
-
-                                <DroppableArea id={id(semana,`quint`)} dia={'quint'} semana={semana} title="Quinta-Feira" inside={inside}/>
-
-                                <DroppableArea id={id(semana,`sext`)} dia={'sext'} semana={semana} title="Sexta-Feira" inside={inside}/>
+                            <table className={style.root_table}>
+                                <tbody>
+                                    <For each={lines}>
+                                        {(interval)=>(
+                                            <tr>
+                                                <For each={col}>
+                                                    {(dia)=>(
+                                                        <td>
+                                                            <DroppableArea id={id(semana, dia, interval)} dia={dia} semana={semana} interval={interval} inside={inside}/>
+                                                        </td>
+                                                    )}
+                                                </For>
+                                            </tr>
+                                        )}
+                                    </For>
+                                </tbody>
+                            </table>
                             </div>
                         )
                     }}

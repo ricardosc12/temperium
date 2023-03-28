@@ -23,23 +23,24 @@ export default function HomePage(){
 
     const onDragEnd = ({ droppable, draggable }) => {
         setAtual(null)
+        if(current_node) current_node.style.border = "none"
         if(droppable) {
             const { atividade, inside, drop } = draggable.data
             
 
-            const [ toWeek, toDay ] = droppable?.id.split(/week:|dia:/).filter(Boolean)
-            const [ fromWeek, fromDay ] = drop?.split(/week:|dia:/).filter(Boolean) || [false, false]
+            const [ toWeek, toDay, toInterval ] = droppable?.id.split(/week:|dia:|interval:/).filter(Boolean)
+            const [ fromWeek, fromDay, fromInterval ] = drop?.split(/week:|dia:|interval:/).filter(Boolean) || [false, false, false]
 
-            if(inside && (toWeek!=fromWeek || toDay!=fromDay)) {
+            if(inside && (toWeek!=fromWeek || toDay!=fromDay || toInterval!=fromInterval)) {
                 transferSide({
                     atividade: atividade,
-                    to:[toWeek, toDay],
-                    from:[fromWeek, fromDay]
+                    to:[toWeek, toDay, toInterval],
+                    from:[fromWeek, fromDay, fromInterval]
                 })
             }
 
             else if (!inside) {
-                addInside({atividade: draggable.id, drop: [toWeek, toDay]})
+                addInside({atividade: draggable.id, drop: [toWeek, toDay, toInterval]})
             }
         }
         else {
@@ -47,7 +48,7 @@ export default function HomePage(){
             if(!drop) return
             removeInside({
                 atividade: atividade,
-                from: drop.split(/week:|dia:/).filter(Boolean)
+                from: drop.split(/week:|dia:|interval:/).filter(Boolean)
             })
         }
     };
@@ -57,9 +58,20 @@ export default function HomePage(){
         setAtual(CLASS_NAME[atividade])
     }
 
+    let current_node;
+
+    const onDragOver = ({ draggable, droppable }) => {
+        const node = droppable?.node
+        if(node) {
+            if(current_node) current_node.style.border = "none"
+            node.style.border = "dotted 1px black"
+            current_node = node
+        }
+    }
+
     return (
         <div className={style.home}>
-            <DragDropProvider onDragEnd={onDragEnd} onDragStart={onDragStart}>
+            <DragDropProvider onDragOver={onDragOver} onDragEnd={onDragEnd} onDragStart={onDragStart}>
 
                 <DragDropSensors />
 
@@ -67,10 +79,8 @@ export default function HomePage(){
 
                 <Atividades/>
 
-                <DragOverlay>
-                    <Show when={atual()} fallback={<div>Atividade</div>}>
-                        <div className='atividade_overlay'>{atual()}</div>
-                    </Show>
+                <DragOverlay class={style.overlay}>
+                    {(draggable) => <div class={style.atividade_overlay}>{atual()}</div>}
                 </DragOverlay>
 
             </DragDropProvider>

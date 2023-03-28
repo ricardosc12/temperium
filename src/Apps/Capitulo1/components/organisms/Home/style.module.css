@@ -5,3 +5,23 @@
     width: 100%;
     height: 100%;
 }
+
+.atividade_overlay {
+    cursor: pointer;
+    padding: 1px 8px;
+    border-radius: 5px;
+    background-color: rgba(50,50,50,.9);
+    color: rgba(250,250,250);
+    font-size: 0.9rem;
+    /* width: 20px;
+    height: 20px;
+    background-color: red; */
+    /* overflow: visible; */
+}
+
+.overlay {
+    /* background-color: red;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    overflow: hidden; */
+}
