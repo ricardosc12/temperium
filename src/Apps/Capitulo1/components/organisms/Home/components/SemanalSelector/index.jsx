@@ -5,13 +5,13 @@ export default function SemanalSelector({handleWeek, semanas, week, inside}){
 
     const total_atividades = createMemo(()=>{
         let atividade = {};
-        for (const w of semanas) {
-            if(inside[w]) {
-                for (const [semana, atividades] of Object.entries(inside[w])) {
-                    if(!atividade[w]) atividade[w] = Object.values(atividades).length
-                    else atividade[w] += Object.values(atividades).length
-                    
+        for (const [semana, dias] of Object.entries(inside)){
+            for (const [dia, intervalos] of Object.entries(dias)) {
+                for (const [intervalo, atividades] of Object.entries(intervalos)) {
+                        if(!atividade[semana]) atividade[semana] = Object.values(atividades).length
+                        else atividade[semana] += Object.values(atividades).length
                 }
+                
             }
         }
         return atividade
