@@ -2,9 +2,9 @@
     display: flex;
     position: absolute;
     flex-direction: column;
-    bottom: 0;
+    top: 21px;
     width: 350px;
-    height: calc(100% - 24px);
+    height: calc(100% - 21px);
     right: 0;
     transform: translateX(350px);
     background-color: var(--black-fundo);

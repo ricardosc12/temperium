@@ -26,9 +26,11 @@
 
 .table {
     position: relative;
-    max-height: calc(100% - 20px);
+    max-height: calc(100% - 22px);
     width: 100%;
     margin-top: 60px;
+    margin-bottom: 30px;
+    padding: 0px 30px 0px 10px;
 }
 
 .root_table > tbody > tr > td {
