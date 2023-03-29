@@ -34,9 +34,6 @@ export const useStore = create(set=>({
 
             transferSide:({atividade, to:[toWeek, toDay, toInterval], from: [fromWeek, fromDay, fromInterval]})=>set(produce((state)=>{
 
-                console.log(fromWeek, fromDay, fromInterval)
-                console.log(toWeek, toDay, toInterval)
-
                 if(state.dados.inside[toWeek]?.[toDay]?.[toInterval]?.[atividade]) return
 
                 const items = {...state}

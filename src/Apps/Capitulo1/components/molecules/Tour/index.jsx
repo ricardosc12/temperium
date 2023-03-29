@@ -24,7 +24,7 @@ export default function Tour(){
             },
             {
                 title: "Iniciando uma atividade",
-                element: document.querySelector('#atividades'),
+                element: document.querySelector('#lateralbar-atividades'),
                 intro: 'Arraste e solte uma atividade nos cards para começar !'
             },
             // {

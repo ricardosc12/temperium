@@ -22,3 +22,7 @@ export const IconRead=()=>{
 export const IconWorkSpace=()=>{
     return <svg className="icon-svg-sx" width="32" height="32" viewBox="0 0 16 16"><g fill="currentColor"><path d="M4 16s-1 0-1-1s1-4 5-4s5 3 5 4s-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5Z"/><path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z"/></g></svg>
 }
+
+export const ArrowIconSx=({className})=>{
+    return <svg className={`icon-svg-lg ${className}`} width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m11.3 14.3l-2.6-2.6q-.475-.475-.212-1.087T9.425 10h5.15q.675 0 .938.613T15.3 11.7l-2.6 2.6q-.15.15-.325.225T12 14.6q-.2 0-.375-.075T11.3 14.3Z"/></svg>
+}

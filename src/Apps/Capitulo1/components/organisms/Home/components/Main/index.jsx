@@ -73,7 +73,9 @@ export default function Main(){
     }
 
     const lines = [
-        '7', '8', '9', '10', '11', '12'
+        ',..','7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
+        '13:00', '14:00', '15:00', '16:00', '17:00', '18:30', '19:20',
+        '20:30', '21:20', '22:10', '..,'
     ];
     // '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18:30', '19:20', '20:30', '21:20'
     const col = [
@@ -85,16 +87,24 @@ export default function Main(){
 
             <SemanalSelector semanas={semanas} week={week} inside={inside} handleWeek={handleWeek}/>
 
-            <div className='m-auto'>
+            <div className={`black-scroll ${style.table}`}>
                 <For each={semanas}>
                     {(semana)=>{
                         return ( 
-                            <div className={`flex flex-row black-scroll ${week()!=semana?"hidden":""}`}>
+                            <div className={`flex flex-row ${week()!=semana?"hidden":""}`}>
                             <table className={style.root_table}>
                                 <tbody>
+                                    <tr>
+                                        <For each={Array(col.length+1)}>
+                                            {(_,index)=>(
+                                                <td>{`${index()!=0?col[index()-1]:''}`}</td>
+                                            )}
+                                        </For>
+                                    </tr>
                                     <For each={lines}>
                                         {(interval)=>(
                                             <tr>
+                                                <td><p className='color-black-destaq text-xs text-center'>{interval}</p></td>
                                                 <For each={col}>
                                                     {(dia)=>(
                                                         <td>

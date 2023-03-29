@@ -76,5 +76,17 @@
 		color: #FCFFFF;
 
 		@apply space-x-2 hover:bg-black-destaq
-	  }
+	}
+
+	.btn-action-white {
+		letter-spacing: 0.025em;
+		width: 26px;
+		height: 26px;
+		border-radius: 0.375rem;
+		background-color: var(--white-fundo);
+	}
+
+	.btn-action-white > svg {
+		color: var(--black-fundo);
+	}
 }
