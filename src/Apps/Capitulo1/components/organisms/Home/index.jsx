@@ -11,13 +11,12 @@ import {
     DragOverlay,
   } from "@thisbeyond/solid-dnd";
 
-import { useStore } from "./storage";
-import { CLASS_NAME } from "./storage";
+import { useAtividades } from "./storage/gerenciamento/atividades";
 
 
 export default function HomePage(){
 
-    const { dispatch:{ addInside, removeInside, transferSide} } = useStore(state=>state.change)
+    const { dispatch:{ addInside, removeInside, transferSide} } = useAtividades(state=>state.change)
 
     const [atual, setAtual] = createSignal(null)
 
@@ -39,7 +38,7 @@ export default function HomePage(){
         })
         if(droppable) {
 
-            const { atividade, inside, drop } = draggable.data
+            const { atividade, inside, drop, title } = draggable.data
 
             const [ toWeek, toDay, toInterval ] = droppable?.id.split(/week:|dia:|interval:/).filter(Boolean)
             const [ fromWeek, fromDay, fromInterval ] = drop?.split(/week:|dia:|interval:/).filter(Boolean) || [false, false, false]
@@ -53,7 +52,7 @@ export default function HomePage(){
             }
 
             else if (!inside || (inside && shift)) {
-                addInside({atividade: atividade || draggable.id, drop: [toWeek, toDay, toInterval]})
+                addInside({atividade: atividade || draggable.id, drop: [toWeek, toDay, toInterval], title:title})
             }
         }
         else {
@@ -70,8 +69,8 @@ export default function HomePage(){
         setTimeout(()=>{
             document.getElementById('lateralbar-atividades').colapse(true)
         })
-        const atividade = draggable.data.atividade || draggable.id
-        setAtual(CLASS_NAME[atividade])
+        const atividade = draggable.data.title
+        setAtual(atividade)
     }
 
     let current_node;

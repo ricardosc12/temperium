@@ -6,19 +6,18 @@ import {
   } from "@thisbeyond/solid-dnd";
 
 
-import { useStore } from '../../storage';
-import { CLASS_NAME } from '../../storage';
+
 import SemanalSelector from '../SemanalSelector';
 import { createEffect, createMemo, createSignal, For, Show, Switch } from 'solid-js';
-
+import { useAtividades } from '../../storage/gerenciamento/atividades.jsx'
  
-const Draggable = ({id, drop}) => {
-    const draggable = createDraggable(`i${drop}atividade:${id}`,{drop:drop, atividade:id, inside:true});
+const Draggable = ({id, drop, title}) => {
+    const draggable = createDraggable(`i${drop}atividade:${id}`,{drop:drop, atividade:id, inside:true, title});
     return (
         <div use:draggable className={`
         atividade atividade_p m-2
         ${draggable.isActiveDraggable?'opacity-75':''}`}>
-            {CLASS_NAME[id]}
+            {title}
         </div>
     );
 };
@@ -46,7 +45,7 @@ const DroppableArea=({id, title, inside, semana, dia, interval, ...props})=>{
             <div className={style.area}>
                 <For each={Object.values(inside[semana]?.[dia]?.[interval]||{})}>
                     {(item)=>{
-                        return <Draggable id={item.id} drop={item.drop}/>
+                        return <Draggable id={item.id} title={item.title} drop={item.drop}/>
                     }}
                 </For>
             </div>
@@ -56,7 +55,7 @@ const DroppableArea=({id, title, inside, semana, dia, interval, ...props})=>{
 
 export default function Main(){
 
-    const inside = useStore(state=>state.dados.inside)
+    const inside = useAtividades(state=>state.dados.inside)
 
     const semanas = [
         'semana1','semana2','semana3','semana4','semana5'

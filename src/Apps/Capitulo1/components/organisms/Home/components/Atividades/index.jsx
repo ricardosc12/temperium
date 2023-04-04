@@ -7,8 +7,10 @@ export default function Atividades(){
 
     let ref;
 
-    const [open, setOpen] = createSignal(false)
+    const [open, setOpen] = createSignal(true)
+
     const collapse=(e)=>{
+        return
         if(!open()) {
             setTimeout(()=>{
                 ref.focus()

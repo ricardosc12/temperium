@@ -1,7 +1,7 @@
 import create from 'solid-zustand'
 import produce from 'immer'
 
-export const useStore = create(set=>({
+export const useAtividades = create(set=>({
     dados:{
         inside:{
             // teste:'teste'
@@ -9,7 +9,7 @@ export const useStore = create(set=>({
     },
     change: {
         dispatch: {
-            addInside:({atividade,drop:[semana, dia, intervalo]})=>set(produce((state)=>{
+            addInside:({atividade,drop:[semana, dia, intervalo], title})=>set(produce((state)=>{
                 state.dados.inside = 
                 {
                     ...state.dados.inside, 
@@ -18,7 +18,8 @@ export const useStore = create(set=>({
                                 [intervalo]:{...state.dados.inside[semana]?.[dia]?.[intervalo], 
                                     [atividade]:{
                                         id: `${atividade}`,
-                                        drop: `week:${semana}dia:${dia}interval:${intervalo}`
+                                        drop: `week:${semana}dia:${dia}interval:${intervalo}`,
+                                        title: title
                                     }
                                 }}
                         }
@@ -38,7 +39,7 @@ export const useStore = create(set=>({
 
                 const items = {...state}
 
-                delete items.dados.inside[fromWeek][fromDay][fromInterval][atividade]
+                const removed = items.dados.inside[fromWeek][fromDay][fromInterval][atividade]
 
                 items.dados.inside = 
                 {
@@ -48,23 +49,16 @@ export const useStore = create(set=>({
                                 [toInterval]: {...items.dados.inside[toWeek]?.[toDay]?.[toInterval], 
                                     [atividade]:{
                                         id: `${atividade}`,
-                                        drop: `week:${toWeek}dia:${toDay}interval:${toInterval}`
+                                        drop: `week:${toWeek}dia:${toDay}interval:${toInterval}`,
+                                        title: removed.title
                                     }
                                 }
                             }
                         }
                 }
+
+                delete items.dados.inside[fromWeek][fromDay][fromInterval][atividade]
             }))
         }
     }
 }))
-
-export const CLASS_NAME = {
-    po:"Programação Orientada a Objetos",
-    oc:"Organização Computacional",
-    bd:"Banco de Dados",
-    meta:"Meta-Heurística",
-    comp:"Compiladores",
-    comp_sm1_atv1: "Compiladores - Estudo",
-    comp_sm1_atv2: "Compiladores - Trabalho Prático"
-}
