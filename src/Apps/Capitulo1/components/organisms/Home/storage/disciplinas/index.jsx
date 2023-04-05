@@ -5,7 +5,8 @@ export const useDisciplinas = create(set => ({
     dados: {
         disciplinas: [
             {
-                id: "ccf441",
+                id: "CCF441",
+                cor: "#abeecd",
                 title: "Compiladores",
                 description: "Disciplina ministrada pelo professor Daniel Mendes, ano de 2023/1",
                 atividade_description: "Relembrandos conceitos - Sistemas Operacionais",
@@ -16,20 +17,29 @@ export const useDisciplinas = create(set => ({
                 atividades: [
                     {
                         id:'com_sm1_e',
-                        tags: ['ccf441', 'estudo', 'slide1'],
+                        tags: [
+                            { title: 'CCF441', color: "#abeecd" },
+                            { title: 'Estudo', color: "#abeeb0" },
+                            { title: 'Aula 1', color: "#abeee6" }
+                        ],
                         title: "Estudo",
                         description: "Estudos relacionas ao conteúdo abordado na primeira semana."
                     },
                     {
                         id:'com_sm1_t',
-                        tags: ['ccf441', 'pesquisa', 'tp1'],
+                        tags: [
+                            { title: 'CCF441', color: "#abeecd" },
+                            { title: 'Pesquisa', color: "#abeeb0" },
+                            { title: 'TP1', color: "#abeee6" }
+                        ],
                         title: "Trabalho Prático",
                         description: "Leitura, pesquisas e atividades referentes a conclusão do trabalho prático."
                     },
                 ]
             },
             {
-                id: "ccf425",
+                id: "CCF425",
+                cor: "#e8bcf7",
                 title: "Introdução à Ciência dos Dados",
                 description: "Introdução à Ciência dos Dados",
                 atividade_description: "Apresentar e discutir os principais tópicos relacionados à ciência dos dados",
@@ -40,13 +50,21 @@ export const useDisciplinas = create(set => ({
                 atividades: [
                     {
                         id:'5435',
-                        tags: ['ccf425', 'estudo', 'aula1'],
+                        tags: [
+                            { title: 'CCF425', color: "#e8bcf7" },
+                            { title: 'Estudo', color: "#d5bcf7" },
+                            { title: 'Aula 1', color: "#ffbce5" }
+                        ],
                         title: "Estudo",
                         description: "Aula 1."
                     },
                     {
                         id:'2345',
-                        tags: ['ccf425', 'pesquisa', 'tp1'],
+                        tags: [
+                            { title: 'CCF425', color: "#e8bcf7" },
+                            { title: 'Pesquisa', color: "#d5bcf7" },
+                            { title: 'TP1', color: "#ffbce5" }
+                        ],
                         title: "Atividade Prática",
                         description: "Conhecer o ambiente de desenvolvimento."
                     },

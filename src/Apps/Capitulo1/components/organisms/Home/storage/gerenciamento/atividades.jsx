@@ -9,7 +9,7 @@ export const useAtividades = create(set=>({
     },
     change: {
         dispatch: {
-            addInside:({atividade,drop:[semana, dia, intervalo], title})=>set(produce((state)=>{
+            addInside:({atividade,drop:[semana, dia, intervalo], title, tags})=>set(produce((state)=>{
                 state.dados.inside = 
                 {
                     ...state.dados.inside, 
@@ -19,7 +19,8 @@ export const useAtividades = create(set=>({
                                     [atividade]:{
                                         id: `${atividade}`,
                                         drop: `week:${semana}dia:${dia}interval:${intervalo}`,
-                                        title: title
+                                        title: title,
+                                        tags: JSON.parse(JSON.stringify(tags))
                                     }
                                 }}
                         }
@@ -50,7 +51,8 @@ export const useAtividades = create(set=>({
                                     [atividade]:{
                                         id: `${atividade}`,
                                         drop: `week:${toWeek}dia:${toDay}interval:${toInterval}`,
-                                        title: removed.title
+                                        title: removed.title,
+                                        tags: JSON.parse(JSON.stringify(removed.tags))
                                     }
                                 }
                             }

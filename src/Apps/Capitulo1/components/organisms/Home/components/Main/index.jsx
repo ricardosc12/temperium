@@ -11,13 +11,17 @@ import SemanalSelector from '../SemanalSelector';
 import { createEffect, createMemo, createSignal, For, Show, Switch } from 'solid-js';
 import { useAtividades } from '../../storage/gerenciamento/atividades.jsx'
  
-const Draggable = ({id, drop, title}) => {
-    const draggable = createDraggable(`i${drop}atividade:${id}`,{drop:drop, atividade:id, inside:true, title});
+const Draggable = ({id, drop, title, tags}) => {
+    const draggable = createDraggable(`i${drop}atividade:${id}`,{drop:drop, atividade:id, inside:true, title, tags});
     return (
         <div use:draggable className={`
-        atividade atividade_p m-2
+        atividade atividade_p w-fit h-fit
         ${draggable.isActiveDraggable?'opacity-75':''}`}>
-            {title}
+            <div className='w-fit flex py-1'>
+                <For each={tags}>
+                    {(tag)=><div className='tag-sm color-black-fundo' style={{background: tag.color}}>{tag.title}</div>}
+                </For>
+            </div>
         </div>
     );
 };
@@ -41,11 +45,11 @@ const Droppable = ({id, ...props}) => {
 const DroppableArea=({id, title, inside, semana, dia, interval, ...props})=>{
 
     return (
-        <Droppable id={id} className="w-full h-full">
+        <Droppable id={id} className="w-full h-full p-2">
             <div className={style.area}>
                 <For each={Object.values(inside[semana]?.[dia]?.[interval]||{})}>
                     {(item)=>{
-                        return <Draggable id={item.id} title={item.title} drop={item.drop}/>
+                        return <Draggable {...item}/>
                     }}
                 </For>
             </div>

@@ -38,7 +38,7 @@ export default function HomePage(){
         })
         if(droppable) {
 
-            const { atividade, inside, drop, title } = draggable.data
+            const { atividade, inside, drop, title, tags } = draggable.data
 
             const [ toWeek, toDay, toInterval ] = droppable?.id.split(/week:|dia:|interval:/).filter(Boolean)
             const [ fromWeek, fromDay, fromInterval ] = drop?.split(/week:|dia:|interval:/).filter(Boolean) || [false, false, false]
@@ -52,7 +52,7 @@ export default function HomePage(){
             }
 
             else if (!inside || (inside && shift)) {
-                addInside({atividade: atividade || draggable.id, drop: [toWeek, toDay, toInterval], title:title})
+                addInside({atividade: atividade || draggable.id, drop: [toWeek, toDay, toInterval], title:title, tags:tags })
             }
         }
         else {

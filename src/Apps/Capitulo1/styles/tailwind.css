@@ -89,4 +89,25 @@
 	.btn-action-white > svg {
 		color: var(--black-fundo);
 	}
+
+	.tag {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		line-height: 100%;
+		height: auto;
+		width: auto;
+		font-size: 10px;
+		background-color: var(--white-fundo);
+		border-radius: 0.375rem;
+		padding: 0px 6px;
+		letter-spacing: 0.03rem;
+	}
+
+	.tag-sm {
+		@apply tag;
+		transform: scale(0.9);
+		padding: 3px 10px;
+		padding-top: 4px;
+	}
 }

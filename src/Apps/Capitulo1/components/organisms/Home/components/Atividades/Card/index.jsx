@@ -5,8 +5,8 @@ import style from './style.module.css'
 import { ArrowIcon, IconGrab, IconRead, IconWorkSpace } from "@/Apps/Capitulo1/assets/Icons";
 import { createEffect, createSignal, For } from "solid-js";
 
-const Draggable = ({ id, children, title, ...props }) => {
-    const draggable = createDraggable(id, { title });
+const Draggable = ({ id, children, title, tags, ...props }) => {
+    const draggable = createDraggable(id, { title, tags });
 
     return (
         <div use:draggable className={`
@@ -19,14 +19,17 @@ const Draggable = ({ id, children, title, ...props }) => {
     );
 };
 
-const Atividade = ({ id, title, children, icon, label }) => {
+const Atividade = ({ id, title, children, icon, label, tags }) => {
     return (
-        <Draggable className="w-full" id={id} title={label + " - " + title}>
+        <Draggable className="w-full" id={id} title={label + " - " + title} tags={tags}>
             <div className="w-full flex flex-row items-center mb-5">
                 <div className={style.icon_grab}><IconGrab /></div>
                 <div className="w-full">
                     <div className="flex items-center justify-between w-full">
-                        <h5>{title}</h5>
+                        <div className="flex space-x-2 items-center">
+                            <h5>{title}</h5>
+                            <div className="tag-sm" style={{background:tags[2].color}}>{tags[2].title}</div>
+                        </div>
                         <div>{icon}</div>
                     </div>
                     <p>{children}</p>
@@ -36,7 +39,7 @@ const Atividade = ({ id, title, children, icon, label }) => {
     )
 }
 
-export function CardAtividade({ id, title, atividades, atividade_description }) {
+export function CardAtividade({ id, title, atividades, atividade_description, cor }) {
 
     const [open, setOpen] = createSignal(true)
     const collapse = () => setOpen(prev => !prev)
@@ -48,10 +51,11 @@ export function CardAtividade({ id, title, atividades, atividade_description }) 
     })
 
     return (
-            <div onClick={collapse} ref={ref} className={`${style.card_atividade} ${open() ? style.collapse : ''}`}>
-                <div className="flex items-center justify-between w-full">
-                    <div>
+            <div ref={ref} className={`${style.card_atividade} ${open() ? style.collapse : ''}`}>
+                <div onClick={collapse} className="flex items-center justify-between w-full">
+                    <div className="flex space-x-3">
                         <h2 className="text-sm">{title}</h2>
+                        <div className="tag" style={{background:cor}}>{id}</div>
                     </div>
                     <div className={style.icon_card_atividade}>
                         <ArrowIcon />
@@ -65,7 +69,7 @@ export function CardAtividade({ id, title, atividades, atividade_description }) 
                         <For each={atividades}>
                             {(item) => {
                                 return (
-                                    <Atividade id={item.id} title={item.title} label={title} icon={<IconRead />}>
+                                    <Atividade id={item.id} title={item.title} label={title} icon={<IconRead />} {...item}>
                                         {item.description}
                                     </Atividade>
                                 )

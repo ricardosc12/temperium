@@ -18,6 +18,10 @@
     width: 100%;
 }
 
+.area > * {
+    margin: 2px 2px;
+}
+
 .root_table {
     border-collapse: separate;
     border-spacing: 10px 5px;
