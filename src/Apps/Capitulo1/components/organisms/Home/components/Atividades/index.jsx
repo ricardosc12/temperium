@@ -1,8 +1,9 @@
 import style from './style.module.css'
-import { AtividadeIcon, ArrowIconSx } from '@/Apps/Capitulo1/assets/Icons';
+import { AtividadeIcon, ArrowIconSx, AddIcon } from '@/Apps/Capitulo1/assets/Icons';
 import { CardAtividade } from './Card';
 import { createEffect, createSignal, For } from 'solid-js';
 import { useDisciplinas } from '../../storage/disciplinas';
+import CreateAtividades from '../CriarAtividades';
 
 export default function Atividades() {
 
@@ -51,6 +52,7 @@ export default function Atividades() {
                             <ArrowIconSx className="rotate-90" />
                         </button>
                         <h2 className='eve-md'>Atividades</h2>
+                        <CreateAtividades/>
                     </div>
                     <div className='flex justify-center items-center bg-black-destaq p-1 rounded-md'>
                         <AtividadeIcon />

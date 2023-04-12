@@ -12,7 +12,6 @@ function Modal({open, close, children}){
             setTimeout(() => {
                 close()
             },225);
-            
         }
     }
 
