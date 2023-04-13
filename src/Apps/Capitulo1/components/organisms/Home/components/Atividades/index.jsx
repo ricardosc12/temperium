@@ -17,7 +17,9 @@ export default function Atividades() {
     const { setTarefas } = useTarefas(state=>state.change.dispatch)
 
     createEffect(()=>{
-        setTarefas(JSON.parse(window.localStorage.getItem('disciplinas')))
+        const saved = window.localStorage.getItem('disciplinas')
+        if(saved) setTarefas(JSON.parse(saved))
+        
     })
 
     const collapse = (e) => {
