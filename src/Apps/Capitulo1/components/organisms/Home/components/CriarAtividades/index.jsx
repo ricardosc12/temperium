@@ -3,10 +3,14 @@ import useForm from "@/Apps/Capitulo1/components/hooks/Form"
 import { createModal, HeaderModal } from "@/Apps/Capitulo1/components/molecules/Modal"
 import { createEffect, createSignal, For } from "solid-js"
 import style from './style.module.css'
+import { v4 as uuidv4 } from 'uuid';
+import { useTarefas } from "../../storage/tarefas_custom"
 
 function Modal() {
 
     const { submit, clear } = useForm('form-atv-create')
+
+    const { addTarefa } = useTarefas(state => state.change.dispatch)
 
     const [state, setState] = createSignal({
         atividades: []
@@ -14,23 +18,34 @@ function Modal() {
 
     function handleAdd() {
         let values = submit()
-        if(!values.atividades.titulo || !values.atividades.descricao) return 
+        if (!values.atividades.title || !values.atividades.description) return
         const atividades = [...state().atividades]
         atividades.push(values.atividades)
-        setState(prev=>({...prev, atividades:atividades}))
+        setState(prev => ({ ...prev, atividades: atividades }))
         clear(['atividades'])
     }
 
-    function handleSave(){
+    function handleSave() {
         let values = submit()
+        if (!state().atividades.length) return
+        let atividades = JSON.parse(JSON.stringify(state().atividades))
+        atividades = atividades.map(atv => {
+            atv.id = uuidv4()
+            atv.tags = Object.values(atv.tags)
+            atv.tags = atv.tags.filter(tg=>tg.title)
+            atv.tags.splice(0,0,{ title: values.title, color: values.cor })
+            return atv
+        })
         const result = {
+            custom:true,
             ...values,
-            atividades:state().atividades
+            atividades: atividades
         }
-        console.log(result)
+        addTarefa(result)
+        setState({atividades:[]})
         clear()
     }
-    
+
     return (
         <div className="modal" id="form-atv-create">
             <HeaderModal title="Criar Atividade" />
@@ -38,33 +53,57 @@ function Modal() {
                 <h4 className="color-text-secondary">Crie atividades e gerencie em conjunto com as tarefas acadêmicas.</h4>
                 <div className="divisor"></div>
                 <h3 className="mb-2">Categoria</h3>
-                <div className="flex space-x-2 mb-3">
-                    <div>
-                        <p>Título</p>
-                        <input id="titulo" type="text" />
+                <div className="flex flex-col mb-3 space-y-3">
+                    <div className="flex space-x-2">
+                        <div>
+                            <p>Título</p>
+                            <input id="title" type="text" />
+                        </div>
+                        <div>
+                            <p>Descrição</p>
+                            <input id="atividade_description" type="text" />
+                        </div>
                     </div>
-                    <div>
-                        <p>Descrição</p>
-                        <input id="descricao" type="text" />
-                    </div>
-                    <div>
-                        <p>Cor</p>
-                        <input id="tag" type="color"/>
+                    <div className="flex space-x-2">
+                        <div>
+                            <p>Tag Name</p>
+                            <input id="id" type="text" />
+                        </div>
+                        <div>
+                            <p>Cor</p>
+                            <input id="cor" type="color" />
+                        </div>
                     </div>
                 </div>
                 <h3 className="mb-2">Atividades</h3>
-                <div className="flex space-x-2 mb-5">
-                    <div>
-                        <p>Título</p>
-                        <input id={`atividades.titulo`} type="text" />
+                <div className="flex flex-col mb-5 space-y-3">
+                    <div className="flex space-x-2">
+                        <div>
+                            <p>Título</p>
+                            <input id={`atividades.title`} type="text" />
+                        </div>
+                        <div>
+                            <p>Descrição</p>
+                            <input id={`atividades.description`} type="text" />
+                        </div>
                     </div>
-                    <div>
-                        <p>Descrição</p>
-                        <input id={`atividades.descricao`} type="text" />
-                    </div>
-                    <div>
-                        <p>Cor</p>
-                        <input id={`atividades.tag`} type="color" />
+                    <div className="flex space-x-2">
+                        <div>
+                            <p>Tag Name</p>
+                            <input id={`atividades.tags.0.title`} type="text" />
+                        </div>
+                        <div>
+                            <p>Cor</p>
+                            <input id={`atividades.tags.0.color`} type="color" />
+                        </div>
+                        <div>
+                            <p>Tag Name</p>
+                            <input id={`atividades.tags.1.title`} type="text" />
+                        </div>
+                        <div>
+                            <p>Cor</p>
+                            <input id={`atividades.tags.1.color`} type="color" />
+                        </div>
                     </div>
                 </div>
                 <button onClick={handleAdd} className="btn-sm white mb-5">
@@ -76,12 +115,14 @@ function Modal() {
                     {state().atividades.length ?
                         (
                             <For each={state().atividades}>
-                                {(item,index)=>(
-                                    <div className="flex space-x-3">
-                                        <p>{index()+1}.</p>
-                                        <p>{item.titulo}</p>
-                                        <p>{item.descricao}</p>
-                                        <p style={{background:item.tag}}>{item.tag}</p>
+                                {(item, index) => (
+                                    <div className="flex space-x-3 items-center">
+                                        <p>{index() + 1}.</p>
+                                        <p>{item.title}</p>
+                                        <p>{item.description}</p>
+                                        {Object.values(item.tags).map(tg => {
+                                            return <p className="px-3 py-1 rounded-sm" style={{ background: tg.color }}>{tg.title}</p>
+                                        })}
                                     </div>
                                 )}
                             </For>
@@ -92,7 +133,7 @@ function Modal() {
                 </div>
                 <div className="flex w-full items-center justify-end mb-2">
                     <button onClick={handleSave} className="btn-sm white">
-                        <CheckIcon/>
+                        <CheckIcon />
                         <p className="font-medium">Salvar</p>
                     </button>
                 </div>
@@ -104,7 +145,7 @@ function Modal() {
 export default function CreateAtividades() {
 
     const { open, close } = createModal(<Modal />)
-
+    
     return (
         <div onClick={open} className='btn-sm white ml-3'>
             <AddIcon />

@@ -20,13 +20,15 @@ export default function useForm(id){
             if(ids){
                 for (const input of inputs) {
                     if(ids.some(item=>input.id.includes(item))){
-                        input.value = ""
+                        if(input.type == "color") input.value = "#000000"
+                        else input.value = ""
                     }
                 }
             }
             else {
                 for (const input of inputs) {
-                    input.value = ""
+                    if(input.type == "color") input.value = "#000000"
+                    else input.value = ""
                 }
             }
 

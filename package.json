@@ -33,6 +33,7 @@
     "solid-js": "^1.4.7",
     "solid-zustand": "^1.5.0",
     "typescript": "^4.9.4",
+    "uuid": "^9.0.0",
     "zustand": "^4.3.3"
   }
 }

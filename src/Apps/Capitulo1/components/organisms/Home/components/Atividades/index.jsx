@@ -4,16 +4,24 @@ import { CardAtividade } from './Card';
 import { createEffect, createSignal, For } from 'solid-js';
 import { useDisciplinas } from '../../storage/disciplinas';
 import CreateAtividades from '../CriarAtividades';
+import { useTarefas } from '../../storage/tarefas_custom';
 
 export default function Atividades() {
 
     let ref;
 
-    const [open, setOpen] = createSignal(false)
+    const [open, setOpen] = createSignal(true)
 
     const disciplinas = useDisciplinas(state => state.dados.disciplinas)
+    const tarefas = useTarefas(state=>state.dados.tarefas)
+    const { setTarefas } = useTarefas(state=>state.change.dispatch)
+
+    createEffect(()=>{
+        setTarefas(JSON.parse(window.localStorage.getItem('disciplinas')))
+    })
 
     const collapse = (e) => {
+        return
         if (!open()) {
             setTimeout(() => {
                 ref.focus()
@@ -59,7 +67,7 @@ export default function Atividades() {
                     </div>
                 </div>
                 <div className={style.atividades_list}>
-                    <For each={disciplinas}>
+                    <For each={[...disciplinas, ...tarefas]}>
                         {(item) => <CardAtividade {...item} />}
                     </For>
                 </div>

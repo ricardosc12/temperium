@@ -37,6 +37,7 @@
 }
 
 .atividades{
+    width: 100%;
     opacity: 1;
     transition: opacity 0.20s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }

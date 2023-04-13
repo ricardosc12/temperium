@@ -194,4 +194,38 @@
 		height: 2px;
 		background: linear-gradient(to left, transparent, var(--black-destaq));
 	}
+
+	.menu {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		outline: none;
+		width: auto;
+		height: auto;
+		background-color: var(--black-destaq);
+		z-index: 9999;
+		color: white;
+		padding: 5px 0;
+		box-shadow: 2px 2px 13px rgba(200,200,200,.1);
+		@apply rounded-md
+	}
+	.menu > div {
+		display: flex;
+		align-items: center;
+		position: relative;
+		cursor: pointer;
+		padding: 6px 24px 6px 14px;
+	}
+	.menu > div > svg {
+		margin-right: 12px;
+	}
+	.menu > div:hover::after{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(255,255,255,.1);
+	}
 }
