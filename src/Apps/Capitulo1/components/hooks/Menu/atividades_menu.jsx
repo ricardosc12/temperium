@@ -1,11 +1,11 @@
-import { IconRead } from "@/Apps/Capitulo1/assets/Icons";
+import { TrashIcon } from "@/Apps/Capitulo1/assets/Icons";
 
 
 export function MenuAtividade() {
     return (
         <>
             <div id="excluir">
-                <IconRead/>
+                <TrashIcon/>
                 <p>Excluir</p>
             </div>
         </>

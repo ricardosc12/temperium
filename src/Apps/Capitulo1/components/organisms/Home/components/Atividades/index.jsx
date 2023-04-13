@@ -10,7 +10,7 @@ export default function Atividades() {
 
     let ref;
 
-    const [open, setOpen] = createSignal(true)
+    const [open, setOpen] = createSignal(false)
 
     const disciplinas = useDisciplinas(state => state.dados.disciplinas)
     const tarefas = useTarefas(state=>state.dados.tarefas)
@@ -21,7 +21,7 @@ export default function Atividades() {
     })
 
     const collapse = (e) => {
-        return
+        console.log(e)
         if (!open()) {
             setTimeout(() => {
                 ref.focus()
@@ -53,7 +53,7 @@ export default function Atividades() {
                     <p>Atividades</p>
                 </button>
             </div>
-            <div ref={ref} onBlur={collapse} tabindex="-1" className={`${style.atividades} ${open() ? style.colapse : ''}`} id="lateralbar-atividades">
+            <div ref={ref} tabindex="-1" className={`${style.atividades} ${open() ? style.colapse : ''}`} id="lateralbar-atividades">
                 <div className='m-3 ml-5 mb-6 flex-row flex justify-between'>
                     <div className='flex'>
                         <button onClick={collapse} tabindex="-1" className='btn-action-white mr-3'>
