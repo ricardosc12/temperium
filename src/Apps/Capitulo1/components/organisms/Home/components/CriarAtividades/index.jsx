@@ -32,17 +32,17 @@ function Modal() {
         atividades = atividades.map(atv => {
             atv.id = uuidv4()
             atv.tags = Object.values(atv.tags)
-            atv.tags = atv.tags.filter(tg=>tg.title)
-            atv.tags.splice(0,0,{ title: values.title, color: values.cor })
+            atv.tags = atv.tags.filter(tg => tg.title)
+            atv.tags.splice(0, 0, { title: values.title, color: values.cor })
             return atv
         })
         const result = {
-            custom:true,
+            custom: true,
             ...values,
             atividades: atividades
         }
         addTarefa(result)
-        setState({atividades:[]})
+        setState({ atividades: [] })
         clear()
     }
 
@@ -53,56 +53,56 @@ function Modal() {
                 <h4 className="color-text-secondary">Crie atividades e gerencie em conjunto com as tarefas acadêmicas.</h4>
                 <div className="divisor"></div>
                 <h3 className="mb-2">Categoria</h3>
-                <div className="flex flex-col mb-3 space-y-3">
+                <div className="flex flex-col mb-3 space-y-4">
                     <div className="flex space-x-2">
-                        <div>
+                        <div className="textfield">
+                            <input id="title" placeholder=" " type="text" />
                             <p>Título</p>
-                            <input id="title" type="text" />
                         </div>
-                        <div>
+                        <div className="textfield">
+                            <input id="atividade_description" placeholder=" " type="text" />
                             <p>Descrição</p>
-                            <input id="atividade_description" type="text" />
                         </div>
                     </div>
                     <div className="flex space-x-2">
-                        <div>
+                        <div className="textfield">
+                            <input id="id" placeholder=" " type="text" />
                             <p>Tag Name</p>
-                            <input id="id" type="text" />
                         </div>
-                        <div>
-                            <p>Cor</p>
+                        <div className="colorfield">                            
                             <input id="cor" type="color" />
+                            <p>Cor</p>
                         </div>
                     </div>
                 </div>
                 <h3 className="mb-2">Atividades</h3>
-                <div className="flex flex-col mb-5 space-y-3">
+                <div className="flex flex-col mb-5 space-y-4">
                     <div className="flex space-x-2">
-                        <div>
+                        <div className="textfield">
+                            <input id={`atividades.title`} placeholder=" " type="text" />
                             <p>Título</p>
-                            <input id={`atividades.title`} type="text" />
                         </div>
-                        <div>
+                        <div className="textfield">
+                            <input id={`atividades.description`} placeholder=" " type="text" />
                             <p>Descrição</p>
-                            <input id={`atividades.description`} type="text" />
                         </div>
                     </div>
                     <div className="flex space-x-2">
-                        <div>
+                        <div className="textfield">
+                            <input id={`atividades.tags.0.title`} placeholder=" " type="text" />
                             <p>Tag Name</p>
-                            <input id={`atividades.tags.0.title`} type="text" />
                         </div>
-                        <div>
-                            <p>Cor</p>
+                        <div className="colorfield">                            
                             <input id={`atividades.tags.0.color`} type="color" />
-                        </div>
-                        <div>
-                            <p>Tag Name</p>
-                            <input id={`atividades.tags.1.title`} type="text" />
-                        </div>
-                        <div>
                             <p>Cor</p>
+                        </div>
+                        <div className="textfield">
+                            <input id={`atividades.tags.1.title`} placeholder=" " type="text" />
+                            <p>Tag Name</p>
+                        </div>
+                        <div className="colorfield">                            
                             <input id={`atividades.tags.1.color`} type="color" />
+                            <p>Cor</p>
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@ function Modal() {
 export default function CreateAtividades() {
 
     const { open, close } = createModal(<Modal />)
-    
+    open()
     return (
         <div onClick={open} className='btn-sm white ml-3'>
             <AddIcon />
