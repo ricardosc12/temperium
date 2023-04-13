@@ -145,7 +145,7 @@ function Modal() {
 export default function CreateAtividades() {
 
     const { open, close } = createModal(<Modal />)
-    open()
+
     return (
         <div onClick={open} className='btn-sm white ml-3'>
             <AddIcon />
