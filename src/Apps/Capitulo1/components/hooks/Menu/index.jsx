@@ -18,7 +18,7 @@ export function createMenu(e, Menu) {
     document.body.appendChild(menu_e)
 
     createRoot(() => {
-        render(<Menu />, document.getElementById("menu-option"))
+        render(()=><Menu />, menu_e)
     })
     
     menu_e.focus()
