@@ -10,6 +10,8 @@ function Modal() {
 
     const { submit, clear } = useForm('form-atv-create')
 
+    let editing = false;
+
     const { addTarefa } = useTarefas(state => state.change.dispatch)
 
     const [state, setState] = createSignal({
@@ -69,7 +71,7 @@ function Modal() {
                             <input id="id" placeholder=" " type="text" />
                             <p>Tag Name</p>
                         </div>
-                        <div className="colorfield">                            
+                        <div className="colorfield">
                             <input id="cor" type="color" />
                             <p>Cor</p>
                         </div>
@@ -92,7 +94,7 @@ function Modal() {
                             <input id={`atividades.tags.0.title`} placeholder=" " type="text" />
                             <p>Tag Name</p>
                         </div>
-                        <div className="colorfield">                            
+                        <div className="colorfield">
                             <input id={`atividades.tags.0.color`} type="color" />
                             <p>Cor</p>
                         </div>
@@ -100,7 +102,7 @@ function Modal() {
                             <input id={`atividades.tags.1.title`} placeholder=" " type="text" />
                             <p>Tag Name</p>
                         </div>
-                        <div className="colorfield">                            
+                        <div className="colorfield">
                             <input id={`atividades.tags.1.color`} type="color" />
                             <p>Cor</p>
                         </div>
@@ -144,7 +146,7 @@ function Modal() {
 
 export default function CreateAtividades() {
 
-    const { open, close } = createModal(<Modal />)
+    const { open, close } = createModal(Modal, { closeOnBlur: false })
 
     return (
         <div onClick={open} className='btn-sm white ml-3'>
