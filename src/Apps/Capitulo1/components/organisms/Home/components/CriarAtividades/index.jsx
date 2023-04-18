@@ -6,7 +6,7 @@ import style from './style.module.css'
 import { v4 as uuidv4 } from 'uuid';
 import { useTarefas } from "../../storage/tarefas_custom"
 
-function Modal() {
+function Modal(props) {
 
     const { submit, clear } = useForm('form-atv-create')
 
@@ -146,10 +146,14 @@ function Modal() {
 
 export default function CreateAtividades() {
 
-    const { open, close } = createModal(Modal, { closeOnBlur: false })
+    const { open, close } = createModal(Modal, { closeOnBlur: false, props: { teste: 'teste' } })
+
+    function handleOpen(props){
+        open(props)
+    }
 
     return (
-        <div onClick={open} className='btn-sm white ml-3'>
+        <div onClick={handleOpen} id="modal-create_atividade" className='btn-sm white ml-3'>
             <AddIcon />
             <p>Criar</p>
         </div>

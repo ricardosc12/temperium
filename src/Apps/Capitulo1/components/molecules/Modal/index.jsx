@@ -1,4 +1,4 @@
-import { createEffect, createSignal, Show } from "solid-js";
+import { createEffect, createMemo, createSignal, Show, children } from "solid-js";
 import { Portal } from "solid-js/web";
 import style from './style.module.css'
 
@@ -7,7 +7,7 @@ function Modal({ open, close, children, closeOnBlur = true }) {
     let modal;
 
     const closeModal = (e) => {
-        if (closeOnBlur && e.target.id === "modal" || e.target.nodeName == "BUTTON" ) {
+        if (closeOnBlur && e.target.id === "modal" || e.target.nodeName == "BUTTON") {
             modal.classList.remove('open_modal_animation')
             setTimeout(() => {
                 close()
@@ -30,15 +30,17 @@ function Modal({ open, close, children, closeOnBlur = true }) {
     )
 }
 
-export function createModal(children, props = {}) {
+export function createModal(Component, props = {}) {
 
     const [state, setState] = createSignal(false);
-    const open = () => setState(true);
+    let propsComponent = {};
+    const open = (props) => {
+        if (props) propsComponent = props
+        setState(true)
+    };
     const close = () => setState(false);
 
-    let Element = children;
-
-    <Modal open={state} close={close} closeOnBlur={props.closeOnBlur}>{Element}</Modal>
+    <Modal open={state} close={close} closeOnBlur={props.closeOnBlur}>{() => <Component {...propsComponent} />}</Modal>
 
     return { open, close, state }
 }
