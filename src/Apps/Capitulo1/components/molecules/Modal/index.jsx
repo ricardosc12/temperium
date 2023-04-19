@@ -33,16 +33,23 @@ function Modal({ open, close, children, closeOnBlur = true }) {
 export function createModal(Component, props = {}) {
 
     const [state, setState] = createSignal(false);
-    let propsComponent = {};
+    let propsComponent = { ...props?.props };
     const open = (props) => {
-        if (props) propsComponent = props
+        if (props) propsComponent = { ...propsComponent, ...props }
         setState(true)
     };
-    const close = () => setState(false);
+    const close = () => {
+        propsComponent = { ...props?.props }
+        setState(false)
+    };
 
     <Modal open={state} close={close} closeOnBlur={props.closeOnBlur}>{() => <Component {...propsComponent} />}</Modal>
 
     return { open, close, state }
+}
+
+export function openModal(modalId, props) {
+    document.getElementById(modalId).open(null, props)
 }
 
 export const HeaderModal = ({ title }) => {

@@ -4,22 +4,22 @@ import { checkUpdate, installUpdate } from '@tauri-apps/api/updater'
 import { relaunch } from '@tauri-apps/api/process'
 import { VERSION } from '@/config/version'
 
-const ModalUpdate=()=>{
- 
-    async function update(){
+const ModalUpdate = () => {
+
+    async function update() {
         try {
             const { shouldUpdate, manifest } = await checkUpdate()
             console.log('antes', shouldUpdate)
             if (shouldUpdate) {
-              // display dialog
-              const update = await installUpdate()
-              console.log(shouldUpdate,update)
-              // install complete, restart the app
-              await relaunch()
+                // display dialog
+                const update = await installUpdate()
+                console.log(shouldUpdate, update)
+                // install complete, restart the app
+                await relaunch()
             }
-          } catch (error) {
+        } catch (error) {
             console.log(error)
-          }
+        }
     }
 
     return (
@@ -27,11 +27,15 @@ const ModalUpdate=()=>{
     )
 }
 
-export default function Footer(){
+export default function Footer() {
 
-    const { open, close } = createModal(<div className="flex w-52 h-32 bg-white-fundo rounded-2xl items-center justify-center">
-        <ModalUpdate/>
-    </div>)
+    const { open, close } = createModal(() => {
+        return (
+            <div className="flex w-52 h-32 bg-white-fundo rounded-2xl items-center justify-center">
+                <ModalUpdate />
+            </div>
+        )
+    })
 
     return (
         <footer className={style.footer}>
