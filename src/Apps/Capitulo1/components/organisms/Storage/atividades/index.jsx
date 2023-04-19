@@ -18,7 +18,7 @@ export const atividadesStorage = (set) => ({
             state.dados.tarefas = payload
         })),
         removeTarefa: (id) => set(produce((state) => {
-            state.dados.tarefas = state.dados.tarefas.filter(item => item.id != id)
+            state.dados.tarefas = state.dados.tarefas.filter(item => item.id_ != id)
             window.localStorage.setItem("disciplinas", JSON.stringify(state.dados.tarefas))
         })),
     }

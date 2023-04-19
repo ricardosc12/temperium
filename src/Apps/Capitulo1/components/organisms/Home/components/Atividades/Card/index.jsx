@@ -60,7 +60,7 @@ export function CardAtividade({ id, title, atividades, atividade_description, co
         if (!custom) return
         const menu_resp = await createMenu(e, MenuAtividade)
         if (menu_resp == "excluir") {
-            removeTarefa(id)
+            removeTarefa(props.id_)
         }
         else if (menu_resp == "editar") {
             openModal("modal-create-atividade", {
