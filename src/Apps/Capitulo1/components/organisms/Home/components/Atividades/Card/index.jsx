@@ -2,11 +2,12 @@ import {
     createDraggable,
 } from "@thisbeyond/solid-dnd";
 import style from './style.module.css'
-import { ArrowIcon, IconGrab, IconRead, IconWorkSpace } from "@/Apps/Capitulo1/assets/Icons";
+import { ArrowIcon, IconGrab, IconRead } from "@/Apps/Capitulo1/assets/Icons";
 import { createEffect, createSignal, For } from "solid-js";
 import { createMenu } from "@/Apps/Capitulo1/components/hooks/Menu";
 import { MenuAtividade } from "@/Apps/Capitulo1/components/hooks/Menu/atividades_menu";
-import { useTarefas } from "../../../storage/tarefas_custom";
+import { openModal } from "@/Apps/Capitulo1/components/molecules/Modal";
+import { useStorage } from "../../../../Storage/context";
 
 const Draggable = ({ id, children, title, tags, ...props }) => {
     const draggable = createDraggable(id, { title, tags });
@@ -42,12 +43,12 @@ const Atividade = ({ id, title, children, icon, label, tags }) => {
     )
 }
 
-export function CardAtividade({ id, title, atividades, atividade_description, cor, custom }) {
+export function CardAtividade({ id, title, atividades, atividade_description, cor, custom, ...props }) {
 
     const [open, setOpen] = createSignal(true)
     const collapse = () => setOpen(prev => !prev)
 
-    const { removeTarefa } = useTarefas(state=>state.change.dispatch)
+    const { dispatch: { removeTarefa } } = useStorage()
 
     let ref;
 
@@ -60,6 +61,11 @@ export function CardAtividade({ id, title, atividades, atividade_description, co
         const menu_resp = await createMenu(e, MenuAtividade)
         if (menu_resp == "excluir") {
             removeTarefa(id)
+        }
+        else if (menu_resp == "editar") {
+            openModal("modal-create-atividade", {
+                id, title, atividades, atividade_description, cor, custom, ...props
+            })
         }
     }
 

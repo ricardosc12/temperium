@@ -2,9 +2,8 @@ import style from './style.module.css'
 import { AtividadeIcon, ArrowIconSx, AddIcon } from '@/Apps/Capitulo1/assets/Icons';
 import { CardAtividade } from './Card';
 import { createEffect, createSignal, For } from 'solid-js';
-import { useDisciplinas } from '../../storage/disciplinas';
 import CreateAtividades from '../CriarAtividades';
-import { useTarefas } from '../../storage/tarefas_custom';
+import { useStorage } from '../../../Storage/context';
 
 export default function Atividades() {
 
@@ -12,18 +11,14 @@ export default function Atividades() {
 
     const [open, setOpen] = createSignal(false)
 
-    const disciplinas = useDisciplinas(state => state.dados.disciplinas)
-    const tarefas = useTarefas(state=>state.dados.tarefas)
-    const { setTarefas } = useTarefas(state=>state.change.dispatch)
+    const { dados, dispatch: { setTarefas } } = useStorage()
 
-    createEffect(()=>{
+    createEffect(() => {
         const saved = window.localStorage.getItem('disciplinas')
-        if(saved) setTarefas(JSON.parse(saved))
-        
+        if (saved) setTarefas(JSON.parse(saved))
     })
 
     const collapse = (e) => {
-        console.log(e)
         if (!open()) {
             setTimeout(() => {
                 ref.focus()
@@ -51,7 +46,7 @@ export default function Atividades() {
         <>
             <div className={`${style.button_colapse} ${open() ? style.colapse : ''}`}>
                 <button tabindex="-1" onClick={collapse} class="btn-base shadow-lg">
-                    <AtividadeIcon />
+                    <AtividadeIcon/>
                     <p>Atividades</p>
                 </button>
             </div>
@@ -62,14 +57,14 @@ export default function Atividades() {
                             <ArrowIconSx className="rotate-90" />
                         </button>
                         <h2 className='eve-md'>Atividades</h2>
-                        <CreateAtividades/>
+                        <CreateAtividades />
                     </div>
                     <div className='flex justify-center items-center bg-black-destaq p-1 rounded-md'>
                         <AtividadeIcon />
                     </div>
                 </div>
                 <div className={style.atividades_list}>
-                    <For each={[...disciplinas, ...tarefas]}>
+                    <For each={[...dados.disciplinas, ...dados.tarefas]}>
                         {(item) => <CardAtividade {...item} />}
                     </For>
                 </div>

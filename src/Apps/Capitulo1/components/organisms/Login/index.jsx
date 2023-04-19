@@ -5,7 +5,7 @@ import ModalSign from './Modal';
 
 export default function LoginPage(){
 
-    const { open:open, close:close, state } = createModal(<ModalSign/>)
+    const { open:open, close:close, state } = createModal(()=><ModalSign/>)
 
     open()
 

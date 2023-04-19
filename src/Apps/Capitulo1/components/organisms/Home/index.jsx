@@ -1,63 +1,60 @@
 import Atividades from "./components/Atividades"
 import Main from "./components/Main"
 import style from './style.module.css'
-import { createEffect, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 
 import {
     DragDropProvider,
     DragDropSensors,
-    createDraggable,
-    createDroppable,
     DragOverlay,
-  } from "@thisbeyond/solid-dnd";
+} from "@thisbeyond/solid-dnd";
 
-import { useAtividades } from "./storage/gerenciamento/atividades";
+import { useStorage } from "../Storage/context";
 
+export default function HomePage() {
 
-export default function HomePage(){
-
-    const { dispatch:{ addInside, removeInside, transferSide} } = useAtividades(state=>state.change)
+    const { dispatch: { addInside, removeInside, transferSide } } = useStorage()
 
     const [atual, setAtual] = createSignal(null)
 
-    let shift=false;
+    let shift = false;
 
-    const keyDown=(e)=>{
-        if(e.key=="Shift") shift=true;
+    const keyDown = (e) => {
+        if (e.key == "Shift") shift = true;
     }
 
-    const keyUp=(e)=>{
-        if(e.key=="Shift") shift=false;
+    const keyUp = (e) => {
+        if (e.key == "Shift") shift = false;
     }
 
     const onDragEnd = ({ droppable, draggable }) => {
         setAtual(null)
-        if(current_node) current_node.style['box-shadow'] = "none"
-        setTimeout(()=>{
+        if (current_node) current_node.style['box-shadow'] = "none"
+        setTimeout(() => {
             document.getElementById('lateralbar-atividades').colapse(false)
         })
-        if(droppable) {
+        if (droppable) {
 
             const { atividade, inside, drop, title, tags } = draggable.data
 
-            const [ toWeek, toDay, toInterval ] = droppable?.id.split(/week:|dia:|interval:/).filter(Boolean)
-            const [ fromWeek, fromDay, fromInterval ] = drop?.split(/week:|dia:|interval:/).filter(Boolean) || [false, false, false]
+            const [toWeek, toDay, toInterval] = droppable?.id.split(/week:|dia:|interval:/).filter(Boolean)
+            const [fromWeek, fromDay, fromInterval] = drop?.split(/week:|dia:|interval:/).filter(Boolean) || [false, false, false]
 
-            if(inside && shift==false && (toWeek!=fromWeek || toDay!=fromDay || toInterval!=fromInterval)) {
+            if (inside && shift == false && (toWeek != fromWeek || toDay != fromDay || toInterval != fromInterval)) {
                 transferSide({
                     atividade: atividade,
-                    to:[toWeek, toDay, toInterval],
-                    from:[fromWeek, fromDay, fromInterval]
+                    to: [toWeek, toDay, toInterval],
+                    from: [fromWeek, fromDay, fromInterval]
                 })
             }
 
             else if (!inside || (inside && shift)) {
-                addInside({atividade: atividade || draggable.id, drop: [toWeek, toDay, toInterval], title:title, tags:tags })
+                addInside({ atividade: atividade || draggable.id, drop: [toWeek, toDay, toInterval], title: title, tags: tags })
             }
         }
         else {
             const { atividade, drop } = draggable.data
-            if(!drop) return
+            if (!drop) return
             removeInside({
                 atividade: atividade,
                 from: drop.split(/week:|dia:|interval:/).filter(Boolean)
@@ -65,8 +62,8 @@ export default function HomePage(){
         }
     };
 
-    const onDragStart=({draggable})=>{
-        setTimeout(()=>{
+    const onDragStart = ({ draggable }) => {
+        setTimeout(() => {
             document.getElementById('lateralbar-atividades').colapse(true)
         })
         const atividade = draggable.data.title
@@ -77,8 +74,8 @@ export default function HomePage(){
 
     const onDragOver = ({ draggable, droppable }) => {
         const node = droppable?.node
-        if(node) {
-            if(current_node) current_node.style['box-shadow'] = "none"
+        if (node) {
+            if (current_node) current_node.style['box-shadow'] = "none"
             node.style['box-shadow'] = "0px 0px 1px 1px var(--black-destaq)"
             current_node = node
         }
@@ -90,9 +87,9 @@ export default function HomePage(){
 
                 <DragDropSensors />
 
-                <Main/>
+                <Main />
 
-                <Atividades/>
+                <Atividades />
 
                 <DragOverlay class={style.overlay}>
                     {(draggable) => <div class={style.atividade_overlay}>{atual()}</div>}

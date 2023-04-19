@@ -4,15 +4,20 @@ import { createModal, HeaderModal } from "@/Apps/Capitulo1/components/molecules/
 import { createEffect, createSignal, For } from "solid-js"
 import style from './style.module.css'
 import { v4 as uuidv4 } from 'uuid';
-import { useTarefas } from "../../storage/tarefas_custom"
+import { useStorage } from "../../../Storage/context"
 
 function Modal(props) {
 
-    const { submit, clear } = useForm('form-atv-create')
+    const { submit, clear, change } = useForm('form-atv-create')
 
-    let editing = false;
+    createEffect(() => {
+        if (props.id) {
+            change(props)
+            setState({ atividades: props.atividades })
+        }
+    })
 
-    const { addTarefa } = useTarefas(state => state.change.dispatch)
+    const { dispatch: { addTarefa, editTarefa } } = useStorage()
 
     const [state, setState] = createSignal({
         atividades: []
@@ -31,19 +36,27 @@ function Modal(props) {
         let values = submit()
         if (!state().atividades.length) return
         let atividades = JSON.parse(JSON.stringify(state().atividades))
-        atividades = atividades.map(atv => {
-            atv.id = uuidv4()
-            atv.tags = Object.values(atv.tags)
-            atv.tags = atv.tags.filter(tg => tg.title)
-            atv.tags.splice(0, 0, { title: values.title, color: values.cor })
-            return atv
-        })
+        if (!props.id) {
+            atividades = atividades.map(atv => {
+                atv.id = uuidv4()
+                atv.tags = Object.values(atv.tags)
+                atv.tags = atv.tags.filter(tg => tg.title)
+                atv.tags.splice(0, 0, { title: values.title, color: values.cor })
+                return atv
+            })
+        }
         const result = {
             custom: true,
+            id_: props.id ? props.id_ : uuidv4(),
             ...values,
             atividades: atividades
         }
-        addTarefa(result)
+        if (props.id) {
+            editTarefa(result)
+        }
+        else {
+            addTarefa(result)
+        }
         setState({ atividades: [] })
         clear()
     }
@@ -146,14 +159,20 @@ function Modal(props) {
 
 export default function CreateAtividades() {
 
-    const { open, close } = createModal(Modal, { closeOnBlur: false, props: { teste: 'teste' } })
+    const { open, close } = createModal(Modal, { closeOnBlur: false })
 
-    function handleOpen(props){
+    let ref;
+
+    function handleOpen(e, props) {
         open(props)
     }
 
+    createEffect(() => {
+        ref.open = handleOpen
+    })
+
     return (
-        <div onClick={handleOpen} id="modal-create_atividade" className='btn-sm white ml-3'>
+        <div ref={ref} onClick={handleOpen} id="modal-create-atividade" className='btn-sm white ml-3'>
             <AddIcon />
             <p>Criar</p>
         </div>
