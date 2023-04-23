@@ -5,6 +5,7 @@ import { createEffect, createSignal, For } from "solid-js"
 import style from './style.module.css'
 import { v4 as uuidv4 } from 'uuid';
 import { useStorage } from "../../../Storage/context"
+import Select from "@/Apps/Capitulo1/components/atoms/Select"
 
 function Modal(props) {
 
@@ -17,7 +18,7 @@ function Modal(props) {
         }
     })
 
-    const { dispatch: { addTarefa, editTarefa } } = useStorage()
+    const { dados: { tags }, dispatch: { addTarefa, editTarefa } } = useStorage()
 
     const [state, setState] = createSignal({
         atividades: []
@@ -74,10 +75,11 @@ function Modal(props) {
                             <input id="title" placeholder=" " type="text" />
                             <p>Título</p>
                         </div>
-                        <div className="textfield">
+                        <Select id="tag" label="Tag" options={tags.primary} />
+                        {/* <div className="textfield">
                             <input id="atividade_description" placeholder=" " type="text" />
                             <p>Descrição</p>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="flex space-x-2">
                         <div className="textfield">

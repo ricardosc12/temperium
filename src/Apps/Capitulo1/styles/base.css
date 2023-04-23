@@ -66,7 +66,7 @@ h5 {
     -webkit-transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
     -o-transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
 	
-	transform: translateY(0px) !important;
+	transform: translateZ(0px) !important;
 	transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
 }
 

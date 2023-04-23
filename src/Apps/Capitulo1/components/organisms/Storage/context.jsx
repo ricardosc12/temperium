@@ -3,6 +3,7 @@ import { createStore } from "solid-js/store";
 import { atividadesStorage } from "./atividades";
 import { disciplinasStorage } from "./disciplinas";
 import { gerenciamentoStorage } from "./gerenciamento";
+import { tagsStorage } from "./tags";
 
 const CounterContext = createContext();
 
@@ -13,14 +14,16 @@ export function StorageProvider(props) {
         dados: {
             disciplinas: disciplinasStorage().disciplinas,
             tarefas: atividadesStorage().tarefas,
-            inside: gerenciamentoStorage().inside
+            inside: gerenciamentoStorage().inside,
+            tags: tagsStorage().tags,
         }
     });
     const counter = {
         dados: state.dados,
         dispatch: {
             ...atividadesStorage(setState).dispatch,
-            ...gerenciamentoStorage(setState).dispatch
+            ...gerenciamentoStorage(setState).dispatch,
+            ...tagsStorage(setState).dispatch,
         }
     }
 

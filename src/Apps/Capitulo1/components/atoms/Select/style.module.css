@@ -1,0 +1,44 @@
+.select > p {
+    position: absolute;
+    transform: scale(0.83) translateY(-18px);
+    color: var(--text-secondary) !important;
+}
+
+.select {
+    display: flex;
+    margin-top: 7px;
+}
+
+.select fluent-select  {
+    outline: none !important;
+    min-width: 130px;
+    width: auto;
+}
+
+.select fluent-option > div {
+    display: flex;
+    align-items: center;
+}
+
+.select fluent-option > div > p {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--black-fundo) !important;
+}
+
+
+.select fluent-option > div > span {
+    display: flex;
+    min-width: 12px;
+    min-height: 12px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.root_modal_tags {
+    width: 90vw;
+    width: 600px;
+    padding: 0px .5rem;
+}

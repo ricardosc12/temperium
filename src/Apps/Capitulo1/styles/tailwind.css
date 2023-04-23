@@ -11,6 +11,7 @@
 	.bg-black-border { background: #2C3539 !important; }
 	.bg-white-fundo { background: #FCFFFF !important; }
 	.bg-text-primary { background: #FCFFFF !important; }
+	.bg-text-primary-hover { background: #f0f3f3 !important; }
 	.bg-text-secondary { background: #C1C5C7 !important; }
 
 	.color-black-fundo { color: #171F23 !important; }
@@ -71,6 +72,7 @@
 		font-size: 0.9rem;
 	}
 
+	/* BUTTON */
 	.btn-base {
 		cursor: pointer;
 		letter-spacing: 0.025em;
@@ -140,6 +142,7 @@
 	.btn-action-white > svg {
 		color: var(--black-fundo);
 	}
+	/* BUTTON */
 
 	.tag {
 		display: flex;
@@ -195,6 +198,7 @@
 		background: linear-gradient(to left, transparent, var(--black-destaq));
 	}
 
+	/* MENU */
 	.menu {
 		display: flex;
 		flex-direction: column;
@@ -228,7 +232,9 @@
 		height: 100%;
 		background-color: rgba(255,255,255,.1);
 	}
+	/* MENU */
 
+	/* TEXTFIELD */
 	.textfield {
 		height: 38px;
 		position: relative;
@@ -303,4 +309,28 @@
 		color: var(--text-secondary) !important;
 		position: absolute;
 	}
+	/* TEXTFIELD */
+
+	/* TAG */
+
+	.tag-field {
+		transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
+		@apply flex mr-3 mb-3 items-center px-3 rounded bg-text-primary cursor-pointer
+	}
+
+	.tag-field:hover {
+		transform: translateY(-1px);
+		transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
+		@apply bg-text-primary-hover
+	}
+
+
+	.tag-field > span {
+		@apply flex w-3 h-3 rounded-full mr-2
+	}
+
+	.tag-field > p {
+		color: var(--black-fundo) !important;
+		margin-right: 5px;
+	}	
 }
