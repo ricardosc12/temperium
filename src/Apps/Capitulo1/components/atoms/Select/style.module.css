@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.select fluent-option > div > p {
+.select fluent-option:not(:last-of-type) > div > p {
     display: block;
     white-space: nowrap;
     overflow: hidden;
@@ -37,8 +37,24 @@
     margin-right: 10px;
 }
 
-.root_modal_tags {
-    width: 90vw;
-    width: 600px;
-    padding: 0px .5rem;
+.select_option {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    justify-content: center;
+    right: 3px;
+    top: 0;
+    height: 32px;
+    color: var(--black-destaq) !important;
+}
+
+.select_option > p {
+    font-weight: 500;
+    color: var(--black-destaq) !important;
+}
+
+.select_option > svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
 }

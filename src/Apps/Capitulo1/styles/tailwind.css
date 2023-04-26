@@ -315,22 +315,37 @@
 
 	.tag-field {
 		transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
-		@apply flex mr-3 mb-3 items-center px-3 rounded bg-text-primary cursor-pointer
+		opacity: 0.9;
+		height: 28px;
+		@apply flex mr-3 mb-3 items-center px-3 rounded bg-black-destaq cursor-pointer
 	}
 
 	.tag-field:hover {
 		transform: translateY(-1px);
+		opacity: 1;
 		transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
-		@apply bg-text-primary-hover
 	}
-
 
 	.tag-field > span {
 		@apply flex w-3 h-3 rounded-full mr-2
 	}
 
-	.tag-field > p {
-		color: var(--black-fundo) !important;
+	.tag-field > input {
+		@apply mr-2
+	}
+	.tag-field > :nth-child(2) {
+		outline: none;
+	}
+	.tag-field{
+		outline: none;
+	}
+	.tag-field > p, .tag-field > :nth-child(2) {
+		color: var(--text-primary) !important;
 		margin-right: 5px;
-	}	
+		font-size: 14px;
+	}
+
+	.tag-field.active {
+		border: 1px solid var(--white-fundo);
+	}
 }

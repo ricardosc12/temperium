@@ -1,15 +1,27 @@
 import style from './style.module.css'
 import '@/Apps/Capitulo1/styles/fluent-ui.css'
-import { createEffect, createSignal, For, on } from 'solid-js'
-import { createModal, HeaderModal } from '../../molecules/Modal'
-import { useStorage } from '../../organisms/Storage/context'
-import TextField from '../TextField'
+import { createEffect, createSignal, For, on, splitProps } from 'solid-js'
+import { createModal } from '../../molecules/Modal'
+import { ModalTagSelector } from '../../molecules/Modal/TagSelector'
+import { AddIcon } from '@/Apps/Capitulo1/assets/Icons'
 
-export default function Select({ id, label, height = '30px', options = [] }) {
+export default function Select(props) {
 
-    const [selected, setSelected] = createSignal('estudo')
+    const [selected, setSelected] = createSignal('')
 
-    const { open } = createModal(() => <Modal />, { closeOnBlur: true })
+    const [_, others] = splitProps(props, ["id", "label"])
+
+    const { open } = createModal(() => <ModalTagSelector />, { closeOnBlur: true })
+
+    let ref;
+
+    createEffect(() => {
+        ref.role = "section"
+    })
+
+    createEffect(()=>{
+        setSelected(others.options[0].id)
+    })
 
     createEffect(on(selected, (selected) => {
         var style = document.createElement('style')
@@ -17,15 +29,15 @@ export default function Select({ id, label, height = '30px', options = [] }) {
         .control { 
             padding-top: 3px !important;
             border-radius: 0 !important;
-            min-height: ${height} !important;
-            max-height: ${height} !important;
+            min-height: ${props.height} !important;
+            max-height: ${props.height} !important;
             background: transparent !important;
             border: none !important;
             border-bottom: 1px solid var(--black-destaq) !important;
         } 
         .selected-value::before {
             content: '';
-            background: ${options.find(option => option.value == selected)?.color || '#000000'};
+            background: ${props.options.find(option => option.id == selected)?.color || '#000000'};
             border-radius: 0.375rem;
             margin-right:10px;
             display: flex;
@@ -48,12 +60,13 @@ export default function Select({ id, label, height = '30px', options = [] }) {
     }))
 
     return (
-        <div className={style.select} id={id}>
-            <p>{label}</p>
+        <div className={style.select} id={props.id}>
+            <p>{props.label}</p>
             <fluent-select onChange={(e) => setSelected(e.target._value)} id="select" className="fluent-style" title="Selecione uma tag">
-                <For each={options}>
+
+                <For each={props.options}>
                     {(option) => (
-                        <fluent-option title={option.label} value={option.value}>
+                        <fluent-option title={option.label} value={option.id}>
                             <div className='flex'>
                                 <span style={{ background: option.color }}></span>
                                 <p>{option.label}</p>
@@ -61,46 +74,13 @@ export default function Select({ id, label, height = '30px', options = [] }) {
                         </fluent-option>
                     )}
                 </For>
+                <fluent-option onClick={open} ref={ref} title={"Create"}>
+                    <div className={style.select_option}>
+                        <AddIcon />
+                        <p>Adicionar</p>
+                    </div>
+                </fluent-option>
             </fluent-select>
-        </div>
-    )
-}
-
-const Modal = () => {
-
-    const { dados } = useStorage()
-
-    return (
-        <div className='modal'>
-            <HeaderModal title={"Adicionar ou remover Tags"} />
-            <div className={style.root_modal_tags}>
-                <h4 className='color-text-secondary'>
-                    Adicione, edite ou remova tags primárias e secundárias.
-                </h4>
-                <div className='divisor'></div>
-                <h3 className='mb-3'>Tags primárias</h3>
-                <div className='flex mb-4 color-text-primary flex-wrap border rounded-md p-3'>
-                    <For each={[...dados.tags.primary,...dados.tags.primary,...dados.tags.primary]}>
-                        {(tag)=>(
-                            <div className='tag-field'>
-                                <span style={{background:tag.color}}></span>
-                                <p>{tag.label}</p>
-                            </div>
-                        )}
-                    </For>
-                </div>
-                <h3 className='mb-3'>Tags secundárias</h3>
-                <div className='flex color-text-primary flex-wrap border rounded-md p-3'>
-                    <For each={[...dados.tags.primary]}>
-                        {(tag)=>(
-                            <div className='tag-field'>
-                                <span style={{background:tag.color}}></span>
-                                <p>{tag.label}</p>
-                            </div>
-                        )}
-                    </For>
-                </div>
-            </div>
         </div>
     )
 }

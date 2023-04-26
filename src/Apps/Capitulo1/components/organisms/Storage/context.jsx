@@ -1,4 +1,4 @@
-import { createContext, useContext } from "solid-js";
+import { createContext, createEffect, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
 import { atividadesStorage } from "./atividades";
 import { disciplinasStorage } from "./disciplinas";
@@ -10,6 +10,7 @@ const CounterContext = createContext();
 export const useStorage = () => useContext(CounterContext);
 
 export function StorageProvider(props) {
+
     const [state, setState] = createStore({
         dados: {
             disciplinas: disciplinasStorage().disciplinas,
@@ -26,6 +27,11 @@ export function StorageProvider(props) {
             ...tagsStorage(setState).dispatch,
         }
     }
+
+    createEffect(()=>{
+        const saved = window.localStorage.getItem('tags')
+        if (saved) counter.dispatch.setTag(JSON.parse(saved))
+    })
 
     return (
         <CounterContext.Provider value={counter}>

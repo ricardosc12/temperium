@@ -9,25 +9,25 @@ export const tagsStorage = (set) => ({
             { label: "Pesquisa", value: "pesquisa", color: '#9bf3a9', id: '3' },
             { label: "Aprendizado JS", value: "aprendizado_js", color: '#cc6699', id: '4' },
         ],
-        seconrady: []
+        secondary: []
     },
     dispatch: {
         addTag: (payload, type) => set(produce((state) => {
             state.dados.tags[type].push(payload)
             window.localStorage.setItem("tags", JSON.stringify(state.dados.tags))
         })),
-        editTag: (payload, type) => set(produce((state) => {
-            const index = state.dados.tags[type].findIndex(item => item.id == payload.id)
+        editTag: ({ label, color, id }, type) => set(produce((state) => {
+            const index = state.dados.tags[type].findIndex(item => item.id == id)
             if (index != -1) {
-                state.dados.tags[type][index] = payload
+                state.dados.tags[type][index] = { ...state.dados.tags[type][index], label: label, color: color }
             }
             window.localStorage.setItem("tags", JSON.stringify(state.dados.tags))
         })),
         setTag: (payload) => set(produce((state) => {
             state.dados.tags = payload
         })),
-        removeTag: (id,type) => set(produce((state) => {
-            state.dados.tags[type] = state.dados.tags[type].filter(item => item.id_ != id)
+        removeTag: (id, type) => set(produce((state) => {
+            state.dados.tags[type] = state.dados.tags[type].filter(item => item.id != id)
             window.localStorage.setItem("tags", JSON.stringify(state.dados.tags))
         })),
     }
