@@ -28,9 +28,8 @@ export function createMenu(e, Menu) {
 
     return new Promise(resolve=>{
         menu_e.onblur = (e) => {
-            if(e.relatedTarget===null) return
             menu_e?.remove()
-            resolve(false)
+            setTimeout(()=>resolve(false))
         }
     
         menu_e.onclick = (e) => {
