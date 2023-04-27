@@ -1,4 +1,4 @@
-import { createContext, createEffect, useContext } from "solid-js";
+import { createContext, createEffect, onMount, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
 import { atividadesStorage } from "./atividades";
 import { disciplinasStorage } from "./disciplinas";
@@ -28,9 +28,19 @@ export function StorageProvider(props) {
         }
     }
 
-    createEffect(()=>{
-        const saved = window.localStorage.getItem('tags')
-        if (saved) counter.dispatch.setTag(JSON.parse(saved))
+    onMount(() => {
+        console.log('geting tags')
+        const saved = JSON.parse(window.localStorage.getItem('tags'))
+        const tags_disciplinas = state.dados.disciplinas.map(item => ({ label: item.id, color: item.cor, id: item.id, deletable:false }))
+        if (saved) {
+            counter.dispatch.setTag(saved)
+        }
+        else {
+            counter.dispatch.setTag({ 
+                primary: [...state.dados.tags.primary, ...tags_disciplinas], 
+                secondary: [...state.dados.tags.secondary, ...tags_disciplinas] 
+            })
+        }
     })
 
     return (

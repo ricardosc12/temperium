@@ -94,7 +94,10 @@ export const ModalTagSelector = () => {
     }
 
     const cancelEdit = () => {
-        if (!elIsEdited.id) elIsEdited.remove()
+        if (!elIsEdited.id) {
+            isAddTag = false;
+            elIsEdited.remove()
+        }
         else {
             elIsEdited.children[1].innerHTML = oldData.label
             elIsEdited.children[0].value = oldData.color
@@ -162,7 +165,7 @@ export const ModalTagSelector = () => {
                     </button>
                 </div>
                 <div ref={refs.primary} id="tag_area" className={style.tag_area}>
-                    <For each={dados.tags.primary}>
+                    <For each={dados.tags.primary.filter(item=>item.deletable!=false)}>
                         {(tag) => (
                             <TagField tag={tag} type={'primary'} />
                         )}
@@ -175,7 +178,7 @@ export const ModalTagSelector = () => {
                     </button>
                 </div>
                 <div ref={refs.secondary} id="tag_area" className={style.tag_area}>
-                    <For each={dados.tags.secondary}>
+                    <For each={dados.tags.secondary.filter(item=>item.deletable!=false)}>
                         {(tag) => (
                             <TagField tag={tag} type={'secondary'} />
                         )}

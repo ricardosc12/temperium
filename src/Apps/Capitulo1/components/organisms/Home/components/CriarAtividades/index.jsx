@@ -26,6 +26,7 @@ function Modal(props) {
 
     function handleAdd() {
         let values = submit()
+        console.log(values)
         if (!values.atividades.title || !values.atividades.description) return
         const atividades = [...state().atividades]
         atividades.push(values.atividades)
@@ -71,56 +72,29 @@ function Modal(props) {
                 <h3 className="mb-2">Categoria</h3>
                 <div className="flex flex-col mb-3 space-y-4">
                     <div className="flex space-x-2">
-                        <div className="textfield">
-                            <input id="title" placeholder=" " type="text" />
+                        <div className="textfield flex-1">
+                            <input required id="title" placeholder=" " type="text" />
                             <p>Título</p>
                         </div>
-                        <Select id="tag" label="Tag" options={tags.primary} />
-                        {/* <div className="textfield">
-                            <input id="atividade_description" placeholder=" " type="text" />
-                            <p>Descrição</p>
-                        </div> */}
+                        <Select required id="tag" label="Tag" options={tags.primary} />
                     </div>
-                    <div className="flex space-x-2">
-                        <div className="textfield">
-                            <input id="id" placeholder=" " type="text" />
-                            <p>Tag Name</p>
-                        </div>
-                        <div className="colorfield">
-                            <input id="cor" type="color" />
-                            <p>Cor</p>
-                        </div>
+                    <div className="textarea w-full">
+                        <textarea required placeholder=" " className="w-full" id="atividade_description" rows="2" />
+                        <p>Descrição</p>
                     </div>
                 </div>
                 <h3 className="mb-2">Atividades</h3>
                 <div className="flex flex-col mb-5 space-y-4">
                     <div className="flex space-x-2">
-                        <div className="textfield">
+                        <div className="textfield flex-1">
                             <input id={`atividades.title`} placeholder=" " type="text" />
                             <p>Título</p>
                         </div>
-                        <div className="textfield">
-                            <input id={`atividades.description`} placeholder=" " type="text" />
-                            <p>Descrição</p>
-                        </div>
+                        <Select id="atividades.tag" label="Tag" options={tags.secondary} />
                     </div>
-                    <div className="flex space-x-2">
-                        <div className="textfield">
-                            <input id={`atividades.tags.0.title`} placeholder=" " type="text" />
-                            <p>Tag Name</p>
-                        </div>
-                        <div className="colorfield">
-                            <input id={`atividades.tags.0.color`} type="color" />
-                            <p>Cor</p>
-                        </div>
-                        <div className="textfield">
-                            <input id={`atividades.tags.1.title`} placeholder=" " type="text" />
-                            <p>Tag Name</p>
-                        </div>
-                        <div className="colorfield">
-                            <input id={`atividades.tags.1.color`} type="color" />
-                            <p>Cor</p>
-                        </div>
+                    <div className="textarea w-full">
+                        <textarea placeholder=" " className="w-full" id="atividades.description" rows="2" />
+                        <p>Descrição</p>
                     </div>
                 </div>
                 <button onClick={handleAdd} className="btn-sm white mb-5">
@@ -171,6 +145,7 @@ export default function CreateAtividades() {
 
     createEffect(() => {
         ref.open = handleOpen
+        open()
     })
 
     return (
