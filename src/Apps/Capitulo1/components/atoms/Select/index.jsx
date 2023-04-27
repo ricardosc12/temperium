@@ -1,6 +1,6 @@
 import style from './style.module.css'
 import '@/Apps/Capitulo1/styles/fluent-ui.css'
-import { createEffect, createSignal, For, on, splitProps } from 'solid-js'
+import { createEffect, createSignal, For, on, onMount, splitProps } from 'solid-js'
 import { createModal } from '../../molecules/Modal'
 import { ModalTagSelector } from '../../molecules/Modal/TagSelector'
 import { AddIcon } from '@/Apps/Capitulo1/assets/Icons'
@@ -14,8 +14,10 @@ export default function Select(props) {
     const { open } = createModal(() => <ModalTagSelector />, { closeOnBlur: true })
 
     let ref;
+    let refSelect;
+    let inputRef;
 
-    createEffect(() => {
+    onMount(() => {
         ref.role = "section"
     })
 
@@ -24,6 +26,13 @@ export default function Select(props) {
     })
 
     createEffect(on(selected, (selected) => {
+
+        const option = props.options.find(option => option.id == selected)
+
+        if(option) {
+            inputRef['data-value'] = {...option}
+        }
+
         var style = document.createElement('style')
         style.innerHTML = `
         .control { 
@@ -37,7 +46,7 @@ export default function Select(props) {
         } 
         .selected-value::before {
             content: '';
-            background: ${props.options.find(option => option.id == selected)?.color || '#000000'};
+            background: ${option?.color || '#000000'};
             border-radius: 0.375rem;
             margin-right:10px;
             display: flex;
@@ -56,14 +65,14 @@ export default function Select(props) {
             color: var(--white-fundo);
         }
         `
-        document.getElementById('select').shadowRoot.appendChild(style)
+        refSelect.shadowRoot.appendChild(style)
     }))
 
     return (
         <div className={style.select} id={props.id}>
+            <input required={props.required} id={props.id} ref={inputRef} className='hidden'/>
             <p>{props.label}</p>
-            <fluent-select onChange={(e) => setSelected(e.target._value)} id="select" className="fluent-style" title="Selecione uma tag">
-
+            <fluent-select ref={refSelect} onChange={(e) => setSelected(e.target._value)} id="select" className="fluent-style" title="Selecione uma tag">
                 <For each={props.options}>
                     {(option) => (
                         <fluent-option title={option.label} value={option.id}>

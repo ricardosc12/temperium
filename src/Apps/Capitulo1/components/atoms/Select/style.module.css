@@ -37,6 +37,10 @@
     margin-right: 10px;
 }
 
+.select input:required + p::after {
+    content: ' *';
+}
+
 .select_option {
     display: flex;
     position: absolute;
