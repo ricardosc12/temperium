@@ -16,7 +16,12 @@ export default function useForm(id) {
             if (!form) return
             let values = {}
             const inputs = form.querySelectorAll('input')
+            const textarea = form.querySelectorAll('textarea')
             for (const input of inputs) {
+                if(input['data-value']) values = immer(input.id, values, input['data-value']) 
+                else values = immer(input.id, values, input.value)
+            }
+            for (const input of textarea) {
                 values = immer(input.id, values, input.value)
             }
             return values
