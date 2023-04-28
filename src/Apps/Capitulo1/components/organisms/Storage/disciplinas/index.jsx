@@ -2,7 +2,10 @@ export const disciplinasStorage = () => ({
     disciplinas: [
         {
             id: "CCF441",
-            cor: "#abeecd",
+            tag: {
+                color: "#abeecd",
+                title: "CCF441"
+            },
             title: "Compiladores",
             description: "Disciplina ministrada pelo professor Daniel Mendes, ano de 2023/1",
             atividade_description: "Relembrandos conceitos - Sistemas Operacionais",
@@ -35,7 +38,10 @@ export const disciplinasStorage = () => ({
         },
         {
             id: "CCF425",
-            cor: "#e8bcf7",
+            tag: {
+                color: "#e8bcf7",
+                title: "CCF425"
+            },
             title: "Introdução à Ciência dos Dados",
             description: "Introdução à Ciência dos Dados",
             atividade_description: "Apresentar e discutir os principais tópicos relacionados à ciência dos dados",

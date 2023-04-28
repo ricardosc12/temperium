@@ -43,7 +43,7 @@ const Atividade = ({ id, title, children, icon, label, tags }) => {
     )
 }
 
-export function CardAtividade({ id, title, atividades, atividade_description, cor, custom, ...props }) {
+export function CardAtividade({ id, title, atividades, atividade_description, tag, custom, ...props }) {
 
     const [open, setOpen] = createSignal(true)
     const collapse = () => setOpen(prev => !prev)
@@ -60,11 +60,11 @@ export function CardAtividade({ id, title, atividades, atividade_description, co
         if (!custom) return
         const menu_resp = await createMenu(e, MenuAtividade)
         if (menu_resp == "excluir") {
-            removeTarefa(props.id_)
+            removeTarefa(id)
         }
         else if (menu_resp == "editar") {
             openModal("modal-create-atividade", {
-                id, title, atividades, atividade_description, cor, custom, ...props
+                id, title, atividades: [...atividades], atividade_description, tag, custom, ...props
             })
         }
     }
@@ -74,7 +74,7 @@ export function CardAtividade({ id, title, atividades, atividade_description, co
             <div onClick={collapse} className="flex items-center justify-between w-full">
                 <div className="flex space-x-3">
                     <h2 className="text-sm">{title}</h2>
-                    <div className="tag" style={{ background: cor }}>{id}</div>
+                    <div className="tag" style={{ background: tag.color }}>{tag.title}</div>
                 </div>
                 <div className={style.icon_card_atividade}>
                     <ArrowIcon />

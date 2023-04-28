@@ -12,10 +12,16 @@ function Modal(props) {
 
     const { submit, clear, change, values: form_values, submissError } = useForm('form-atv-create')
 
-    createEffect(() => {
+    onMount(() => {
         if (props.id) {
-            change(props)
-            setState({ atividades: props.atividades })
+            setTimeout(() => {
+                change({
+                    title: props.title,
+                    atividade_description: props.atividade_description,
+                    tag: props.tag.id
+                })
+                setState({ atividades: props.atividades, editando: false })
+            }, 225)
         }
     })
 
@@ -55,7 +61,7 @@ function Modal(props) {
         const atividades = [...state().atividades]
         const idx_edit = state().editando
         if (idx_edit !== false) {
-            atividades[idx_edit] = values.atividades
+            atividades[idx_edit] = { ...atividades[idx_edit], ...values.atividades }
         }
         else atividades.push(values.atividades)
         setState(prev => ({ ...prev, atividades: atividades, editando: false }))
@@ -66,21 +72,17 @@ function Modal(props) {
         let values = submit()
         if (!state().atividades.length) return
         let atividades = JSON.parse(JSON.stringify(state().atividades))
-        console.log(values)
-        if (!props.id) {
-            atividades = atividades.map(atv => {
-                atv.id = uuidv4()
-                atv.tags = [
-                    { title: values.tag.title, color: values.tag.color },
-                    { ...atv.tag }
-                ]
-                delete atv['tag']
-                return atv
-            })
-        }
+        atividades = atividades.map(atv => {
+            atv.id = props.id ? atv.id : uuidv4()
+            atv.tags = [
+                { title: values.tag.title, color: values.tag.color },
+                { ...atv.tag }
+            ]
+            return atv
+        })
         const result = {
             custom: true,
-            id_: props.id ? props.id_ : uuidv4(),
+            id: props.id ? props.id : uuidv4(),
             ...values,
             atividades: atividades
         }
@@ -184,7 +186,6 @@ export default function CreateAtividades() {
 
     createEffect(() => {
         ref.open = handleOpen
-        open()
     })
 
     return (

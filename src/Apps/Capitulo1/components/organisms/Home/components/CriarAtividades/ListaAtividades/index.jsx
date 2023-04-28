@@ -42,7 +42,7 @@ export default function ListaAtividades(props) {
                                 <div className="flex items-center justify-between">
                                     <div className="flex">
                                         <h3>{item.title}</h3>
-                                        <span className="tag-sm ml-4 font-medium text-xs" style={{ background: item.tag.color }}>{item.tag.label}</span>
+                                        <span className="tag-sm ml-4 font-medium text-xs" style={{ background: item.tag.color }}>{item.tag.title}</span>
                                     </div>
                                     <div className="flex space-x-5 mr-2">
                                         <div className="icon" onClick={(e) => handleRemove(e, index())}>

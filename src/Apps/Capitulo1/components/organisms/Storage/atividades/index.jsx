@@ -8,7 +8,7 @@ export const atividadesStorage = (set) => ({
             window.localStorage.setItem("disciplinas", JSON.stringify(state.dados.tarefas))
         })),
         editTarefa: (payload) => set(produce((state) => {
-            const index = state.dados.tarefas.findIndex(item => item.id_ == payload.id_)
+            const index = state.dados.tarefas.findIndex(item => item.id == payload.id)
             if (index != -1) {
                 state.dados.tarefas[index] = payload
             }
@@ -18,7 +18,7 @@ export const atividadesStorage = (set) => ({
             state.dados.tarefas = payload
         })),
         removeTarefa: (id) => set(produce((state) => {
-            state.dados.tarefas = state.dados.tarefas.filter(item => item.id_ != id)
+            state.dados.tarefas = state.dados.tarefas.filter(item => item.id != id)
             window.localStorage.setItem("disciplinas", JSON.stringify(state.dados.tarefas))
         })),
     }

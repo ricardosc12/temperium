@@ -70,11 +70,15 @@ export default function useForm(id) {
                     if (ids.some(item => input.id.includes(item))) {
                         if (input.type == "color") input.value = "#000000"
                         else input.value = ""
+                        input.placeholder = " "
+                        input.parentNode.classList.remove('error')
                     }
                 }
                 for (const input of textarea) {
                     if (ids.some(item => input.id.includes(item))) {
                         input.value = ""
+                        input.placeholder = " "
+                        input.parentNode.classList.remove('error')
                     }
                 }
             }
@@ -82,9 +86,13 @@ export default function useForm(id) {
                 for (const input of inputs) {
                     if (input.type == "color") input.value = "#000000"
                     else input.value = ""
+                    input.placeholder = " "
+                    input.parentNode.classList.remove('error')
                 }
                 for (const input of textarea) {
                     input.value = ""
+                    input.placeholder = " "
+                    input.parentNode.classList.remove('error')
                 }
             }
         },
