@@ -9,7 +9,7 @@ export default function Select(props) {
 
     const [selected, setSelected] = createSignal('')
 
-    const [_, others] = splitProps(props, ["id", "label"])
+    const [_, others] = splitProps(props, ["id", "title"])
 
     const { open } = createModal(() => <ModalTagSelector />, { closeOnBlur: true })
 
@@ -17,11 +17,20 @@ export default function Select(props) {
     let refSelect;
     let inputRef;
 
+    const handleChange=(id)=>{
+        const index = props.options.findIndex(option => option.id == id)
+        const options = refSelect.querySelectorAll("[role='option']")
+        options[index].click()
+        refSelect.open = false
+        setSelected(id)
+    }
+
     onMount(() => {
         ref.role = "section"
+        inputRef['data-set'] = handleChange
     })
 
-    createEffect(()=>{
+    createEffect(() => {
         setSelected(others.options[0].id)
     })
 
@@ -29,8 +38,8 @@ export default function Select(props) {
 
         const option = props.options.find(option => option.id == selected)
 
-        if(option) {
-            inputRef['data-value'] = {...option}
+        if (option) {
+            inputRef['data-value'] = { ...option }
         }
 
         var style = document.createElement('style')
@@ -70,15 +79,15 @@ export default function Select(props) {
 
     return (
         <div className={style.select} id={props.id}>
-            <input required={props.required} id={props.id} ref={inputRef} className='hidden'/>
+            <input required={props.required} id={props.id} ref={inputRef} className='hidden' />
             <p>{props.label}</p>
-            <fluent-select ref={refSelect} onChange={(e) => setSelected(e.target._value)} id="select" className="fluent-style" title="Selecione uma tag">
+            <fluent-select ref={refSelect} onChange={(e) => setSelected(e.target._value)} id={props.id} className="fluent-style" title="Selecione uma tag">
                 <For each={props.options}>
                     {(option) => (
-                        <fluent-option title={option.label} value={option.id}>
+                        <fluent-option title={option.title} value={option.id}>
                             <div className='flex'>
                                 <span style={{ background: option.color }}></span>
-                                <p>{option.label}</p>
+                                <p>{option.title}</p>
                             </div>
                         </fluent-option>
                     )}

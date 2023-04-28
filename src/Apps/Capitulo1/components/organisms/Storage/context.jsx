@@ -31,7 +31,7 @@ export function StorageProvider(props) {
     onMount(() => {
         console.log('geting tags')
         const saved = JSON.parse(window.localStorage.getItem('tags'))
-        const tags_disciplinas = state.dados.disciplinas.map(item => ({ label: item.id, color: item.cor, id: item.id, deletable:false }))
+        const tags_disciplinas = state.dados.disciplinas.map(item => ({ title: item.id, color: item.cor, id: item.id, deletable:false }))
         if (saved) {
             counter.dispatch.setTag(saved)
         }

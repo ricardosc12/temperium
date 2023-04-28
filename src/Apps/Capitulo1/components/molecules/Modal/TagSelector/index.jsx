@@ -33,7 +33,7 @@ export const ModalTagSelector = () => {
             return
         }
 
-        oldData.label = el.children[1].innerHTML
+        oldData.title = el.children[1].innerHTML
         oldData.color = el.children[0].value
 
         el.children[0].disabled = false
@@ -81,7 +81,7 @@ export const ModalTagSelector = () => {
                 el = e.target.closest('.tag-field')
             }
             const request = {
-                label: el.children[1].innerHTML,
+                title: el.children[1].innerHTML,
                 color: el.children[0].value,
                 id: el.id
             }
@@ -99,7 +99,7 @@ export const ModalTagSelector = () => {
             elIsEdited.remove()
         }
         else {
-            elIsEdited.children[1].innerHTML = oldData.label
+            elIsEdited.children[1].innerHTML = oldData.title
             elIsEdited.children[0].value = oldData.color
         }
         editable(elIsEdited, false)
@@ -120,7 +120,7 @@ export const ModalTagSelector = () => {
     const handleAddTag = (type_) => {
         const type = type_
         return () => {
-            (isAddTag == false) && render(() => <TagField type={type} tag={{ label: "New", color: "#000000" }} />, refs[type])
+            (isAddTag == false) && render(() => <TagField type={type} tag={{ title: "New", color: "#000000" }} />, refs[type])
             isAddTag = true;
             refs[type].lastChild.click()
             refs[type].lastChild.click()
@@ -139,7 +139,7 @@ export const ModalTagSelector = () => {
         return (
             <div onContextMenu={(e) => menu(e, tag.id, type)} id={tag.id} className='tag-field' onFocus={e => e.target.children[1].focus()} onClick={handleEditable} tabIndex="-1">
                 <input id="color-pick" className={style.color_pick} type="color" value={tag.color} disabled />
-                <div onKeyDown={handleEditTag(type)}>{tag.label}</div>
+                <div onKeyDown={handleEditTag(type)}>{tag.title}</div>
                 <div className="flex hidden">
                     <CheckIcon onClick={handleEditTag(type)} className="ml-3" style={{ width: '20px' }} />
                     <IconClose onClick={cancelEdit} className="ml-2" style={{ width: '20px' }} />

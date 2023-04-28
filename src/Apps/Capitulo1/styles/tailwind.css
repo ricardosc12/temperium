@@ -238,10 +238,10 @@
 	.textfield {
 		height: 38px;
 		position: relative;
-		border-bottom: 1px solid var(--black-destaq);
 	}
 	.textfield > input {
 		width: 100%;
+		border-bottom: 1px solid var(--black-destaq);
 	}
 	.textfield::before {
 		content: "";
@@ -254,6 +254,17 @@
 		transform: scaleX(0);
 		transition: transform 225ms cubic-bezier(0.19, 1, 0.22, 1);
 	}
+	.textfield.error::before {
+		border-bottom: 1px solid transparent;
+	}
+	.textfield.error input:placeholder-shown {
+		border-bottom: 1px solid rgba(219, 53, 53, 0.753);
+	}
+
+	.textfield.error input:placeholder-shown + p {
+		color: rgb(255, 70, 70) !important;
+	}
+
 	.textfield:focus-within::before {
 		transform: scaleX(1);
 		transition: transform 225ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -370,6 +381,7 @@
 	}
 
 	.textarea::before {
+		pointer-events: none;
 		content: '';
 		position: absolute;
 		width: calc(100% - 13px);
@@ -378,6 +390,7 @@
 		border-radius: 10px;
 		background-color: var(--black-fundo);
 	}
+	
 
 	.textarea > p {
 		pointer-events: none;
@@ -386,6 +399,14 @@
 		left: 13px;
 		position: absolute;
 		transition: transform 225ms cubic-bezier(0.19, 1, 0.22, 1);
+	}
+
+	.textarea.error > p {
+		color: rgb(255, 70, 70) !important;
+	}
+
+	.textarea.error textarea:not(:placeholder-shown) + p {
+		color: var(--text-secondary) !important;
 	}
 
 	.textarea textarea:required + p::after {
@@ -412,6 +433,4 @@
 		padding-left: 15px;
 		font-size: 15px;
 	}
-
-
 }
