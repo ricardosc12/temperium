@@ -46,7 +46,8 @@ function Modal(props) {
         setState(prev => ({ ...prev, editando: index }))
     }
 
-    const { open, close } = createModal(() => <ListaAtividades editarAtividade={editarAtividade} removerAtividade={removerAtividade} atividades={state().atividades} />)
+    const { open } = createModal(() => <ListaAtividades modalId="modal-lista-atividades"
+        editarAtividade={editarAtividade} removerAtividade={removerAtividade} atividades={state().atividades} />, { id: "modal-lista-atividades" })
 
     const handleOpenModal = () => {
         state().atividades.length && open()
@@ -104,7 +105,7 @@ function Modal(props) {
 
     return (
         <div className="modal" id="form-atv-create">
-            <HeaderModal title="Criar Atividade" />
+            <HeaderModal id="modal-create-atividades" title="Criar Atividade" />
             <div className={style.content_modal}>
                 <h4 className="color-text-secondary">Crie atividades e gerencie em conjunto com as tarefas acadêmicas.</h4>
                 <div className="divisor"></div>
@@ -176,7 +177,7 @@ function Modal(props) {
 
 export default function CreateAtividades() {
 
-    const { open, close } = createModal(Modal, { closeOnBlur: false })
+    const { open } = createModal(Modal, { closeOnBlur: false, id: "modal-create-atividades" })
 
     let ref;
 

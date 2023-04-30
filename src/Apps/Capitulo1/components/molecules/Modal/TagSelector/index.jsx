@@ -150,7 +150,7 @@ export const ModalTagSelector = () => {
 
     return (
         <div className='modal'>
-            <HeaderModal title={"Adicionar ou remover Tags"} />
+            <HeaderModal id="modal-tag-selector" title={"Adicionar ou remover Tags"} />
             <div className={style.root_modal_tags}>
                 <h4 className='color-text-secondary'>
                     Adicione, edite ou remova tags primárias e secundárias.

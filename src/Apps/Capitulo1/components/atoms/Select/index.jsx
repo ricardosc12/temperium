@@ -11,13 +11,13 @@ export default function Select(props) {
 
     const [_, others] = splitProps(props, ["id", "title"])
 
-    const { open } = createModal(() => <ModalTagSelector />, { closeOnBlur: true })
+    const { open } = createModal(() => <ModalTagSelector />, { closeOnBlur: true, id: "modal-tag-selector" })
 
     let ref;
     let refSelect;
     let inputRef;
 
-    const handleChange=(id)=>{
+    const handleChange = (id) => {
         const index = props.options.findIndex(option => option.id == id)
         const options = refSelect.querySelectorAll("[role='option']")
         options[index].click()

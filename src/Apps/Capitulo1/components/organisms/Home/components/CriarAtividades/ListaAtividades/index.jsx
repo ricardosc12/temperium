@@ -1,5 +1,5 @@
 import { IconClose, PenIcon, TrashIcon } from "@/Apps/Capitulo1/assets/Icons";
-import { HeaderModal } from "@/Apps/Capitulo1/components/molecules/Modal";
+import { closeModal, HeaderModal } from "@/Apps/Capitulo1/components/molecules/Modal";
 import { For } from "solid-js";
 import style from './style.module.css'
 
@@ -8,7 +8,7 @@ export default function ListaAtividades(props) {
     let refModal;
 
     const close = () => {
-        refModal.closest('[id^="modal"]').click()
+        closeModal(props.modalId)
     }
 
     const handleEdit = index => {
@@ -26,7 +26,7 @@ export default function ListaAtividades(props) {
 
     return (
         <div ref={refModal} className="modal">
-            <HeaderModal title={"Sub-Atividades adicionadas"} />
+            <HeaderModal id={props.modalId} title={"Sub-Atividades adicionadas"} />
             <div className={style.content_atividades}>
                 <h4 className="color-text-secondary">
                     Visualize ou edite as sub-tarefas adicionadas.

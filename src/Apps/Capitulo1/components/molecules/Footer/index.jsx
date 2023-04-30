@@ -35,7 +35,7 @@ export default function Footer() {
                 <ModalUpdate />
             </div>
         )
-    })
+    }, { id: "modal-update" })
 
     return (
         <footer className={style.footer}>

@@ -1,22 +1,27 @@
-import { createEffect, createMemo, createSignal, Show, children } from "solid-js";
+import { createEffect, createMemo, createSignal, Show, children, onMount } from "solid-js";
 import { Portal } from "solid-js/web";
 import style from './style.module.css'
 
-function Modal({ open, close, children, closeOnBlur = true }) {
+function Modal({ id, open, close, children, closeOnBlur = true }) {
 
     let modal;
 
     const closeModal = (e) => {
-        if (closeOnBlur && e.target.id === "modal" || e.target.nodeName == "BUTTON") {
-            modal.classList.remove('open_modal_animation')
-            setTimeout(() => {
-                close()
-            }, 225);
+        modal.classList.remove('open_modal_animation')
+        setTimeout(() => {
+            close()
+        }, 225);
+    }
+
+    const handleClick=(e)=>{
+        if(closeOnBlur && e.target.id == id) {
+            closeModal()
         }
     }
 
     createEffect(() => {
         if (open() === true) setTimeout(() => {
+            modal.close = closeModal
             modal.classList.add('open_modal_animation')
         });
     })
@@ -24,7 +29,7 @@ function Modal({ open, close, children, closeOnBlur = true }) {
     return (
         <Show when={open()}>
             <Portal>
-                <div ref={modal} id="modal" onClick={closeModal} className={style.root_modal}>{children}</div>
+                <div ref={modal} id={id} onClick={handleClick} className={style.root_modal}>{children}</div>
             </Portal>
         </Show>
     )
@@ -43,7 +48,7 @@ export function createModal(Component, props = {}) {
         setState(false)
     };
 
-    <Modal open={state} close={close} closeOnBlur={props.closeOnBlur}>{() => <Component {...propsComponent} />}</Modal>
+    <Modal id={props.id} open={state} close={close} closeOnBlur={props.closeOnBlur}>{() => <Component {...propsComponent} />}</Modal>
 
     return { open, close, state }
 }
@@ -52,13 +57,16 @@ export function openModal(modalId, props) {
     document.getElementById(modalId).open(null, props)
 }
 
-export const HeaderModal = ({ title }) => {
+export function closeModal(id){
+    document.getElementById(id).close() 
+}
+
+export const HeaderModal = ({ id, title }) => {
 
     let modal;
 
     function close() {
-        // modal.closest('[id^="modal"]').click()
-        modal.click()
+        document.getElementById(id).close() 
     }
 
     return (
