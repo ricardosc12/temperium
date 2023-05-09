@@ -1,7 +1,7 @@
 import Atividades from "./components/Atividades"
 import Main from "./components/Main"
 import style from './style.module.css'
-import { createEffect, createSignal, on } from "solid-js";
+import { createEffect, createMemo, createSignal, on, onMount } from "solid-js";
 
 import {
     DragDropProvider,
@@ -18,19 +18,32 @@ export default function HomePage() {
 
     const { dispatch: { addInside, removeInside, transferSide }, dados } = useStorage()
 
-    const [atividades, setAtividades] = createSignal(new Map(), { equals: false })
+    // const [atividades, setAtividades] = createSignal(new Map(), { equals: false })
+    const [mapTarefas, setMapTarefas] = createSignal(new Map())
+    const [mapDisciplinas, setMapDisciplinas] = createSignal(new Map())
+
+    const atividades = createMemo(() => {
+        const newMap = mapDisciplinas()
+        const disciplinas = mapTarefas()
+        newMap.forEach((value, key) => {
+            disciplinas.set(key, value)
+        })
+        console.log(disciplinas)
+        return disciplinas
+    })
 
     createEffect(() => {
         console.time('mapping disciplinhas')
         const disciplinas = JSON.parse(JSON.stringify(dados.disciplinas))
         untrack(() => {
+            const atividades = new Map()
             disciplinas.forEach((item, index) => {
-                atividades().set(item.id, item)
+                atividades.set(item.id, item)
                 item.atividades.forEach((atividade, _) => {
-                    atividades().set(atividade.id, atividade)
+                    atividades.set(atividade.id, atividade)
                 })
             });
-            setAtividades(atividades())
+            setMapDisciplinas(atividades)
         })
 
         console.timeEnd('mapping disciplinhas')
@@ -40,13 +53,14 @@ export default function HomePage() {
         console.time('mapping atividades')
         const tarefas = JSON.parse(JSON.stringify(dados.tarefas))
         untrack(() => {
+            const atividades = new Map()
             tarefas.forEach((item, index) => {
-                atividades().set(item.id, item)
+                atividades.set(item.id, item)
                 item.atividades.forEach((atividade, _) => {
-                    atividades().set(atividade.id, atividade)
+                    atividades.set(atividade.id, atividade)
                 })
             });
-            setAtividades(atividades())
+            setMapTarefas(atividades)
         })
         console.timeEnd('mapping atividades')
     })

@@ -3,7 +3,7 @@ import {
 } from "@thisbeyond/solid-dnd";
 import style from './style.module.css'
 import { ArrowIcon, IconGrab, IconRead } from "@/Apps/Capitulo1/assets/Icons";
-import { createEffect, createSignal, For } from "solid-js";
+import { batch, createEffect, createSignal, For } from "solid-js";
 import { createMenu } from "@/Apps/Capitulo1/components/hooks/Menu";
 import { MenuAtividade } from "@/Apps/Capitulo1/components/hooks/Menu/atividades_menu";
 import { openModal } from "@/Apps/Capitulo1/components/molecules/Modal";
@@ -43,7 +43,7 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
     const [open, setOpen] = createSignal(true)
     const collapse = () => setOpen(prev => !prev)
 
-    const { dispatch: { removeTarefa } } = useStorage()
+    const { dispatch: { removeTarefa, removeInside } } = useStorage()
 
     let ref;
 
@@ -55,7 +55,19 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
         if (!custom) return
         const menu_resp = await createMenu(e, MenuAtividade)
         if (menu_resp == "excluir") {
-            removeTarefa(id)
+            batch(()=>{
+                console.time('removing')
+                document.querySelectorAll(`[id="${id}"]`).forEach(el=>{
+                    const [id, data] = el.getAttribute('data-drag').split('::')
+                    removeInside({
+                        atividade: id,
+                        from: data.split(/week:|dia:|interval:/).filter(Boolean)
+                    })
+                })
+                removeTarefa(id)
+                console.timeEnd('removing')
+            })
+
         }
         else if (menu_resp == "editar") {
             openModal("modal-create-atividade", {

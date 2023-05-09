@@ -105,7 +105,7 @@ const DragAndDrop = (props) => {
 
 const Droppable = (props) => {
     return (
-        <div name="droppable" className={`flex w-full h-full ${props.className || ''}`} data-drag={props.data}>
+        <div id={props.id} name="droppable" className={`flex w-full h-full ${props.className || ''}`} data-drag={props.data}>
             {props.children}
         </div>
     )
@@ -113,7 +113,7 @@ const Droppable = (props) => {
 
 const Draggable = (props) => {
     return (
-        <div name="draggable" className={props.className} data-drag={props.data} draggable="true">
+        <div id={props.id} name="draggable" className={props.className} data-drag={props.data} draggable="true">
             {props.children}
         </div>
     )

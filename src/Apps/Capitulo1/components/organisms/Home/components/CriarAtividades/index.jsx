@@ -73,9 +73,11 @@ function Modal(props) {
         let values = submit()
         if (!state().atividades.length) return
         console.time('create/edit')
+        const id_task = props.id ? props.id : uuidv4()
         let atividades = JSON.parse(JSON.stringify(state().atividades))
         atividades = atividades.map(atv => {
-            atv.id = props.id ? atv.id : uuidv4()
+            atv.id = atv.id ? atv.id : uuidv4()
+            atv.parentId = id_task
             atv.tags = [
                 { title: values.tag.title, color: values.tag.color },
                 { ...atv.tag }
@@ -84,7 +86,7 @@ function Modal(props) {
         })
         const result = {
             custom: true,
-            id: props.id ? props.id : uuidv4(),
+            id: id_task,
             ...values,
             atividades: atividades
         }

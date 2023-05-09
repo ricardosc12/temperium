@@ -6,15 +6,16 @@ import {
 } from "@thisbeyond/solid-dnd";
 
 import SemanalSelector from '../SemanalSelector';
-import { batch, createEffect, createMemo, createSignal, For } from 'solid-js';
+import { batch, createEffect, createMemo, createSignal, For, on } from 'solid-js';
 import { useStorage } from '../../../Storage/context';
 import { Draggable as DraggableHook, Droppable as DroppableHook } from '@/Apps/Capitulo1/components/hooks/DragAndDrop';
 
 const Draggable = (props) => {
+    const atividade = createMemo(()=>props.atividades().get(props.id))
     return (
-        <DraggableHook data={props.id+'::'+props.drop}>
+        <DraggableHook id={atividade().parentId} data={props.id+'::'+props.drop}>
             <div className='w-fit flex py-1'>
-                <For each={props.atividades().get(props.id).tags}>
+                <For each={atividade().tags}>
                     {(tag) => <div className='tag-sm color-black-fundo' style={{ background: tag.color }}>{tag.title}</div>}
                 </For>
             </div>
@@ -80,11 +81,11 @@ export default function Main(props) {
     //             semanas.forEach(semana => {
     //                 lines.forEach(interval => {
     //                     col.forEach(col => {
-    //                         addInside({ atividade: "e574f7f1-1cff-4adf-a5fe-d792c1388c80", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "214d0a89-32dd-4038-a81b-0c03304bbe0f", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "9d1418b3-9897-43ed-8b68-8528cbd5acef", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "d58e6d86-b600-4131-be1d-1566ffa31d19", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "5ec32eba-5516-49d4-a4d4-758cfd522788", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "85eb4a03-fd53-42bb-931c-132812865db9", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "5d4b0e23-1485-4045-b8d3-d4485fc9142d", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "43649911-9f95-4213-9d44-b5829afdc7fb", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "f5f591df-3303-45d2-a002-f7781868a83d", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "351087fc-4b5b-4506-866d-0529c4d1286e", drop: [semana, col, interval] })
     //                     })
     //                 })
     //             })
