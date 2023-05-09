@@ -72,6 +72,7 @@ function Modal(props) {
     function handleSave() {
         let values = submit()
         if (!state().atividades.length) return
+        console.time('create/edit')
         let atividades = JSON.parse(JSON.stringify(state().atividades))
         atividades = atividades.map(atv => {
             atv.id = props.id ? atv.id : uuidv4()
@@ -95,6 +96,7 @@ function Modal(props) {
         }
         setState({ atividades: [], editando: false })
         clear()
+        console.timeEnd('create/edit')
     }
 
     const handleCancelEdit = () => {
@@ -165,6 +167,7 @@ function Modal(props) {
                     <div className="flex items-center justify-center bg-white-fundo px-3 h-5 rounded-md ml-3 font-medium">{state().atividades.length}</div>
                 </div>
                 <div className="flex w-full items-center justify-end mb-2">
+                    <p>Carregando... </p>
                     <button onClick={handleSave} className="btn-sm white">
                         <CheckIcon />
                         <p className="font-medium">Salvar</p>

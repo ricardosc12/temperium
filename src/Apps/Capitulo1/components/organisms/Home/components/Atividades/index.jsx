@@ -9,14 +9,9 @@ export default function Atividades() {
 
     let ref;
 
-    const [open, setOpen] = createSignal(false)
+    const [open, setOpen] = createSignal(true)
 
-    const { dados, dispatch: { setTarefas } } = useStorage()
-
-    createEffect(() => {
-        const saved = window.localStorage.getItem('disciplinas')
-        if (saved) setTarefas(JSON.parse(saved))
-    })
+    const { dados } = useStorage()
 
     const collapse = (e) => {
         if (!open()) {
@@ -34,12 +29,14 @@ export default function Atividades() {
     function onDrag(drag) {
         if (drag === false) {
             ref.classList.remove('opacity-0')
+            ref.classList.remove('translate-x-96')
             ref.classList.add('opacity-100')
             return
         }
         if (!open()) return
         ref.classList.remove('opacity-100')
         ref.classList.add('opacity-0')
+        ref.classList.add('translate-x-96')
     }
 
     return (

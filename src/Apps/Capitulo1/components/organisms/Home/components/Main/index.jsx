@@ -6,37 +6,28 @@ import {
 } from "@thisbeyond/solid-dnd";
 
 import SemanalSelector from '../SemanalSelector';
-import { createEffect, createSignal, For } from 'solid-js';
+import { batch, createEffect, createMemo, createSignal, For } from 'solid-js';
 import { useStorage } from '../../../Storage/context';
+import { Draggable as DraggableHook, Droppable as DroppableHook } from '@/Apps/Capitulo1/components/hooks/DragAndDrop';
 
-const Draggable = ({ id, drop, title, tags }) => {
-    const draggable = createDraggable(`i${drop}atividade:${id}`, { drop: drop, atividade: id, inside: true, title, tags });
+const Draggable = (props) => {
     return (
-        <div use:draggable className={`
-        atividade atividade_p w-fit h-fit
-        ${draggable.isActiveDraggable ? 'opacity-75' : ''}`}>
+        <DraggableHook data={props.id+'::'+props.drop}>
             <div className='w-fit flex py-1'>
-                <For each={tags}>
+                <For each={props.atividades().get(props.id).tags}>
                     {(tag) => <div className='tag-sm color-black-fundo' style={{ background: tag.color }}>{tag.title}</div>}
                 </For>
             </div>
-        </div>
+        </DraggableHook>
     );
 };
 
 const Droppable = ({ id, ...props }) => {
 
-    const droppable = createDroppable(id());
-
     return (
-        <div
-            use:droppable={droppable}
-            class="droppable"
-            classList={{ "!droppable-accept": droppable.isActiveDroppable }}
-            {...props}
-        >
+        <DroppableHook data={id()}>
             {props.children}
-        </div>
+        </DroppableHook>
     );
 };
 
@@ -47,7 +38,7 @@ const DroppableArea = ({ id, title, dados, semana, dia, interval, ...props }) =>
             <div className={style.area}>
                 <For each={Object.values(dados.inside[semana]?.[dia]?.[interval] || {})}>
                     {(item) => {
-                        return <Draggable {...item} />
+                        return <Draggable atividades={props.atividades} {...item} />
                     }}
                 </For>
             </div>
@@ -55,9 +46,9 @@ const DroppableArea = ({ id, title, dados, semana, dia, interval, ...props }) =>
     )
 }
 
-export default function Main() {
+export default function Main(props) {
 
-    const { dados } = useStorage()
+    const { dados, dispatch: { addInside } } = useStorage()
 
     const semanas = [
         'semana1', 'semana2', 'semana3', 'semana4', 'semana5'
@@ -83,6 +74,24 @@ export default function Main() {
         "dom", "seg", "ter", "qua", "qui", "sex", "sab"
     ];
 
+    // createEffect(() => {
+    //     setTimeout(() => {
+    //         batch(() => {
+    //             semanas.forEach(semana => {
+    //                 lines.forEach(interval => {
+    //                     col.forEach(col => {
+    //                         addInside({ atividade: "e574f7f1-1cff-4adf-a5fe-d792c1388c80", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "214d0a89-32dd-4038-a81b-0c03304bbe0f", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "9d1418b3-9897-43ed-8b68-8528cbd5acef", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "d58e6d86-b600-4131-be1d-1566ffa31d19", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "5ec32eba-5516-49d4-a4d4-758cfd522788", drop: [semana, col, interval] })
+    //                     })
+    //                 })
+    //             })
+    //         })
+    //     }, 1000);
+    // })
+
     return (
         <div className={style.main} id="main_content">
 
@@ -91,8 +100,8 @@ export default function Main() {
             <div className={`black-scroll ${style.table}`}>
                 <For each={semanas}>
                     {(semana) => {
-                        return (
-                            <div className={`flex flex-row ${week() != semana ? "hidden" : ""}`}>
+                        return (week() == semana) ? (
+                            <div className={`flex flex-row`}>
                                 <table className={style.root_table}>
                                     <tbody>
                                         <tr>
@@ -109,7 +118,9 @@ export default function Main() {
                                                     <For each={col}>
                                                         {(dia) => (
                                                             <td>
-                                                                <DroppableArea id={id(semana, dia, interval)} dia={dia} semana={semana} interval={interval} dados={dados} />
+                                                                <DroppableArea id={id(semana, dia, interval)} dia={dia}
+                                                                    semana={semana} interval={interval} dados={dados}
+                                                                    atividades={props.atividades} />
                                                             </td>
                                                         )}
                                                     </For>
@@ -119,7 +130,7 @@ export default function Main() {
                                     </tbody>
                                 </table>
                             </div>
-                        )
+                        ) : ''
                     }}
                 </For>
             </div>

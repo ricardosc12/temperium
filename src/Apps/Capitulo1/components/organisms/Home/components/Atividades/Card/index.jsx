@@ -8,18 +8,13 @@ import { createMenu } from "@/Apps/Capitulo1/components/hooks/Menu";
 import { MenuAtividade } from "@/Apps/Capitulo1/components/hooks/Menu/atividades_menu";
 import { openModal } from "@/Apps/Capitulo1/components/molecules/Modal";
 import { useStorage } from "../../../../Storage/context";
+import { Draggable as DraggableHook } from "@/Apps/Capitulo1/components/hooks/DragAndDrop";
 
 const Draggable = ({ id, children, title, tags, ...props }) => {
-    const draggable = createDraggable(id, { title, tags });
-
     return (
-        <div use:draggable className={`
-        cursor-pointer
-        ${draggable.isActiveDraggable ? 'opacity-75 border-green' : ''}`}
-            {...props}
-        >
+        <DraggableHook data={id} className={props.className}>
             {children}
-        </div>
+        </DraggableHook>
     );
 };
 

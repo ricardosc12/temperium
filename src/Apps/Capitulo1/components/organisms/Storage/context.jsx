@@ -31,16 +31,18 @@ export function StorageProvider(props) {
     onMount(() => {
         console.log('geting tags')
         const saved = JSON.parse(window.localStorage.getItem('tags'))
-        const tags_disciplinas = state.dados.disciplinas.map(item => ({ title: item.tag.title, color: item.tag.color, id: item.id, deletable:false }))
+        const tags_disciplinas = state.dados.disciplinas.map(item => ({ title: item.tag.title, color: item.tag.color, id: item.id, deletable: false }))
         if (saved) {
             counter.dispatch.setTag(saved)
         }
         else {
-            counter.dispatch.setTag({ 
-                primary: [...state.dados.tags.primary, ...tags_disciplinas], 
-                secondary: [...state.dados.tags.secondary, ...tags_disciplinas] 
+            counter.dispatch.setTag({
+                primary: [...state.dados.tags.primary, ...tags_disciplinas],
+                secondary: [...state.dados.tags.secondary, ...tags_disciplinas]
             })
         }
+        let disciplinas = window.localStorage.getItem('disciplinas')
+        if (disciplinas) counter.dispatch.setTarefas(JSON.parse(disciplinas))
     })
 
     return (

@@ -17,8 +17,6 @@ export const gerenciamentoStorage = (set) => ({
                             [atividade]: {
                                 id: `${atividade}`,
                                 drop: `week:${semana}dia:${dia}interval:${intervalo}`,
-                                title: title,
-                                tags: JSON.parse(JSON.stringify(tags))
                             }
                         }
                     }
@@ -52,9 +50,7 @@ export const gerenciamentoStorage = (set) => ({
                             ...items.dados.inside[toWeek]?.[toDay]?.[toInterval],
                             [atividade]: {
                                 id: `${atividade}`,
-                                drop: `week:${toWeek}dia:${toDay}interval:${toInterval}`,
-                                title: removed.title,
-                                tags: JSON.parse(JSON.stringify(removed.tags))
+                                drop: `week:${toWeek}dia:${toDay}interval:${toInterval}`
                             }
                         }
                     }
