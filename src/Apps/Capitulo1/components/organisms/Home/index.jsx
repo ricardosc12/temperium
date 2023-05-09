@@ -78,12 +78,12 @@ export default function HomePage() {
     }
 
     const onDragEnd = ({ droppable, draggable }) => {
-        if (!draggable) return
-        setAtual(null)
-        if (current_node) current_node.style['box-shadow'] = "none"
         setTimeout(() => {
             document.getElementById('lateralbar-atividades').colapse(false)
         })
+        if (!draggable) return
+        setAtual(null)
+        if (current_node) current_node.style['box-shadow'] = "none"
         if (droppable.el) {
             const [atividadeId, drop] = draggable.data.split('::')
             const { id } = atividades().get(atividadeId)

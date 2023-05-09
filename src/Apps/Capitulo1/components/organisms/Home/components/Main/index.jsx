@@ -6,14 +6,14 @@ import {
 } from "@thisbeyond/solid-dnd";
 
 import SemanalSelector from '../SemanalSelector';
-import { batch, createEffect, createMemo, createSignal, For, on } from 'solid-js';
+import { batch, createEffect, createMemo, createSignal, For, on, Show } from 'solid-js';
 import { useStorage } from '../../../Storage/context';
 import { Draggable as DraggableHook, Droppable as DroppableHook } from '@/Apps/Capitulo1/components/hooks/DragAndDrop';
 
 const Draggable = (props) => {
-    const atividade = createMemo(()=>props.atividades().get(props.id))
+    const atividade = createMemo(() => props.atividades().get(props.id))
     return (
-        <DraggableHook id={atividade().parentId} data={props.id+'::'+props.drop}>
+        <DraggableHook id={atividade().parentId} data={props.id + '::' + props.drop}>
             <div className='w-fit flex py-1'>
                 <For each={atividade().tags}>
                     {(tag) => <div className='tag-sm color-black-fundo' style={{ background: tag.color }}>{tag.title}</div>}
@@ -58,7 +58,13 @@ export default function Main(props) {
     const [week, setWeek] = createSignal(semanas[0])
 
     function handleWeek(e) {
-        setWeek(e)
+        console.time('switching')
+        document.getElementById('loading-week').innerHTML = "Loading..."
+        setTimeout(() => {
+            setWeek(e)
+            document.getElementById('loading-week').innerHTML = ""
+            console.timeEnd('switching')
+        })
     }
 
     const id = (week, dia, interval) => {
@@ -81,11 +87,11 @@ export default function Main(props) {
     //             semanas.forEach(semana => {
     //                 lines.forEach(interval => {
     //                     col.forEach(col => {
-    //                         addInside({ atividade: "85eb4a03-fd53-42bb-931c-132812865db9", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "5d4b0e23-1485-4045-b8d3-d4485fc9142d", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "43649911-9f95-4213-9d44-b5829afdc7fb", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "f5f591df-3303-45d2-a002-f7781868a83d", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "351087fc-4b5b-4506-866d-0529c4d1286e", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "ce9d95be-b32c-4d2c-ac3f-42bff71051a7", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "bf21786c-bf0c-4776-a8e4-40c1b189f9be", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "67f852c3-765d-4f6e-acd0-2590d48710e3", drop: [semana, col, interval] })
+    //                         // addInside({ atividade: "f5f591df-3303-45d2-a002-f7781868a83d", drop: [semana, col, interval] })
+    //                         // addInside({ atividade: "351087fc-4b5b-4506-866d-0529c4d1286e", drop: [semana, col, interval] })
     //                     })
     //                 })
     //             })
@@ -97,11 +103,12 @@ export default function Main(props) {
         <div className={style.main} id="main_content">
 
             <SemanalSelector semanas={semanas} week={week} dados={dados} handleWeek={handleWeek} />
-
+            <h3 id="loading-week" className='color-black-fundo'></h3>
             <div className={`black-scroll ${style.table}`}>
+
                 <For each={semanas}>
-                    {(semana) => {
-                        return (week() == semana) ? (
+                    {(semana) => (
+                        <Show when={semana == week()}>
                             <div className={`flex flex-row`}>
                                 <table className={style.root_table}>
                                     <tbody>
@@ -131,8 +138,8 @@ export default function Main(props) {
                                     </tbody>
                                 </table>
                             </div>
-                        ) : ''
-                    }}
+                        </Show>
+                    )}
                 </For>
             </div>
 
