@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useStorage } from "../../../Storage/context"
 import Select from "@/Apps/Capitulo1/components/atoms/Select"
 import ListaAtividades from "./ListaAtividades"
+import { loadButton } from "@/Apps/Capitulo1/components/hooks/Button/load"
 
 function Modal(props) {
 
@@ -69,36 +70,43 @@ function Modal(props) {
         clear(['atividades'])
     }
 
-    function handleSave() {
-        let values = submit()
-        if (!state().atividades.length) return
-        console.time('create/edit')
-        const id_task = props.id ? props.id : uuidv4()
-        let atividades = JSON.parse(JSON.stringify(state().atividades))
-        atividades = atividades.map(atv => {
-            atv.id = atv.id ? atv.id : uuidv4()
-            atv.parentId = id_task
-            atv.tags = [
-                { title: values.tag.title, color: values.tag.color },
-                { ...atv.tag }
-            ]
-            return atv
-        })
-        const result = {
-            custom: true,
-            id: id_task,
-            ...values,
-            atividades: atividades
-        }
-        if (props.id) {
-            editTarefa(result)
-        }
-        else {
-            addTarefa(result)
-        }
-        setState({ atividades: [], editando: false })
-        clear()
-        console.timeEnd('create/edit')
+    async function handleSave() {
+        const stop = loadButton('btn-create-task')
+        setTimeout(() => {
+            let values = submit()
+            if (!state().atividades.length) {
+                stop()
+                return
+            }
+            console.time('create/edit')
+            const id_task = props.id ? props.id : uuidv4()
+            let atividades = JSON.parse(JSON.stringify(state().atividades))
+            atividades = atividades.map(atv => {
+                atv.id = atv.id ? atv.id : uuidv4()
+                atv.parentId = id_task
+                atv.tags = [
+                    { title: values.tag.title, color: values.tag.color },
+                    { ...atv.tag }
+                ]
+                return atv
+            })
+            const result = {
+                custom: true,
+                id: id_task,
+                ...values,
+                atividades: atividades
+            }
+            if (props.id) {
+                editTarefa(result)
+            }
+            else {
+                addTarefa(result)
+            }
+            setState({ atividades: [], editando: false })
+            clear()
+            stop()
+            console.timeEnd('create/edit')
+        });
     }
 
     const handleCancelEdit = () => {
@@ -169,9 +177,8 @@ function Modal(props) {
                     <div className="flex items-center justify-center bg-white-fundo px-3 h-5 rounded-md ml-3 font-medium">{state().atividades.length}</div>
                 </div>
                 <div className="flex w-full items-center justify-end mb-2">
-                    <p>Carregando... </p>
-                    <button onClick={handleSave} className="btn-sm white">
-                        <CheckIcon />
+                    <button id="btn-create-task" onClick={handleSave} className="btn-sm white">
+                        <CheckIcon className="icon-svg color-black-fundo" />
                         <p className="font-medium">Salvar</p>
                     </button>
                 </div>

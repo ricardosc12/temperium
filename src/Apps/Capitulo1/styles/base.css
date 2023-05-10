@@ -12,6 +12,8 @@
   --text-primary: #FCFFFF;
   --text-secondary: #C1C5C7;
   --black-shadow: #171F2380;
+  --disabled: #99a5aa;
+  --disabled-white: #cecece;
 }
 
 ::-webkit-scrollbar {

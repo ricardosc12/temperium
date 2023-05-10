@@ -3,16 +3,12 @@ import Main from "./components/Main"
 import style from './style.module.css'
 import { createEffect, createMemo, createSignal, on, onMount } from "solid-js";
 
-import {
-    DragDropProvider,
-    DragDropSensors,
-    DragOverlay,
-} from "@thisbeyond/solid-dnd";
-
 import { DragAndDrop } from "../../hooks/DragAndDrop";
 
 import { useStorage } from "../Storage/context";
 import { untrack } from "solid-js/web";
+import { CheckIcon } from "@/Apps/Capitulo1/assets/Icons";
+import { loadButton } from "../../hooks/Button/load";
 
 export default function HomePage() {
 

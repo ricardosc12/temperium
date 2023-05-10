@@ -13,6 +13,7 @@
 	.bg-text-primary { background: #FCFFFF !important; }
 	.bg-text-primary-hover { background: #f0f3f3 !important; }
 	.bg-text-secondary { background: #C1C5C7 !important; }
+	.bg-disabled {background: #99a5aa !important;}
 
 	.color-black-fundo { color: #171F23 !important; }
 	.color-black-destaq { color: #2C3539 !important; }
@@ -88,11 +89,28 @@
 
 		@apply space-x-2 hover:bg-black-destaq
 	}
+
+	.btn-base > p {
+		height: 19px;
+	}
 	
 	.btn-base.white {
 		@apply hover:bg-white-fundo;
-		color: var(--black-fundo);
 		background: var(--white-fundo);
+	}
+	.btn-base.white > p {
+		color: var(--black-fundo) !important;
+	}
+	.btn-base.white > svg {
+		color: var(--black-fundo) !important;
+	}
+	
+	.btn-base.loading {
+		pointer-events: none;
+		background: var(--disabled);
+	}
+	.btn-base.white.loading{
+		background: var(--disabled-white);
 	}
 
 	.btn-sm {
@@ -118,7 +136,6 @@
 		margin-left: -4px;
 	}
 	
-
 	.btn-sm > p {
 		color: var(--white-fundo) !important;
 	}
@@ -129,6 +146,13 @@
 
 	.btn-sm.white > p {
 		color: var(--black-fundo) !important;
+	}
+	.btn-sm.white.loading{
+		background: var(--disabled-white);
+	}
+	.btn-sm.loading {
+		pointer-events: none;
+		background: var(--disabled);
 	}
 
 	.btn-action-white {
