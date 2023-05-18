@@ -13,6 +13,34 @@ function getInputsObject(form){
     return inputs
 }
 
+export function values(id){
+    const form = document.getElementById(id)
+    if (!form) return
+    let values = {}
+    const inputs = form.querySelectorAll('input')
+    const textarea = form.querySelectorAll('textarea')
+    for (const input of inputs) {
+        if(input['data-value']) values = immer(input.id, values, input['data-value']) 
+        else values = immer(input.id, values, input.value)
+    }
+    for (const input of textarea) {
+        values = immer(input.id, values, input.value)
+    }
+    return values
+}
+
+export function change(id,values){
+    const form = document.getElementById(id)
+    if (!form) return
+    const inputs = getInputsObject(form)
+    for(const [id, value] of Object.entries(values)){
+        if(inputs[id]['data-set']) {
+            inputs[id]['data-set'](value)
+        }
+        else if(inputs[id]) inputs[id].value = value
+    }
+}
+
 export default function useForm(id) {
     const formProps = {
         submit: () => {
