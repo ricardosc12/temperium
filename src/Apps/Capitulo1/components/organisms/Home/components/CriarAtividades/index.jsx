@@ -26,7 +26,7 @@ function Modal(props) {
         }
     })
 
-    const { dados: { tags }, dispatch: { addTarefa, editTarefa } } = useStorage()
+    const { dados, dispatch: { addTarefa, editTarefa } } = useStorage()
 
     const [state, setState] = createSignal({
         atividades: [],
@@ -71,7 +71,7 @@ function Modal(props) {
         }
         else atividades.push(values.atividades)
         change({
-            "atividades.tag": tags.secondary[0].id
+            "atividades.tag": dados.tags.secondary[0].id
         })
         setState(prev => ({ ...prev, atividades: atividades, editando: false }))
         clear(['atividades'])
@@ -135,7 +135,7 @@ function Modal(props) {
                             <input required id="title" placeholder=" " type="text" />
                             <p>Título</p>
                         </div>
-                        <Select required id="tag" label="Tag" options={tags.primary} />
+                        <Select required id="tag" label="Tag" options={dados.tags.primary} />
                     </div>
                     <div className="textarea w-full">
                         <textarea required placeholder=" " className="w-full" id="atividade_description" rows="2" />
@@ -149,7 +149,7 @@ function Modal(props) {
                             <input id={`atividades.title`} placeholder=" " type="text" />
                             <p>Título</p>
                         </div>
-                        <Select id="atividades.tag" label="Tag" options={tags.secondary} />
+                        <Select id="atividades.tag" label="Tag" options={dados.tags.secondary} />
                     </div>
                     <div className="textarea w-full">
                         <textarea placeholder=" " className="w-full" id="atividades.description" rows="2" />

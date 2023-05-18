@@ -6,6 +6,7 @@ import style from './style.module.css'
 import { v4 as uuidv4 } from 'uuid';
 import { createMenu } from "../../../hooks/Menu"
 import { MenuTag } from "../../../hooks/Menu/tags_menu"
+import { change } from "../../../hooks/Form"
 
 export const ModalTagSelector = () => {
 
@@ -90,6 +91,18 @@ export const ModalTagSelector = () => {
                 return
             }
             editTag(request, type)
+            setTimeout(() => {
+                if(type=="secondary") {
+                    change("form-atv-create",{
+                        "atividades.tag": request.id
+                    })
+                }
+                else {
+                    change("form-atv-create",{
+                        "tag": request.id
+                    })
+                }   
+            });
         }
     }
 

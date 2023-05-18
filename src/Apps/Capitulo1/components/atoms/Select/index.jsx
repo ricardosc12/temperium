@@ -7,7 +7,7 @@ import { AddIcon } from '@/Apps/Capitulo1/assets/Icons'
 
 export default function Select(props) {
 
-    const [selected, setSelected] = createSignal('')
+    const [selected, setSelected] = createSignal('', { equals: false })
 
     const [_, others] = splitProps(props, ["id", "title"])
 
