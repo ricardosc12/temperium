@@ -18,11 +18,11 @@ function Modal(props) {
             setTimeout(() => {
                 change({
                     title: props.title,
-                    atividade_description: props.atividade_description,
+                    atividade_description: props.atividade_description || "",
                     tag: props.tag.id
                 })
                 setState({ atividades: props.atividades, editando: false })
-            }, 225)
+            }, 150)
         }
     })
 
@@ -63,9 +63,16 @@ function Modal(props) {
         const atividades = [...state().atividades]
         const idx_edit = state().editando
         if (idx_edit !== false) {
-            atividades[idx_edit] = { ...atividades[idx_edit], ...values.atividades }
+            atividades[idx_edit] = { ...atividades[idx_edit], 
+                title: values.atividades.title,
+                tag: values.atividades.tag,
+                description: values.atividades.description || ""
+            }
         }
         else atividades.push(values.atividades)
+        change({
+            "atividades.tag": tags.secondary[0].id
+        })
         setState(prev => ({ ...prev, atividades: atividades, editando: false }))
         clear(['atividades'])
     }
@@ -121,7 +128,7 @@ function Modal(props) {
             <div className={style.content_modal}>
                 <h4 className="color-text-secondary">Crie atividades e gerencie em conjunto com as tarefas acadêmicas.</h4>
                 <div className="divisor"></div>
-                <h3 className="mb-2">Categoria</h3>
+                <h3 className="mb-2">Atividade</h3>
                 <div className="flex flex-col mb-3 space-y-4">
                     <div className="flex space-x-2">
                         <div className="textfield flex-1">
@@ -135,7 +142,7 @@ function Modal(props) {
                         <p>Descrição</p>
                     </div>
                 </div>
-                <h3 className="mb-2">Atividades</h3>
+                <h3 className="mb-2">Sub-Atividades</h3>
                 <div className="flex flex-col mb-5 space-y-4">
                     <div className="flex space-x-2">
                         <div className="textfield flex-1">

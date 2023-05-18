@@ -15,6 +15,7 @@ const DragAndDrop = (props) => {
     }
 
     function handleDragEnd() {
+        props.onDragTerminate&&props.onDragTerminate()
         actual_element = null;
     }
 
@@ -106,6 +107,10 @@ const DragAndDrop = (props) => {
             document.addEventListener("drop", handleDrop, false)
             document.addEventListener("dragenter", handleEnter, false)
             document.addEventListener("dragleave", handleLeave, false)
+
+            document.addEventListener('dragend', handleDragEnd, false)
+            document.addEventListener('dragover', handleDragOver, false)
+            console.timeEnd('onmount')
             // for (const dropper of droppable) {
             //     dropper.ondragleave = (e) => {
             //         counter--;
@@ -144,9 +149,7 @@ const DragAndDrop = (props) => {
             //         console.timeEnd('ondragenter')
             //     }
             // }
-            document.addEventListener('dragend', handleDragEnd, false)
-            document.addEventListener('dragover', handleDragOver, false)
-            console.timeEnd('onmount')
+
             // document.getElementById('loading').innerHTML = ""
         })
     })

@@ -110,6 +110,12 @@ export default function HomePage() {
         }
     };
 
+    const onDragTerminate=()=>{
+        setTimeout(() => {
+            document.getElementById('lateralbar-atividades').colapse(false)
+        })
+    }
+
     const onDragStart = ({ draggable }) => {
         // setTimeout(() => {
         document.getElementById('lateralbar-atividades').colapse(true)
@@ -136,7 +142,7 @@ export default function HomePage() {
 
     return (
         <div tabindex="0" onKeyDown={keyDown} onKeyUp={keyUp} className={style.home}>
-            <DragAndDrop onDragLeave={onDragLeave} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragEnter={onDragOver}>
+            <DragAndDrop onDragTerminate={onDragTerminate} onDragLeave={onDragLeave} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragEnter={onDragOver}>
                 {/* <DragDropProvider onDragOver={onDragOver} onDragEnd={onDragEnd} onDragStart={onDragStart}> */}
 
                 {/* <DragDropSensors /> */}

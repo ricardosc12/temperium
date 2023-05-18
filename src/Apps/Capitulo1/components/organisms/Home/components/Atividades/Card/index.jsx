@@ -18,10 +18,10 @@ const Draggable = ({ id, children, title, tags, ...props }) => {
     );
 };
 
-const Atividade = ({ id, title, children, icon, label, tags }) => {
+const Atividade = ({ id, title, children, icon, label, tags, ...props }) => {
     return (
         <Draggable className="w-full" id={id} title={label + " - " + title} tags={tags}>
-            <div className="w-full flex flex-row items-center mb-5">
+            <div onContextMenu={props.onContextMenu} className="w-full flex flex-row items-center mb-5">
                 <div className={style.icon_grab}><IconGrab /></div>
                 <div className="w-full">
                     <div className="flex items-center justify-between w-full">
@@ -51,20 +51,23 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
         ref.style.setProperty('--max-height', ref.scrollHeight + 'px');
     })
 
-    async function menu(e) {
+    async function menu(e, atividadeId) {
+        console.log(atividadeId)
+        e.stopPropagation()
         if (!custom) return
         const menu_resp = await createMenu(e, MenuAtividade)
         if (menu_resp == "excluir") {
-            batch(()=>{
+            batch(() => {
                 console.time('removing')
-                document.querySelectorAll(`[id="${id}"]`).forEach(el=>{
+                document.querySelectorAll(`[id="${id}"]`).forEach(el => {
                     const [id, data] = el.getAttribute('data-drag').split('::')
+                    if (atividadeId && id != atividadeId) return;
                     removeInside({
                         atividade: id,
                         from: data.split(/week:|dia:|interval:/).filter(Boolean)
                     })
                 })
-                removeTarefa(id)
+                removeTarefa(id, atividadeId)
                 console.timeEnd('removing')
             })
 
@@ -94,7 +97,10 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
                     <For each={atividades}>
                         {(item) => {
                             return (
-                                <Atividade id={item.id} title={item.title} label={title} icon={<IconRead />} {...item}>
+                                <Atividade id={item.id} title={item.title}
+                                    label={title} icon={<IconRead />} {...item}
+                                    onContextMenu={(e) => menu(e, item.id)}
+                                >
                                     {item.description}
                                 </Atividade>
                             )

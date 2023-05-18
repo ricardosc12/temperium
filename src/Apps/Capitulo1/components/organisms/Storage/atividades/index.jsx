@@ -17,8 +17,21 @@ export const atividadesStorage = (set) => ({
         setTarefas: (payload) => set(produce((state) => {
             state.dados.tarefas = payload
         })),
-        removeTarefa: (id) => set(produce((state) => {
-            state.dados.tarefas = state.dados.tarefas.filter(item => item.id != id)
+        removeTarefa: (id, subId) => set(produce((state) => {
+            if (subId) {
+                const index = state.dados.tarefas.findIndex(item => item.id == id)
+                if (index != -1) {
+                    for (let idx = 0; idx < state.dados.tarefas[index].atividades.length; idx++) {
+                        if (state.dados.tarefas[index].atividades[idx].id == subId) {
+                            state.dados.tarefas[index].atividades.splice(idx, 1)
+                            break
+                        }
+                    }
+                }
+            }
+            else {
+                state.dados.tarefas = state.dados.tarefas.filter(item => item.id != id)
+            }
             window.localStorage.setItem("disciplinas", JSON.stringify(state.dados.tarefas))
         })),
     }
