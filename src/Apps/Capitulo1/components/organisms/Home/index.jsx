@@ -28,6 +28,18 @@ export default function HomePage() {
         return disciplinas
     })
 
+    const tags = createMemo(()=>{
+        const iter = JSON.parse(JSON.stringify(dados.tags))
+        const tags = {}
+        iter.primary.forEach(tag=>{
+            tags[tag.id] = tag
+        })
+        iter.secondary.forEach(tag=>{
+            tags[tag.id] = tag
+        })
+        return tags
+    })
+
     createEffect(() => {
         console.time('mapping disciplinhas')
         const disciplinas = JSON.parse(JSON.stringify(dados.disciplinas))
@@ -147,9 +159,9 @@ export default function HomePage() {
 
                 {/* <DragDropSensors /> */}
 
-                <Main atividades={atividades} />
+                <Main tags={tags} atividades={atividades} />
 
-                <Atividades />
+                <Atividades tags={tags}/>
 
                 {/* <DragOverlay class={style.overlay}> */}
                 {/* {(draggable) => <div class={style.atividade_overlay}>{atual()}</div>} */}

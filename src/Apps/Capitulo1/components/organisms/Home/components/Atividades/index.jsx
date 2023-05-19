@@ -1,11 +1,11 @@
 import style from './style.module.css'
 import { AtividadeIcon, ArrowIconSx, AddIcon } from '@/Apps/Capitulo1/assets/Icons';
 import { CardAtividade } from './Card';
-import { createEffect, createSignal, For } from 'solid-js';
+import { createEffect, createMemo, createSignal, For } from 'solid-js';
 import CreateAtividades from '../CriarAtividades';
 import { useStorage } from '../../../Storage/context';
 
-export default function Atividades() {
+export default function Atividades({tags}) {
 
     let ref;
 
@@ -62,7 +62,7 @@ export default function Atividades() {
                 </div>
                 <div className={style.atividades_list}>
                     <For each={[...dados.disciplinas, ...dados.tarefas]}>
-                        {(item) => <CardAtividade {...item} />}
+                        {(item) => <CardAtividade tagsMap={tags} {...item} />}
                     </For>
                 </div>
             </div>

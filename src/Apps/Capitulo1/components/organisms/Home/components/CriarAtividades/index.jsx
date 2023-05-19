@@ -22,6 +22,9 @@ function Modal(props) {
                     tag: props.tag.id
                 })
                 setState({ atividades: props.atividades, editando: false })
+                if (props.indexAtividade != undefined) {
+                    editarAtividade(props.indexAtividade)
+                }
             }, 150)
         }
     })
@@ -41,7 +44,7 @@ function Modal(props) {
         const atividade = state().atividades[index]
         change({
             "atividades.title": atividade.title,
-            "atividades.description": atividade.description,
+            "atividades.description": atividade.description || "",
             "atividades.tag": atividade.tag.id
         })
         setState(prev => ({ ...prev, editando: index }))
@@ -63,7 +66,8 @@ function Modal(props) {
         const atividades = [...state().atividades]
         const idx_edit = state().editando
         if (idx_edit !== false) {
-            atividades[idx_edit] = { ...atividades[idx_edit], 
+            atividades[idx_edit] = {
+                ...atividades[idx_edit],
                 title: values.atividades.title,
                 tag: values.atividades.tag,
                 description: values.atividades.description || ""
@@ -92,7 +96,7 @@ function Modal(props) {
                 atv.id = atv.id ? atv.id : uuidv4()
                 atv.parentId = id_task
                 atv.tags = [
-                    { title: values.tag.title, color: values.tag.color },
+                    { title: values.tag.title, color: values.tag.color, id: values.tag.id },
                     { ...atv.tag }
                 ]
                 return atv

@@ -12,11 +12,16 @@ import { Draggable as DraggableHook, Droppable as DroppableHook } from '@/Apps/C
 
 const Draggable = (props) => {
     const atividade = createMemo(() => props.atividades().get(props.id))
+
     return (
         <DraggableHook id={atividade().parentId} data={props.id + '::' + props.drop}>
             <div className='w-fit flex py-1'>
                 <For each={atividade().tags}>
-                    {(tag) => <div className='tag-sm color-black-fundo' style={{ background: tag.color }}>{tag.title}</div>}
+                    {(tag) => <div className='tag-sm color-black-fundo' style={{
+                        background: props.tags()[tag.id] ? props.tags()[tag.id].color : tag.color
+                    }}
+                    >{props.tags()[tag.id] ? props.tags()[tag.id].title  : tag.title}
+                    </div>}
                 </For>
             </div>
         </DraggableHook>
@@ -32,14 +37,14 @@ const Droppable = ({ id, ...props }) => {
     );
 };
 
-const DroppableArea = ({ id, title, dados, semana, dia, interval, ...props }) => {
+const DroppableArea = ({ id, title, dados, semana, dia, interval, tags, ...props }) => {
 
     return (
         <Droppable id={id} className="w-full h-full p-2">
             <div className={style.area}>
                 <For each={Object.values(dados.inside[semana]?.[dia]?.[interval] || {})}>
                     {(item) => {
-                        return <Draggable atividades={props.atividades} {...item} />
+                        return <Draggable tags={tags} atividades={props.atividades} {...item} />
                     }}
                 </For>
             </div>
@@ -87,9 +92,9 @@ export default function Main(props) {
     //             semanas.forEach(semana => {
     //                 lines.forEach(interval => {
     //                     col.forEach(col => {
-    //                         addInside({ atividade: "ce9d95be-b32c-4d2c-ac3f-42bff71051a7", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "bf21786c-bf0c-4776-a8e4-40c1b189f9be", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "67f852c3-765d-4f6e-acd0-2590d48710e3", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "0d42160e-474d-42e1-b500-3f84ad67a056", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "9beccf94-299e-43a0-9c51-bcc893e2a8eb", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "4eb6120f-4218-4d52-aaf8-22cb64e36083", drop: [semana, col, interval] })
     //                         // addInside({ atividade: "f5f591df-3303-45d2-a002-f7781868a83d", drop: [semana, col, interval] })
     //                         // addInside({ atividade: "351087fc-4b5b-4506-866d-0529c4d1286e", drop: [semana, col, interval] })
     //                     })
@@ -126,7 +131,7 @@ export default function Main(props) {
                                                     <For each={col}>
                                                         {(dia) => (
                                                             <td>
-                                                                <DroppableArea id={id(semana, dia, interval)} dia={dia}
+                                                                <DroppableArea tags={props.tags} id={id(semana, dia, interval)} dia={dia}
                                                                     semana={semana} interval={interval} dados={dados}
                                                                     atividades={props.atividades} />
                                                             </td>

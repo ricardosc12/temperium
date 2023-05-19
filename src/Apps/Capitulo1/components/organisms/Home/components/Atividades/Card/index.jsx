@@ -18,7 +18,7 @@ const Draggable = ({ id, children, title, tags, ...props }) => {
     );
 };
 
-const Atividade = ({ id, title, children, icon, label, tags, ...props }) => {
+const Atividade = ({ id, title, children, icon, label, tags, tagsMap, ...props }) => {
     return (
         <Draggable className="w-full" id={id} title={label + " - " + title} tags={tags}>
             <div onContextMenu={props.onContextMenu} className="w-full flex flex-row items-center mb-5">
@@ -27,7 +27,11 @@ const Atividade = ({ id, title, children, icon, label, tags, ...props }) => {
                     <div className="flex items-center justify-between w-full">
                         <div className="flex space-x-2 items-center">
                             <h5>{title}</h5>
-                            <div className="tag-sm" style={{ background: tags[tags.length - 1].color }}>{tags[tags.length - 1].title}</div>
+                            <div className="tag-sm" style={{
+                                background: tagsMap()[tags[tags.length - 1].id] ? tagsMap()[tags[tags.length - 1].id].color : tags[tags.length - 1].color
+                            }}>
+                                {tagsMap()[tags[tags.length - 1].id] ? tagsMap()[tags[tags.length - 1].id].title : tags[tags.length - 1].title}
+                            </div>
                         </div>
                         <div>{icon}</div>
                     </div>
@@ -38,7 +42,7 @@ const Atividade = ({ id, title, children, icon, label, tags, ...props }) => {
     )
 }
 
-export function CardAtividade({ id, title, atividades, atividade_description, tag, custom, ...props }) {
+export function CardAtividade({ id, title, atividades, atividade_description, tag, custom, tagsMap, ...props }) {
 
     const [open, setOpen] = createSignal(true)
     const collapse = () => setOpen(prev => !prev)
@@ -51,7 +55,7 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
         ref.style.setProperty('--max-height', ref.scrollHeight + 'px');
     })
 
-    async function menu(e, atividadeId) {
+    async function menu(e, atividadeId, index) {
         console.log(atividadeId)
         e.stopPropagation()
         if (!custom) return
@@ -74,7 +78,7 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
         }
         else if (menu_resp == "editar") {
             openModal("modal-create-atividade", {
-                id, title, atividades: [...atividades], atividade_description, tag, custom, ...props
+                id, indexAtividade: index, title, atividades: [...atividades], atividade_description, tag, custom, ...props
             })
         }
     }
@@ -84,7 +88,11 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
             <div onClick={collapse} className="flex items-center justify-between w-full">
                 <div className="flex space-x-3">
                     <h2 className="text-sm">{title}</h2>
-                    <div className="tag" style={{ background: tag.color }}>{tag.title}</div>
+                    <div className="tag" style={{
+                        background: tagsMap()[tag.id] ? tagsMap()[tag.id].color : tag.color
+                    }}>
+                        {tagsMap()[tag.id] ? tagsMap()[tag.id].title : tag.title}
+                    </div>
                 </div>
                 <div className={style.icon_card_atividade}>
                     <ArrowIcon />
@@ -95,11 +103,12 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
                 <div className={style.divisor}></div>
                 <div className={style.main_atividades}>
                     <For each={atividades}>
-                        {(item) => {
+                        {(item, index) => {
                             return (
                                 <Atividade id={item.id} title={item.title}
+                                    tagsMap={tagsMap}
                                     label={title} icon={<IconRead />} {...item}
-                                    onContextMenu={(e) => menu(e, item.id)}
+                                    onContextMenu={(e) => menu(e, item.id, index())}
                                 >
                                     {item.description}
                                 </Atividade>
