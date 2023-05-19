@@ -61,7 +61,7 @@ function Modal(props) {
         let values = form_values()
         if (!values.atividades.title) {
             submissError(['atividades.title'])
-            return
+            return false
         }
         const atividades = [...state().atividades]
         const idx_edit = state().editando
@@ -79,9 +79,13 @@ function Modal(props) {
         })
         setState(prev => ({ ...prev, atividades: atividades, editando: false }))
         clear(['atividades'])
+        return true
     }
 
     async function handleSave() {
+        if(state().editando && !handleAdd()) {
+            return
+        }
         const stop = loadButton('btn-create-task')
         setTimeout(() => {
             let values = submit()
