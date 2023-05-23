@@ -129,6 +129,9 @@ function Modal(props) {
     const handleCancelEdit = () => {
         setState(prev => ({ ...prev, editando: false }))
         clear(['atividades'])
+        change({
+            "atividades.tag": dados.tags.secondary[0].id
+        })
     }
 
 

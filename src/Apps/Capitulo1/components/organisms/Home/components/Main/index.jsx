@@ -1,12 +1,7 @@
 import style from './style.module.css'
 
-import {
-    createDraggable,
-    createDroppable,
-} from "@thisbeyond/solid-dnd";
-
 import SemanalSelector from '../SemanalSelector';
-import { batch, createEffect, createMemo, createSignal, For, on, Show } from 'solid-js';
+import { createEffect, createMemo, createSignal, For, Show } from 'solid-js';
 import { useStorage } from '../../../Storage/context';
 import { Draggable as DraggableHook, Droppable as DroppableHook } from '@/Apps/Capitulo1/components/hooks/DragAndDrop';
 
@@ -14,9 +9,9 @@ const Draggable = (props) => {
     const atividade = createMemo(() => props.atividades().get(props.id))
 
     return (
-        <DraggableHook id={atividade().parentId} data={props.id + '::' + props.drop}>
+        <DraggableHook id={atividade()?.parentId} data={props.id + '::' + props.drop}>
             <div className='w-fit flex py-1'>
-                <For each={atividade().tags}>
+                <For each={atividade()?.tags}>
                     {(tag) => <div className='tag-sm color-black-fundo' style={{
                         background: props.tags()[tag.id] ? props.tags()[tag.id].color : tag.color
                     }}
