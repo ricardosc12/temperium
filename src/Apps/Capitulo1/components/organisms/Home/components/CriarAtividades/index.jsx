@@ -83,9 +83,11 @@ function Modal(props) {
     }
 
     async function handleSave() {
-        if(state().editando && !handleAdd()) {
+
+        if (state().editando !== false && !handleAdd()) {
             return
         }
+
         const stop = loadButton('btn-create-task')
         setTimeout(() => {
             let values = submit()
