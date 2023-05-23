@@ -62,7 +62,7 @@ export default function Atividades({tags}) {
                 </div>
                 <div className={style.atividades_list}>
                     <For each={[...dados.disciplinas, ...dados.tarefas]}>
-                        {(item) => <CardAtividade tagsMap={tags} {...item} />}
+                        {(item) => <CardAtividade hash={dados.hash} tagsMap={tags} {...item} />}
                     </For>
                 </div>
             </div>

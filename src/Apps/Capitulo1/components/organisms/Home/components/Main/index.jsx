@@ -1,7 +1,7 @@
 import style from './style.module.css'
 
 import SemanalSelector from '../SemanalSelector';
-import { createEffect, createMemo, createSignal, For, Show } from 'solid-js';
+import { createEffect, createMemo, createSignal, For, Show, batch } from 'solid-js';
 import { useStorage } from '../../../Storage/context';
 import { Draggable as DraggableHook, Droppable as DroppableHook } from '@/Apps/Capitulo1/components/hooks/DragAndDrop';
 
@@ -87,10 +87,10 @@ export default function Main(props) {
     //             semanas.forEach(semana => {
     //                 lines.forEach(interval => {
     //                     col.forEach(col => {
-    //                         addInside({ atividade: "0d42160e-474d-42e1-b500-3f84ad67a056", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "9beccf94-299e-43a0-9c51-bcc893e2a8eb", drop: [semana, col, interval] })
-    //                         addInside({ atividade: "4eb6120f-4218-4d52-aaf8-22cb64e36083", drop: [semana, col, interval] })
-    //                         // addInside({ atividade: "f5f591df-3303-45d2-a002-f7781868a83d", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "d84fc4d3-60b5-4ff8-b3c0-b87bcddbdf3f", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "9a6d0ee9-1b19-4215-8c3f-74aa0de58e83", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "eacf538e-01e0-4d96-8dc7-06e2924ffe9f", drop: [semana, col, interval] })
+    //                         addInside({ atividade: "ef548917-57c4-4332-8e60-1f0a8734ec30", drop: [semana, col, interval] })
     //                         // addInside({ atividade: "351087fc-4b5b-4506-866d-0529c4d1286e", drop: [semana, col, interval] })
     //                     })
     //                 })

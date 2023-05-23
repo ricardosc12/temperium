@@ -1,8 +1,8 @@
 import { produce } from "solid-js/store"
 
 export const gerenciamentoStorage = (set) => ({
-    inside: {
-    },
+    inside: {},
+    hash: {},
     dispatch: {
         addInside: ({ atividade, drop: [semana, dia, intervalo], title, tags }) => set(produce((state) => {
             state.dados.inside =
@@ -22,12 +22,23 @@ export const gerenciamentoStorage = (set) => ({
                     }
                 }
             }
+            state.dados.hash[atividade] = {
+                ...state.dados.hash[atividade],
+                [semana]: {
+                    ...state.dados.hash[atividade]?.[semana],
+                    [dia]: {
+                        ...state.dados.hash[atividade]?.[semana]?.[dia],
+                        [intervalo]: true
+                    }
+                }
+            }
         })),
         removeInside: ({ atividade, from: [semana, dia, intervalo] }) => set(produce((state) => {
 
             const items = { ...state }
 
             delete items.dados.inside[semana][dia][intervalo][atividade]
+            delete items.dados.hash[atividade][semana][dia][intervalo]
 
         })),
 
@@ -36,8 +47,6 @@ export const gerenciamentoStorage = (set) => ({
             if (state.dados.inside[toWeek]?.[toDay]?.[toInterval]?.[atividade]) return
 
             const items = { ...state }
-
-            const removed = items.dados.inside[fromWeek][fromDay][fromInterval][atividade]
 
             items.dados.inside =
             {
@@ -57,7 +66,19 @@ export const gerenciamentoStorage = (set) => ({
                 }
             }
 
+            items.dados.hash[atividade] = {
+                ...state.dados.hash[atividade],
+                [toWeek]: {
+                    ...state.dados.hash[atividade]?.[toWeek],
+                    [toDay]: {
+                        ...state.dados.hash[atividade]?.[toWeek]?.[toDay],
+                        [toInterval]: true
+                    }
+                }
+            }
+
             delete items.dados.inside[fromWeek][fromDay][fromInterval][atividade]
+            delete items.dados.hash[atividade][fromWeek][fromDay][fromInterval]
         }))
     }
 

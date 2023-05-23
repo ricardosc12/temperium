@@ -42,7 +42,7 @@ const Atividade = ({ id, title, children, icon, label, tags, tagsMap, ...props }
     )
 }
 
-export function CardAtividade({ id, title, atividades, atividade_description, tag, custom, tagsMap, ...props }) {
+export function CardAtividade({ id, title, atividades, atividade_description, tag, custom, tagsMap, hash, ...props }) {
 
     const [open, setOpen] = createSignal(true)
     const collapse = () => setOpen(prev => !prev)
@@ -56,21 +56,22 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
     })
 
     async function menu(e, atividadeId, index) {
-        console.log(atividadeId)
         e.stopPropagation()
         if (!custom) return
         const menu_resp = await createMenu(e, MenuAtividade)
         if (menu_resp == "excluir") {
             batch(() => {
                 console.time('removing')
-                document.querySelectorAll(`[id="${id}"]`).forEach(el => {
-                    const [id, data] = el.getAttribute('data-drag').split('::')
-                    if (atividadeId && id != atividadeId) return;
-                    removeInside({
-                        atividade: id,
-                        from: data.split(/week:|dia:|interval:/).filter(Boolean)
-                    })
-                })
+                for (let semana in hash[atividadeId]) {
+                    for (let dia in hash[atividadeId][semana]) {
+                        for (let interval in hash[atividadeId][semana][dia]) {
+                            removeInside({
+                                atividade: atividadeId,
+                                from: [semana,dia,interval]
+                            })
+                        }
+                    }
+                }
                 removeTarefa(id, atividadeId)
                 console.timeEnd('removing')
             })

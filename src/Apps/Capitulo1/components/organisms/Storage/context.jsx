@@ -16,6 +16,7 @@ export function StorageProvider(props) {
             disciplinas: disciplinasStorage().disciplinas,
             tarefas: atividadesStorage().tarefas,
             inside: gerenciamentoStorage().inside,
+            hash: gerenciamentoStorage().hash,
             tags: tagsStorage().tags,
         }
     });
