@@ -9,7 +9,7 @@ import Footer from './components/molecules/Footer';
 
 export default function Cap1(){
 	return (
-		<div className="main">
+		<div id='main' className="main">
 			<Tour/>
 			<Header/>
 			<MainApp/>

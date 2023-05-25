@@ -15,7 +15,7 @@ const Draggable = (props) => {
                     {(tag) => <div className='tag-sm color-black-fundo' style={{
                         background: props.tags()[tag.id] ? props.tags()[tag.id].color : tag.color
                     }}
-                    >{props.tags()[tag.id] ? props.tags()[tag.id].title  : tag.title}
+                    >{props.tags()[tag.id] ? props.tags()[tag.id].title : tag.title}
                     </div>}
                 </For>
             </div>
@@ -105,7 +105,6 @@ export default function Main(props) {
             <SemanalSelector semanas={semanas} week={week} dados={dados} handleWeek={handleWeek} />
             <h3 id="loading-week" className='color-black-fundo'></h3>
             <div className={`black-scroll ${style.table}`}>
-
                 <For each={semanas}>
                     {(semana) => (
                         <Show when={semana == week()}>
