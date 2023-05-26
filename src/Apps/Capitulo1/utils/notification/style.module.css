@@ -3,8 +3,8 @@
     position: absolute;
     min-width: 100px;
     min-height: 41px;
-    left: 75px;
-    top: 66px;
+    left: 116px;
+    bottom: 144px;
     z-index: 9999;
     animation: notify-anime 300ms;
 }
@@ -55,7 +55,7 @@
     height: 100%;
     border-radius: 100px;
     background-color: var(--white-fundo);
-    animation: progress-anime 2200ms linear;
+    animation: progress-anime var(--timer) linear;
 }
 
 @keyframes progress-anime {

@@ -8,6 +8,7 @@ import { useStorage } from "../../../Storage/context"
 import Select from "@/Apps/Capitulo1/components/atoms/Select"
 import ListaAtividades from "./ListaAtividades"
 import { loadButton } from "@/Apps/Capitulo1/components/hooks/Button/load"
+import { notify } from "@/Apps/Capitulo1/utils/notification/notification"
 
 function Modal(props) {
 
@@ -91,7 +92,13 @@ function Modal(props) {
         const stop = loadButton('btn-create-task')
         setTimeout(() => {
             let values = submit()
+            if(!values.title) {
+                notify("Campos obrigatórios não preenchidos !")
+                stop()
+                return
+            }
             if (!state().atividades.length) {
+                notify("Adicione pelo menos uma sub-atividade !")
                 stop()
                 return
             }
@@ -151,7 +158,7 @@ function Modal(props) {
                         <Select required id="tag" label="Tag" options={dados.tags.primary} />
                     </div>
                     <div className="textarea w-full">
-                        <textarea required placeholder=" " className="w-full" id="atividade_description" rows="2" />
+                        <textarea placeholder=" " className="w-full" id="atividade_description" rows="2" />
                         <p>Descrição</p>
                     </div>
                 </div>

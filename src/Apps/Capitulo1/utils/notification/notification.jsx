@@ -4,6 +4,7 @@ import { render } from 'solid-js/web'
 import { IconExclamation } from '../../assets/Icons';
 
 let timer;
+let time = 3000;
 
 function NotifyComponent({ message, icon }) {
 
@@ -15,7 +16,7 @@ function NotifyComponent({ message, icon }) {
         document.getElementById('tp-notify-progress')?.classList.remove(style.stop)
         timer = setTimeout(() => {
             document.getElementById('tp-notify')?.remove()
-        }, 2200);
+        }, time);
     }
 
     function stopTime() {
@@ -47,12 +48,13 @@ export function notify(message, type) {
     const new_notify = document.createElement('div')
     new_notify.className = style.container_notify
     new_notify.id = 'tp-notify'
+    new_notify.style.setProperty('--timer', time + 'ms');
 
     createRoot(() => {
         render(() => <NotifyComponent message={message} />, new_notify)
     })
 
-    document.getElementById('main').appendChild(new_notify)
+    document.body.appendChild(new_notify)
 
     console.log('notify')
 }
