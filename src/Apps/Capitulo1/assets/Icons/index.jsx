@@ -45,6 +45,18 @@ export const TrashIcon = ({ ...props }) => {
     )
 }
 
+export function IconEventRepeat(props) {
+    return (
+        <svg className="icon-svg-sx" width="32" height="32" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M5 22q-.825 0-1.413-.588T3 20V6q0-.825.588-1.413T5 4h1V3q0-.425.288-.713T7 2q.425 0 .713.288T8 3v1h8V3q0-.425.288-.713T17 2q.425 0 .713.288T18 3v1h1q.825 0 1.413.588T21 6v5q0 .425-.288.713T20 12q-.425 0-.713-.288T19 11v-1H5v10h6q.425 0 .713.288T12 21q0 .425-.288.713T11 22H5Zm14 2q-1.6 0-2.863-.888T14.325 20.8q-.125-.275.063-.537t.487-.263q.35 0 .638.213t.462.537q.45.8 1.25 1.275T19 22.5q1.45 0 2.475-1.025T22.5 19q0-1.45-1.025-2.475T19 15.5q-.725 0-1.35.262t-1.1.738h.7q.325 0 .537.213t.213.537q0 .325-.213.537T17.25 18H15q-.425 0-.713-.288T14 17v-2.25q0-.325.213-.537T14.75 14q.325 0 .537.213t.213.537v.675q.675-.65 1.575-1.038T19 14q2.075 0 3.538 1.463T24 19q0 2.075-1.463 3.538T19 24ZM5 8h14V6H5v2Zm0 0V6v2Z"></path></svg>
+    )
+}
+
+export function IconClone(props) {
+    return (
+      <svg className="icon-svg-sx" width="32" height="32" viewBox="0 0 36 36" {...props}><path fill="currentColor" d="M24 10V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4V12a2 2 0 0 1 2-2Z" className="clr-i-solid clr-i-solid-path-1"></path><path fill="currentColor" d="M30 12H14a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V14a2 2 0 0 0-2-2Zm-2 11h-5v5h-2v-5h-5v-2h5v-5h2v5h5Z" className="clr-i-solid clr-i-solid-path-2"></path><path fill="none" d="M0 0h36v36H0z"></path></svg>
+    )
+  }
+
 export const PenIcon = ({ ...props }) => {
     return <svg className="icon-svg-sx" width="32" height="32" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z" /></svg>
 }
@@ -62,11 +74,11 @@ export const LoadingIcon = ({ ...props }) => {
 }
 
 export const LoadingBaseIcon = ({ ...props }) => {
-    return <svg width="32" height="32" viewBox="0 0 24 24" { ...props }><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 15a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Zm10-5a1 1 0 0 1-1 1h-3a1 1 0 1 1 0-2h3a1 1 0 0 1 1 1ZM7 12a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h3a1 1 0 0 1 1 1Zm12.071 7.071a1 1 0 0 1-1.414 0l-2.121-2.121a1 1 0 0 1 1.414-1.414l2.121 2.12a1 1 0 0 1 0 1.415ZM8.464 8.464a1 1 0 0 1-1.414 0l-2.12-2.12a1 1 0 0 1 1.414-1.415l2.12 2.121a1 1 0 0 1 0 1.414ZM4.93 19.071a1 1 0 0 1 0-1.414l2.121-2.121a1 1 0 0 1 1.414 1.414l-2.12 2.121a1 1 0 0 1-1.415 0ZM15.536 8.464a1 1 0 0 1 0-1.414l2.12-2.121a1 1 0 1 1 1.415 1.414L16.95 8.464a1 1 0 0 1-1.414 0Z"/></svg>
+    return <svg width="32" height="32" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 15a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Zm10-5a1 1 0 0 1-1 1h-3a1 1 0 1 1 0-2h3a1 1 0 0 1 1 1ZM7 12a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h3a1 1 0 0 1 1 1Zm12.071 7.071a1 1 0 0 1-1.414 0l-2.121-2.121a1 1 0 0 1 1.414-1.414l2.121 2.12a1 1 0 0 1 0 1.415ZM8.464 8.464a1 1 0 0 1-1.414 0l-2.12-2.12a1 1 0 0 1 1.414-1.415l2.12 2.121a1 1 0 0 1 0 1.414ZM4.93 19.071a1 1 0 0 1 0-1.414l2.121-2.121a1 1 0 0 1 1.414 1.414l-2.12 2.121a1 1 0 0 1-1.415 0ZM15.536 8.464a1 1 0 0 1 0-1.414l2.12-2.121a1 1 0 1 1 1.415 1.414L16.95 8.464a1 1 0 0 1-1.414 0Z" /></svg>
 }
 
 export function IconExclamation(props) {
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" {...props}><path fill="currentColor" d="M7.002 11a1 1 0 1 1 2 0a1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0L7.1 4.995z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" {...props}><path fill="currentColor" d="M7.002 11a1 1 0 1 1 2 0a1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0L7.1 4.995z"></path></svg>
     )
-  }
+}

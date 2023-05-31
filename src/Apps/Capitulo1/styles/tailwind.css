@@ -96,6 +96,7 @@
 	
 	.btn-base.white {
 		@apply hover:bg-white-fundo;
+		color: var(--black-fundo) !important;
 		background: var(--white-fundo);
 	}
 	.btn-base.white > p {

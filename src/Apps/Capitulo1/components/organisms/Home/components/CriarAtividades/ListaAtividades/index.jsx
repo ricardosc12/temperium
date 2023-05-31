@@ -5,8 +5,6 @@ import style from './style.module.css'
 
 export default function ListaAtividades(props) {
 
-    let refModal;
-
     const close = () => {
         closeModal(props.modalId)
     }
@@ -25,7 +23,7 @@ export default function ListaAtividades(props) {
     }
 
     return (
-        <div ref={refModal} className="modal">
+        <div className="modal">
             <HeaderModal id={props.modalId} title={"Sub-Atividades adicionadas"} />
             <div className={style.content_atividades}>
                 <h4 className="color-text-secondary">

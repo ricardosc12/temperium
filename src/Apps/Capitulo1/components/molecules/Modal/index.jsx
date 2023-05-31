@@ -39,6 +39,7 @@ export function createModal(Component, props = {}) {
 
     const [state, setState] = createSignal(false);
     let propsComponent = { ...props?.props };
+    
     const open = (props) => {
         if (props) propsComponent = { ...propsComponent, ...props }
         setState(true)
@@ -48,7 +49,7 @@ export function createModal(Component, props = {}) {
         setState(false)
     };
 
-    <Modal id={props.id} open={state} close={close} closeOnBlur={props.closeOnBlur}>{() => <Component {...propsComponent} />}</Modal>
+    <Modal id={props.id || propsComponent.id} open={state} close={close} closeOnBlur={props.closeOnBlur}>{() => <Component {...propsComponent} />}</Modal>
 
     return { open, close, state }
 }
