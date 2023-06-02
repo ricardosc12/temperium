@@ -8,6 +8,7 @@ import { createMenu } from '@/Apps/Capitulo1/components/hooks/Menu';
 import { MenuAtividadeInside } from '@/Apps/Capitulo1/components/hooks/Menu/atividades_inside_menu';
 import { createModal } from '@/Apps/Capitulo1/components/molecules/Modal';
 import ModalRecorrencia from '../Modais/recorrency';
+import { horarios, semanas, dias } from '../../../Storage/context';
 
 const Draggable = (props) => {
     const atividade = createMemo(() => props.atividades().get(props.id))
@@ -55,10 +56,6 @@ export default function Main(props) {
 
     const { dados, dispatch: { addInside, removeInside } } = useStorage()
 
-    const semanas = [
-        'semana1', 'semana2', 'semana3', 'semana4', 'semana5'
-    ]
-
     const [week, setWeek] = createSignal(semanas[0])
 
     function handleWeek(e) {
@@ -75,23 +72,10 @@ export default function Main(props) {
         return () => `week:${week}dia:${dia}interval:${interval}`
     }
 
-    const lines = [
-        ',..', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
-        '13:00', '14:00', '15:00', '16:00', '17:00', '18:30', '19:20',
-        '20:30', '21:20', '22:10', '..,'
-    ];
-    // '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18:30', '19:20', '20:30', '21:20'
-    const col = [
-        "dom", "seg", "ter", "qua", "qui", "sex", "sab"
-    ];
-
     const { open: openRecurrence } = createModal(ModalRecorrencia, {
         id: 'modal-recurrence',
         props: {
             modalId: 'modal-recurrence',
-            intervalos: lines,
-            dias: col,
-            semanas: semanas
         }
     })
 
@@ -113,8 +97,8 @@ export default function Main(props) {
     //     setTimeout(() => {
     //         batch(() => {
     //             semanas.forEach(semana => {
-    //                 lines.forEach(interval => {
-    //                     col.forEach(col => {
+    //                 horarios.forEach(interval => {
+    //                     dias.forEach(col => {
     //                         addInside({ atividade: "d84fc4d3-60b5-4ff8-b3c0-b87bcddbdf3f", drop: [semana, col, interval] })
     //                         addInside({ atividade: "9a6d0ee9-1b19-4215-8c3f-74aa0de58e83", drop: [semana, col, interval] })
     //                         addInside({ atividade: "eacf538e-01e0-4d96-8dc7-06e2924ffe9f", drop: [semana, col, interval] })
@@ -140,17 +124,17 @@ export default function Main(props) {
                                 <table className={style.root_table}>
                                     <tbody>
                                         <tr>
-                                            <For each={Array(col.length + 1)}>
+                                            <For each={Array(dias.length + 1)}>
                                                 {(_, index) => (
-                                                    <td>{`${index() != 0 ? col[index() - 1] : ''}`}</td>
+                                                    <td>{`${index() != 0 ? dias[index() - 1] : ''}`}</td>
                                                 )}
                                             </For>
                                         </tr>
-                                        <For each={lines}>
+                                        <For each={horarios}>
                                             {(interval) => (
                                                 <tr>
                                                     <td><p className='color-black-destaq text-xs text-center'>{interval}</p></td>
-                                                    <For each={col}>
+                                                    <For each={dias}>
                                                         {(dia) => (
                                                             <td>
                                                                 <DroppableArea menu={menu} tags={props.tags} id={id(semana, dia, interval)} dia={dia}

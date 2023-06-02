@@ -4,6 +4,8 @@ import { CardAtividade } from './Card';
 import { createEffect, createMemo, createSignal, For } from 'solid-js';
 import CreateAtividades from '../CriarAtividades';
 import { useStorage } from '../../../Storage/context';
+import ModalRecorrencia from '../Modais/recorrency';
+import { createModal } from '@/Apps/Capitulo1/components/molecules/Modal';
 
 export default function Atividades({tags}) {
 
@@ -39,6 +41,13 @@ export default function Atividades({tags}) {
         ref.classList.add('translate-x-96')
     }
 
+    const { open: openRecurrence } = createModal(ModalRecorrencia, {
+        id: 'modal-recurrence',
+        props: {
+            modalId: 'modal-recurrence',
+        }
+    })
+
     return (
         <>
             <div className={`${style.button_colapse} ${open() ? style.colapse : ''}`}>
@@ -62,7 +71,7 @@ export default function Atividades({tags}) {
                 </div>
                 <div className={style.atividades_list}>
                     <For each={[...dados.disciplinas, ...dados.tarefas]}>
-                        {(item) => <CardAtividade hash={dados.hash} tagsMap={tags} {...item} />}
+                        {(item) => <CardAtividade openRecurrence={openRecurrence} hash={dados.hash} tagsMap={tags} {...item} />}
                     </For>
                 </div>
             </div>

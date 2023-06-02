@@ -42,7 +42,7 @@ const Atividade = ({ id, title, children, icon, label, tags, tagsMap, ...props }
     )
 }
 
-export function CardAtividade({ id, title, atividades, atividade_description, tag, custom, tagsMap, hash, ...props }) {
+export function CardAtividade({ id, title, atividades, atividade_description, tag, custom, tagsMap, hash, openRecurrence, ...props }) {
 
     const [open, setOpen] = createSignal(true)
     const collapse = () => setOpen(prev => !prev)
@@ -67,7 +67,7 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
                         for (let interval in hash[atividadeId][semana][dia]) {
                             removeInside({
                                 atividade: atividadeId,
-                                from: [semana,dia,interval]
+                                from: [semana, dia, interval]
                             })
                         }
                     }
@@ -81,6 +81,10 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
             openModal("modal-create-atividade", {
                 id, indexAtividade: index, title, atividades: [...atividades], atividade_description, tag, custom, ...props
             })
+        }
+        else if (menu_resp == "repeat") {
+            const atividade = atividades.find(item=>item.id==atividadeId)
+            openRecurrence(atividade)
         }
     }
 

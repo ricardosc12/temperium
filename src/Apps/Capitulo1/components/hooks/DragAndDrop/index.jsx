@@ -7,11 +7,11 @@ const DragAndDrop = (props) => {
     let counter = 0;
 
     function handleStart(e) {
-        console.time('dragstart')
+        // console.time('dragstart')
         e.dataTransfer.setDragImage(e.target, 0, 0);
         actual_element = e.target
         props.onDragStart(e.target.getAttribute('data-drag'))
-        console.timeEnd('dragstart')
+        // console.timeEnd('dragstart')
     }
 
     function handleDragEnd() {
@@ -45,7 +45,7 @@ const DragAndDrop = (props) => {
     }
 
     function handleLeave(e) {
-        console.time('ondragleave')
+        // console.time('ondragleave')
         const droppable = e.target.closest('[name="droppable"]')
         if (droppable) {
             auxCount--;
@@ -62,11 +62,11 @@ const DragAndDrop = (props) => {
                 })
             }
         }
-        console.timeEnd('ondragleave')
+        // console.timeEnd('ondragleave')
     }
 
     function handleEnter(e) {
-        console.time('ondragenter')
+        // console.time('ondragenter')
         const droppable = e.target.closest('[name="droppable"]')
         if (droppable) {
             auxCount++;
@@ -85,7 +85,7 @@ const DragAndDrop = (props) => {
                 )
             }
         }
-        console.timeEnd('ondragenter')
+        // console.timeEnd('ondragenter')
     }
 
 
@@ -101,7 +101,7 @@ const DragAndDrop = (props) => {
 
     createEffect(() => {
         setTimeout(() => {
-            console.time('onmount')
+            // console.time('onmount')
             // const droppable = document.getElementsByName('droppable')
             document.addEventListener("dragstart", handleStart, false)
             document.addEventListener("drop", handleDrop, false)
@@ -110,7 +110,7 @@ const DragAndDrop = (props) => {
 
             document.addEventListener('dragend', handleDragEnd, false)
             document.addEventListener('dragover', handleDragOver, false)
-            console.timeEnd('onmount')
+            // console.timeEnd('onmount')
             // for (const dropper of droppable) {
             //     dropper.ondragleave = (e) => {
             //         counter--;

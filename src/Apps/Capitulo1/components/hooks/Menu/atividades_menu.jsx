@@ -1,4 +1,4 @@
-import { TrashIcon, PenIcon } from "@/Apps/Capitulo1/assets/Icons";
+import { TrashIcon, PenIcon, IconClone } from "@/Apps/Capitulo1/assets/Icons";
 
 
 export function MenuAtividade() {
@@ -11,6 +11,10 @@ export function MenuAtividade() {
             <div id="editar">
                 <PenIcon/>
                 <p>Editar</p>
+            </div>
+            <div id="repeat">
+                <IconClone />
+                <p>Múltiplos</p>
             </div>
         </>
     )

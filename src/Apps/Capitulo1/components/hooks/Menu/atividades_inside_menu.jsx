@@ -10,7 +10,7 @@ export function MenuAtividadeInside() {
             </div>
             <div id="repeat">
                 <IconClone />
-                <p>Clonar</p>
+                <p>Múltiplos</p>
             </div>
         </>
     )

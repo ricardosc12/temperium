@@ -20,6 +20,7 @@ export function StorageProvider(props) {
             tags: tagsStorage().tags,
         }
     });
+
     const counter = {
         dados: state.dados,
         dispatch: {
@@ -52,3 +53,17 @@ export function StorageProvider(props) {
         </CounterContext.Provider>
     );
 }
+
+export const horarios = [
+    ',..', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
+    '13:00', '14:00', '15:00', '16:00', '17:00', '18:30', '19:20',
+    '20:30', '21:20', '22:10', '..,'
+];
+
+export const dias = [
+    "dom", "seg", "ter", "qua", "qui", "sex", "sab"
+];
+
+export const semanas = [
+    'semana1', 'semana2', 'semana3', 'semana4', 'semana5', 'semana6', 'semana7', 'semana8'
+]

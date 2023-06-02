@@ -3,15 +3,54 @@ import { HeaderModal } from "@/Apps/Capitulo1/components/molecules/Modal";
 import { notify } from "@/Apps/Capitulo1/utils/notification/notification";
 import style from './style.module.css'
 import { useStorage } from "../../../Storage/context";
-import { batch } from "solid-js";
+import { batch, createEffect, createSignal, onMount } from "solid-js";
+import { dias, horarios, semanas } from "../../../Storage/context";
 
 export default function ModalRecorrencia(props) {
 
-    const { dispatch: { addInside } } = useStorage()
+    const { dados, dispatch: { addInside, removeInside } } = useStorage()
 
-    console.log(props)
+    const [inBoard, setInBoard] = createSignal({
+        semanas: {},
+        dias: {},
+        horarios: {}
+    })
+
+    createEffect(() => {
+        console.time('mount board')
+        try {
+            const state = {
+                semanas: {},
+                dias: {},
+                horarios: {}
+            }
+
+            Object.entries(dados.hash[props.id]).forEach(([semana, dias]) => {
+                if(Object.keys(dias).length==0) return
+                Object.entries(dias).forEach(([dia, horarios]) => {
+                    if(Object.keys(horarios).length==0) return
+                    Object.keys(horarios).forEach(horario => {
+                        state['horarios'][horario] = true
+                        state['semanas'][semana] = true
+                        state['dias'][dia] = true
+                    })
+                })
+            })
+
+            setInBoard(state)
+        }
+        catch {
+            console.error("Erro ao obter informação de ativos.")
+        }
+
+        console.timeEnd('mount board')
+
+    })
 
     function handleSave() {
+
+        console.time('save board')
+
         const weeks = Array.from(document.getElementsByName("week-check"))?.map(el => {
             if (el.checked) return el.id
         }).filter(item => item) || []
@@ -24,20 +63,53 @@ export default function ModalRecorrencia(props) {
             if (el.checked) return el.id
         }).filter(item => item) || []
 
-        if (!weeks.length || !days.length || !intervals.length) {
-            notify("Selecione cada intervalo: Semana, Dia, Horário")
-            return
-        }
-
         const combinations = []
 
         intervals.forEach(interval => {
             days.forEach(day => {
                 weeks.forEach(week => {
+                    if (inBoard()['horarios'][interval]
+                        && inBoard()['dias'][day]
+                        && inBoard()['semanas'][week]) return
                     combinations.push([week, day, interval])
                 })
             })
         })
+
+        const toRemove = []
+        const weekR = inBoard()['semanas']
+        const dayR = inBoard()['dias']
+        const intervalR = inBoard()['horarios']
+
+        for (const semana in weekR) {
+            if (!weeks.includes(semana)) {
+                for (const day in dayR) {
+                    for (const horario in intervalR) {
+                        toRemove.push([semana, day, horario])
+                    }
+                }
+            }
+        }
+
+        for (const day in dayR) {
+            if (!days.includes(day)) {
+                for (const semana in weekR) {
+                    for (const horario in intervalR) {
+                        toRemove.push([semana, day, horario])
+                    }
+                }
+            }
+        }
+
+        for (const horario in intervalR) {
+            if (!intervals.includes(horario)) {
+                for (const day in dayR) {
+                    for (const semana in weekR) {
+                        toRemove.push([semana, day, horario])
+                    }
+                }
+            }
+        }
 
         batch(() => {
             combinations.forEach(drop => {
@@ -46,7 +118,16 @@ export default function ModalRecorrencia(props) {
                     drop: drop
                 })
             })
+
+            toRemove.forEach(drop => {
+                removeInside({
+                    atividade: props.id,
+                    from: drop
+                })
+            })
         })
+
+        console.timeEnd('save board')
     }
 
     function checkAll(e, name) {
@@ -90,10 +171,10 @@ export default function ModalRecorrencia(props) {
                     </label>
                 </div>
                 <div className={style.check_item}>
-                    <For each={props.semanas}>
+                    <For each={semanas}>
                         {(week) => (
                             <label>
-                                <input name="week-check" id={week} type="checkbox" placeholder="" />
+                                <input checked={inBoard()['semanas'][week]} name="week-check" id={week} type="checkbox" placeholder="" />
                                 <p>{week}</p>
                             </label>
                         )}
@@ -107,10 +188,10 @@ export default function ModalRecorrencia(props) {
                     </label>
                 </div>
                 <div className={style.check_item}>
-                    <For each={props.dias}>
+                    <For each={dias}>
                         {(day) => (
                             <label>
-                                <input name="day-check" id={day} type="checkbox" placeholder="" />
+                                <input checked={inBoard()['dias'][day]} name="day-check" id={day} type="checkbox" placeholder="" />
                                 <p>{day}</p>
                             </label>
                         )}
@@ -124,10 +205,10 @@ export default function ModalRecorrencia(props) {
                     </label>
                 </div>
                 <div className={style.check_item}>
-                    <For each={props.intervalos}>
+                    <For each={horarios}>
                         {(interval) => (
                             <label>
-                                <input name="interval-check" id={interval} type="checkbox" placeholder="" />
+                                <input checked={inBoard()['horarios'][interval]} name="interval-check" id={interval} type="checkbox" placeholder="" />
                                 <p>{interval}</p>
                             </label>
                         )}
