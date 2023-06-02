@@ -1,3 +1,7 @@
+.modal {
+    width: 545px;
+}
+
 .content {
     display: flex;
     flex-direction: column;

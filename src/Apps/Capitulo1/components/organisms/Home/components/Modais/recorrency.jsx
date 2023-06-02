@@ -140,7 +140,7 @@ export default function ModalRecorrencia(props) {
     }
 
     return (
-        <div className="modal w-96">
+        <div className={`modal ${style.modal}`}>
             <HeaderModal id={props.modalId} title={"Clonar atividade"} />
             <div className="px-2">
                 <h4 className="color-text-secondary">
@@ -215,10 +215,10 @@ export default function ModalRecorrencia(props) {
                     </For>
                 </div>
             </div>
-            <div className="flex w-full justify-end mt-3">
+            <div className="flex w-full justify-end mt-3 mb-2 pr-2">
                 <button className="btn-sm white" onClick={handleSave}>
                     <IconClone className="icon-svg-sx color-black-fundo" />
-                    <p className="font-medium">Clonar</p>
+                    <p className="font-medium">Salvar</p>
                 </button>
             </div>
         </div>
