@@ -157,12 +157,3 @@ export default function Main(props) {
         </div>
     )
 }
-
-const Teste = ({ week }) => {
-
-    createEffect(() => {
-        console.log(week())
-    })
-
-    return <div>{week()}</div>
-}

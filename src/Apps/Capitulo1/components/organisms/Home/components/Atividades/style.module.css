@@ -2,7 +2,7 @@
     display: flex;
     position: absolute;
     flex-direction: column;
-    top: 21px;
+    top: 24px;
     width: 350px;
     height: calc(100% - 21px);
     right: 0;

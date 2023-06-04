@@ -18,7 +18,7 @@ export default function MainApp() {
 					<Sidebar setRoute={setRoute} />
 
 					<div className={style.main_content}>
-						<Switch fallback={<div>Not Found</div>}>
+						<Switch fallback={()=><div>Not Found</div>}>
 
 							<Match when={route() === 'home'}>
 								<HomePage />
