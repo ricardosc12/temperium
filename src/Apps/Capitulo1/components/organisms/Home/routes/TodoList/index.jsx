@@ -15,3 +15,6 @@ export default function TodoListRoute() {
         </div>
     )
 }
+
+// Deixar com que cada item do inside tenha um status, e controlar o todo com base nisso.
+// Deixar o status na atividade gera problemas
