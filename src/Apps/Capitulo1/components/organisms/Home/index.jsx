@@ -1,174 +1,27 @@
-import Atividades from "./components/Atividades"
-import Main from "./components/Main"
+import DashboardMode from "./routes/Dashboard";
+import TodoListRoute from "./routes/TodoList";
 import style from './style.module.css'
-import { createEffect, createMemo, createSignal, on, onMount } from "solid-js";
-
-import { DragAndDrop } from "../../hooks/DragAndDrop";
-
-import { useStorage } from "../Storage/context";
-import { untrack } from "solid-js/web";
-import { CheckIcon } from "@/Apps/Capitulo1/assets/Icons";
-import { loadButton } from "../../hooks/Button/load";
+import { Switch, Match, createSignal } from "solid-js";
 
 export default function HomePage() {
 
-    const { dispatch: { addInside, removeInside, transferSide }, dados } = useStorage()
+    const [mode, setMode] = createSignal('dashboard')
 
-    // const [atividades, setAtividades] = createSignal(new Map(), { equals: false })
-    const [mapTarefas, setMapTarefas] = createSignal(new Map())
-    const [mapDisciplinas, setMapDisciplinas] = createSignal(new Map())
-
-    const atividades = createMemo(() => {
-        const newMap = mapDisciplinas()
-        const disciplinas = mapTarefas()
-        newMap.forEach((value, key) => {
-            disciplinas.set(key, value)
-        })
-        console.log(disciplinas)
-        return disciplinas
-    })
-
-    const tags = createMemo(()=>{
-        const iter = JSON.parse(JSON.stringify(dados.tags))
-        const tags = {}
-        iter.primary.forEach(tag=>{
-            tags[tag.id] = tag
-        })
-        iter.secondary.forEach(tag=>{
-            tags[tag.id] = tag
-        })
-        return tags
-    })
-
-    createEffect(() => {
-        console.time('mapping disciplinhas')
-        const disciplinas = JSON.parse(JSON.stringify(dados.disciplinas))
-        untrack(() => {
-            const atividades = new Map()
-            disciplinas.forEach((item, index) => {
-                atividades.set(item.id, item)
-                item.atividades.forEach((atividade, _) => {
-                    atividades.set(atividade.id, atividade)
-                })
-            });
-            setMapDisciplinas(atividades)
-        })
-
-        console.timeEnd('mapping disciplinhas')
-    })
-
-    createEffect(() => {
-        console.time('mapping atividades')
-        const tarefas = JSON.parse(JSON.stringify(dados.tarefas))
-        untrack(() => {
-            const atividades = new Map()
-            tarefas.forEach((item, index) => {
-                atividades.set(item.id, item)
-                item.atividades.forEach((atividade, _) => {
-                    atividades.set(atividade.id, atividade)
-                })
-            });
-            setMapTarefas(atividades)
-        })
-        console.timeEnd('mapping atividades')
-    })
-
-    const [atual, setAtual] = createSignal(null)
-
-    let shift = false;
-
-    const keyDown = (e) => {
-        if (e.key == "Shift") shift = true;
-    }
-
-    const keyUp = (e) => {
-        if (e.key == "Shift") shift = false;
-    }
-
-    const onDragEnd = ({ droppable, draggable }) => {
-        setTimeout(() => {
-            document.getElementById('lateralbar-atividades').colapse(false)
-        })
-        if (!draggable) return
-        setAtual(null)
-        if (current_node) current_node.style['box-shadow'] = "none"
-        if (droppable.el) {
-            const [atividadeId, drop] = draggable.data.split('::')
-            const { id } = atividades().get(atividadeId)
-
-            const [toWeek, toDay, toInterval] = droppable.data.split(/week:|dia:|interval:/).filter(Boolean)
-            const [fromWeek, fromDay, fromInterval] = drop?.split(/week:|dia:|interval:/).filter(Boolean) || [false, false, false]
-
-            if (drop && shift == false && (toWeek != fromWeek || toDay != fromDay || toInterval != fromInterval)) {
-                transferSide({
-                    atividade: id,
-                    to: [toWeek, toDay, toInterval],
-                    from: [fromWeek, fromDay, fromInterval]
-                })
-            }
-            else if (!drop || (drop && shift)) {
-                addInside({ atividade: id, drop: [toWeek, toDay, toInterval] })
-            }
-        }
-
-        else {
-            const [atividadeId, drop] = draggable.data.split('::')
-            const { id } = atividades().get(atividadeId)
-            if (!drop) return
-            removeInside({
-                atividade: id,
-                from: drop.split(/week:|dia:|interval:/).filter(Boolean)
-            })
-        }
-    };
-
-    const onDragTerminate=()=>{
-        setTimeout(() => {
-            document.getElementById('lateralbar-atividades').colapse(false)
-        })
-    }
-
-    const onDragStart = ({ draggable }) => {
-        // setTimeout(() => {
-        document.getElementById('lateralbar-atividades').colapse(true)
-        // })
-        // const atividade = draggable.data.title
-        // setAtual(atividade)
-    }
-
-    let current_node;
-
-    const onDragOver = ({ draggable, droppable }) => {
-        if (droppable) {
-            if (current_node) current_node.style['box-shadow'] = "none"
-            droppable.el.style['box-shadow'] = "0px 0px 1px 1px var(--black-destaq)"
-            current_node = droppable.el
-        }
-    }
-
-    const onDragLeave = ({ droppable }) => {
-        if (current_node) current_node.style['box-shadow'] = "none"
-        droppable.el.style['box-shadow'] = "none"
-        current_node = null
-    }
 
     return (
-        <div tabindex="0" onKeyDown={keyDown} onKeyUp={keyUp} className={style.home}>
-            <DragAndDrop onDragTerminate={onDragTerminate} onDragLeave={onDragLeave} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragEnter={onDragOver}>
-                {/* <DragDropProvider onDragOver={onDragOver} onDragEnd={onDragEnd} onDragStart={onDragStart}> */}
-
-                {/* <DragDropSensors /> */}
-
-                <Main tags={tags} atividades={atividades} />
-
-                <Atividades tags={tags}/>
-
-                {/* <DragOverlay class={style.overlay}> */}
-                {/* {(draggable) => <div class={style.atividade_overlay}>{atual()}</div>} */}
-                {/* </DragOverlay> */}
-
-                {/* </DragDropProvider> */}
-            </DragAndDrop>
+        <div className={style.home}>
+            <div className="flex space-x-5">
+                <h3 onClick={()=>setMode('dashboard')} className="color-black-fundo cursor-pointer">Dashboard</h3>
+                <h3 onClick={()=>setMode('todolist')} className="color-black-fundo cursor-pointer">TodoList</h3>
+            </div>
+            <Switch fallback={() => <div>Loading...</div>}>
+                <Match when={mode() == 'dashboard'}>
+                    <DashboardMode />
+                </Match>
+                <Match when={mode() == "todolist"}>
+                    <TodoListRoute />
+                </Match>
+            </Switch>
         </div>
     )
 }
