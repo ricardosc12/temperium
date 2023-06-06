@@ -1,4 +1,4 @@
-import { createEffect, onCleanup } from "solid-js";
+import { createEffect, onCleanup, onMount } from "solid-js";
 
 const DragAndDrop = (props) => {
 
@@ -15,7 +15,7 @@ const DragAndDrop = (props) => {
     }
 
     function handleDragEnd() {
-        props.onDragTerminate&&props.onDragTerminate()
+        props.onDragTerminate && props.onDragTerminate()
         actual_element = null;
     }
 
@@ -24,10 +24,11 @@ const DragAndDrop = (props) => {
         e.preventDefault();
     }
 
-    const handleDrop = (e) => {
+    function handleDrop(e) {
         counter = 0;
         auxCount = 0;
         if (!actual_element) return
+        // console.time('ondragend')
         e.preventDefault()
         const dropper = e.target.closest("[name='droppable']")
         props.onDragEnd(
@@ -42,6 +43,7 @@ const DragAndDrop = (props) => {
                 },
             }
         )
+        // console.timeEnd('ondragend')
     }
 
     function handleLeave(e) {
@@ -90,68 +92,23 @@ const DragAndDrop = (props) => {
 
 
     onCleanup(() => {
-        document.removeEventListener("dragstart", handleStart, false)
-        document.removeEventListener('dragend', handleDragEnd, false)
-        document.removeEventListener('dragover', handleDragOver, false)
-        document.removeEventListener("dragenter", handleEnter, false)
-        document.removeEventListener("dragleave", handleLeave, false)
+        document.removeEventListener("dragstart", handleStart, true)
+        document.removeEventListener("drop", handleDrop, true)
+        document.removeEventListener("dragenter", handleEnter, true)
+        document.removeEventListener("dragleave", handleLeave, true)
+        document.removeEventListener('dragend', handleDragEnd, true)
+        document.removeEventListener('dragover', handleDragOver, true)
     })
 
     let auxCount = 0
 
-    createEffect(() => {
-        setTimeout(() => {
-            // console.time('onmount')
-            // const droppable = document.getElementsByName('droppable')
-            document.addEventListener("dragstart", handleStart, false)
-            document.addEventListener("drop", handleDrop, false)
-            document.addEventListener("dragenter", handleEnter, false)
-            document.addEventListener("dragleave", handleLeave, false)
-
-            document.addEventListener('dragend', handleDragEnd, false)
-            document.addEventListener('dragover', handleDragOver, false)
-            // console.timeEnd('onmount')
-            // for (const dropper of droppable) {
-            //     dropper.ondragleave = (e) => {
-            //         counter--;
-            //         if (counter == 0) {
-            //             console.time('ondragleave')
-            //             props.onDragLeave&&props.onDragLeave({
-            //                 draggable: {
-            //                     el: actual_element,
-            //                     data: actual_element.getAttribute('data-drag')
-            //                 },
-            //                 droppable: {
-            //                     el: dropper,
-            //                     data: dropper.getAttribute('data-drag')
-            //                 },
-            //             })
-            //             console.timeEnd('ondragleave')
-            //         }
-
-            //     }
-            //     dropper.ondragenter = (e) => {
-            //         counter++;
-            //         if (counter != 1) return
-            //         console.time('ondragenter')
-            //         props.onDragEnter&&props.onDragEnter(
-            //             {
-            //                 draggable: {
-            //                     el: actual_element,
-            //                     data: actual_element.getAttribute('data-drag')
-            //                 },
-            //                 droppable: {
-            //                     el: dropper,
-            //                     data: dropper.getAttribute('data-drag')
-            //                 },
-            //             }
-            //         )
-            //         console.timeEnd('ondragenter')
-            //     }
-            // }
-
-            // document.getElementById('loading').innerHTML = ""
-        })
+    onMount(() => {
+        document.addEventListener("dragstart", handleStart, true)
+        document.addEventListener("drop", handleDrop, true)
+        document.addEventListener("dragenter", handleEnter, true)
+        document.addEventListener("dragleave", handleLeave, true)
+        document.addEventListener('dragend', handleDragEnd, true)
+        document.addEventListener('dragover', handleDragOver, true)
     })
 
     return props.children
