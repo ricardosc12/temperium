@@ -26,7 +26,6 @@ export const createBacklog = (dados, mode) => {
 
     createEffect(() => {
         const atividades = dados.inside
-        console.log(atividades['semana1'])
         const list = {
             intodo: {},
             inprogress: {},
@@ -34,14 +33,14 @@ export const createBacklog = (dados, mode) => {
         }
         if (mode() == 'byweek') {
             if (!atividades[currWeek]) return
-            Object.values(atividades[currWeek]).forEach(days => {
-                Object.values(days).forEach(atvs => {
+            Object.entries(atividades[currWeek]).forEach(([currDay,days]) => {
+                Object.entries(days).forEach(([horario, atvs]) => {
                     Object.values(atvs).forEach(atv => {
                         if (atv.status) {
-                            list[atv.status][atv.id] = atv.id
+                            list[atv.status][atv.id] = {id: atv.id, inside: [currWeek, currDay, horario]}
                         }
                         else {
-                            list['intodo'][atv.id] = atv.id
+                            list['intodo'][atv.id] = {id: atv.id, inside: [currWeek, currDay, horario]}
                         }
 
                     })
@@ -52,13 +51,13 @@ export const createBacklog = (dados, mode) => {
 
         else {
             if (!atividades[currWeek]) return
-            Object.values(atividades[currWeek][currDay]).forEach(atvs => {
+            Object.entries(atividades[currWeek][currDay]).forEach(([horario, atvs]) => {
                 Object.values(atvs).forEach(atv => {
                     if (atv.status) {
-                        list[atv.status][atv.id] = atv.id
+                        list[atv.status][atv.id] = {id: atv.id, inside: [currWeek, currDay, horario]}
                     }
                     else {
-                        list['intodo'][atv.id] = atv.id
+                        list['intodo'][atv.id] = {id: atv.id, inside: [currWeek, currDay, horario]}
                     }
 
                 })
@@ -72,5 +71,5 @@ export const createBacklog = (dados, mode) => {
         })
     })
 
-    return backlog
+    return { backlog, day: currDay, week: currWeek }
 }

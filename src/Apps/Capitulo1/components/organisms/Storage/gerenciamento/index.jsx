@@ -17,6 +17,7 @@ export const gerenciamentoStorage = (set) => ({
                             [atividade]: {
                                 id: `${atividade}`,
                                 drop: `week:${semana}dia:${dia}interval:${intervalo}`,
+                                status: 'intodo'
                             }
                         }
                     }
@@ -59,7 +60,8 @@ export const gerenciamentoStorage = (set) => ({
                             ...items.dados.inside[toWeek]?.[toDay]?.[toInterval],
                             [atividade]: {
                                 id: `${atividade}`,
-                                drop: `week:${toWeek}dia:${toDay}interval:${toInterval}`
+                                drop: `week:${toWeek}dia:${toDay}interval:${toInterval}`,
+                                status: state.dados.inside[fromWeek]?.[fromDay]?.[fromInterval]?.[atividade]?.status || 'intodo'
                             }
                         }
                     }
@@ -79,7 +81,13 @@ export const gerenciamentoStorage = (set) => ({
 
             delete items.dados.inside[fromWeek][fromDay][fromInterval][atividade]
             delete items.dados.hash[atividade][fromWeek][fromDay][fromInterval]
-        }))
+        })),
+
+        changeStatus: ({ atividade, from: [semana, dia, intervalo], status }) => set(produce((state) => {
+
+            state.dados.inside[semana][dia][intervalo][atividade].status = status
+
+        })),
     }
 
 })
