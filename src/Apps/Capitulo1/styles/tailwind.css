@@ -190,6 +190,13 @@
 		padding-top: 4px;
 	}
 
+	.tag-md {
+		@apply tag;
+		font-size: 12px;
+		padding: 3px 10px;
+		padding-top: 4px;
+	}
+
 	.modal {
 		background-color: var(--black-fundo);
 		border-radius: 10px;

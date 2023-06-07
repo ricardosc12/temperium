@@ -1,9 +1,30 @@
 .root_header_todo {
     display: flex;
     position: relative;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 50px;
-    background-color: bisque;
+    padding: 0px 30px;
+}
+
+.bymode {
+    background-color: #e4e8ec;
+    padding: 2px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.bymode:hover {
+    box-shadow: 0px 4px 10px #e4e8ec;
+    transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.bymode[class*="active"]:hover {
+    box-shadow: 0px 4px 15px -5px var(--primary);
+    transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.bymode[class*="active"] {
+    color: white;
+    background-color: var(--primary);
 }

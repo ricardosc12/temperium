@@ -14,6 +14,7 @@
   --black-shadow: #171F2380;
   --disabled: #99a5aa;
   --disabled-white: #cecece;
+  --primary: rgba(100,87,249);
 }
 
 ::-webkit-scrollbar {

@@ -36,11 +36,14 @@ export const createBacklog = (dados, mode) => {
             Object.entries(atividades[currWeek]).forEach(([currDay,days]) => {
                 Object.entries(days).forEach(([horario, atvs]) => {
                     Object.values(atvs).forEach(atv => {
-                        if (atv.status) {
-                            list[atv.status][atv.id] = {id: atv.id, inside: [currWeek, currDay, horario]}
+                        if(list[atv.status][atv.id]) {
+                            list[atv.status][atv.id].inside.push([currWeek, currDay, horario])
+                        }
+                        else if (atv.status) {
+                            list[atv.status][atv.id] = {id: atv.id, inside: [[currWeek, currDay, horario]]}
                         }
                         else {
-                            list['intodo'][atv.id] = {id: atv.id, inside: [currWeek, currDay, horario]}
+                            list['intodo'][atv.id] = {id: atv.id, inside: [[currWeek, currDay, horario]]}
                         }
 
                     })
@@ -53,17 +56,19 @@ export const createBacklog = (dados, mode) => {
             if (!atividades[currWeek]) return
             Object.entries(atividades[currWeek][currDay]).forEach(([horario, atvs]) => {
                 Object.values(atvs).forEach(atv => {
-                    if (atv.status) {
-                        list[atv.status][atv.id] = {id: atv.id, inside: [currWeek, currDay, horario]}
+                    if(list[atv.status][atv.id]) {
+                        list[atv.status][atv.id].inside.push([currWeek, currDay, horario])
+                    }
+                    else if (atv.status) {
+                        list[atv.status][atv.id] = {id: atv.id, inside: [[currWeek, currDay, horario]]}
                     }
                     else {
-                        list['intodo'][atv.id] = {id: atv.id, inside: [currWeek, currDay, horario]}
+                        list['intodo'][atv.id] = {id: atv.id, inside: [[currWeek, currDay, horario]]}
                     }
 
                 })
             })
         }
-
         setBacklog({
             intodo: Object.values(list.intodo),
             inprogress: Object.values(list.inprogress),
