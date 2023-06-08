@@ -16,7 +16,6 @@ function currentDay() {
 export const createBacklog = (dados, mode) => {
 
     const currDay = currentDay()
-    const currWeek = 'semana1'
 
     const [backlog, setBacklog] = createSignal({
         intodo: [],
@@ -32,18 +31,18 @@ export const createBacklog = (dados, mode) => {
             indone: {}
         }
         if (mode() == 'byweek') {
-            if (atividades[currWeek]) {
-                Object.entries(atividades[currWeek]).forEach(([currDay, days]) => {
+            if (atividades[dados.week]) {
+                Object.entries(atividades[dados.week]).forEach(([currDay, days]) => {
                     Object.entries(days).forEach(([horario, atvs]) => {
                         Object.values(atvs).forEach(atv => {
                             if (list[atv.status][atv.id]) {
-                                list[atv.status][atv.id].inside.push([currWeek, currDay, horario])
+                                list[atv.status][atv.id].inside.push([dados.week, currDay, horario])
                             }
                             else if (atv.status) {
-                                list[atv.status][atv.id] = { id: atv.id, inside: [[currWeek, currDay, horario]] }
+                                list[atv.status][atv.id] = { id: atv.id, inside: [[dados.week, currDay, horario]] }
                             }
                             else {
-                                list['intodo'][atv.id] = { id: atv.id, inside: [[currWeek, currDay, horario]] }
+                                list['intodo'][atv.id] = { id: atv.id, inside: [[dados.week, currDay, horario]] }
                             }
 
                         })
@@ -53,17 +52,17 @@ export const createBacklog = (dados, mode) => {
         }
 
         else {
-            if (atividades[currWeek][currDay]) {
-                Object.entries(atividades[currWeek][currDay]).forEach(([horario, atvs]) => {
+            if (atividades[dados.week]?.[currDay]) {
+                Object.entries(atividades[dados.week][currDay]).forEach(([horario, atvs]) => {
                     Object.values(atvs).forEach(atv => {
                         if (list[atv.status][atv.id]) {
-                            list[atv.status][atv.id].inside.push([currWeek, currDay, horario])
+                            list[atv.status][atv.id].inside.push([dados.week, currDay, horario])
                         }
                         else if (atv.status) {
-                            list[atv.status][atv.id] = { id: atv.id, inside: [[currWeek, currDay, horario]] }
+                            list[atv.status][atv.id] = { id: atv.id, inside: [[dados.week, currDay, horario]] }
                         }
                         else {
-                            list['intodo'][atv.id] = { id: atv.id, inside: [[currWeek, currDay, horario]] }
+                            list['intodo'][atv.id] = { id: atv.id, inside: [[dados.week, currDay, horario]] }
                         }
 
                     })
@@ -77,5 +76,5 @@ export const createBacklog = (dados, mode) => {
         })
     })
 
-    return { backlog, day: currDay, week: currWeek }
+    return { backlog, day: currDay, week: dados.week }
 }
