@@ -1,8 +1,10 @@
 .root_main_todo {
     display: flex;
+    position: relative;
     flex-direction: column;
     width: 100%;
     flex: 1;
+    height: calc(100vh - 360px);
 }
 
 .item_list {
@@ -11,6 +13,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    height: 100%;
 }
 
 .item_list_title > h3 {
@@ -56,6 +59,8 @@
     margin: 0px 5px;
     border-radius: 0.375rem;
     z-index: 1;
+    max-height: calc(100% - 80px);
+    overflow-y: scroll;
 }
 
 .item_list_border {

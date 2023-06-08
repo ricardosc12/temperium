@@ -5,6 +5,8 @@ import { useStorage } from '@/Apps/Capitulo1/components/organisms/Storage/contex
 import { createAtividades } from '../../../../hooks/createAtividades'
 import { createBacklog } from './hooks/createBacklog'
 import { createBackgroundColor } from '@/Apps/Capitulo1/utils/color'
+import { createMenuWrapper } from '@/Apps/Capitulo1/components/hooks/MenuWrapper'
+import MenuTodo from '../Menus/todo_menu'
 
 function Card(props) {
     const atividade = props.atividades().get(props.id)
@@ -29,7 +31,7 @@ function Card(props) {
             <h5 className='mt-1'>{atividade.description}</h5>
             <div className='flex w-full items-center justify-between mt-2'>
                 <span>
-                    <h5>{props.inside[0].join(', ')} {props.inside.length>1?'...':''}</h5>
+                    <h5>{props.inside[0].join(', ')} {props.inside.length > 1 ? '...' : ''}</h5>
                 </span>
                 <span><h5>{props.inside.length}</h5></span>
             </div>
@@ -73,12 +75,28 @@ export default function MainTodo(props) {
         })
     }
 
-    function onDragEnd({ draggable, droppable }) {
+
+    async function onDragEnd({ draggable, droppable }) {
         const [id, from] = draggable.data.split('::')
         const status = droppable.data
         const to = backlog()[from].find(item => item.id == id)
 
         if (!to) return
+
+        if (to.inside.length > 1) {
+            const { x, y, width } = draggable.el.getBoundingClientRect()
+            const left = (from == 'indone') ? x - width/2 : x + width + 10
+            const selecteds = await createMenuWrapper({ x: left, y, data: to.inside }, MenuTodo)
+            if (!selecteds) {
+                setGrabbing({
+                    intodo: false,
+                    inprogress: false,
+                    indone: false,
+                })
+                return
+            }
+            to.inside = to.inside.filter((_, index) => selecteds[index] === true)
+        }
 
         batch(() => {
             to.inside.forEach(item => {
@@ -103,7 +121,7 @@ export default function MainTodo(props) {
     return (
         <div className={style.root_main_todo}>
             <DragAndDrop onDragTerminate={onDragTerminate} onDragLeave={onDragLeave} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragEnter={onDragOver}>
-                <div className='flex w-full items-start justify-around'>
+                <div className='flex w-full items-start justify-around h-full'>
                     <For each={status_list}>
                         {(status) => {
                             return (

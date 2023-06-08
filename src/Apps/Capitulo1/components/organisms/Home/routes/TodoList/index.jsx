@@ -6,7 +6,7 @@ import style from './style.module.css'
 
 export default function TodoListRoute() {
 
-    const [mode, setMode] = createSignal('byweek')
+    const [mode, setMode] = createSignal('byday')
 
     return (
         <div className={style.root_todo}>

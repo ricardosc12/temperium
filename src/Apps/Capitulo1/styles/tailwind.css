@@ -14,6 +14,8 @@
 	.bg-text-primary-hover { background: #f0f3f3 !important; }
 	.bg-text-secondary { background: #C1C5C7 !important; }
 	.bg-disabled {background: #99a5aa !important;}
+	.bg-fundo {background: var(--fundo) !important;}
+	.bg-main {background: var(--primary) !important;}
 
 	.color-black-fundo { color: #171F23 !important; }
 	.color-black-destaq { color: #2C3539 !important; }
@@ -21,6 +23,8 @@
 	.color-white-fundo { color: #FCFFFF !important; }
 	.color-text-primary { color: #FCFFFF !important; }
 	.color-text-secondary { color: #C1C5C7 !important; }
+	.color-fundo { color: var(--fundo) !important; }
+	.color-main {color: var(--primary) !important;}
 
 	.border-black-fundo { 
 		box-shadow: 0px 0px 5px var(--black-shadow);
@@ -265,6 +269,31 @@
 		background-color: rgba(255,255,255,.1);
 	}
 	/* MENU */
+
+	/* MENU WRAPPER */
+	.menu-wrapper {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		outline: none;
+		width: auto;
+		height: auto;
+		background-color: white;
+		z-index: 9999;
+		color: white;
+		padding: 5px 0;
+		box-shadow: 0px 2px 13px rgba(138, 135, 135, 0.1),
+		0px 6px 13px rgba(138, 135, 135, 0.1);
+		@apply rounded-md
+	}
+	.menu-wrapper > div {
+		display: flex;
+		align-items: center;
+		position: relative;
+		cursor: pointer;
+		padding: 6px 24px 6px 14px;
+	}
+	/* MENU WRAPPER */
 
 	/* TEXTFIELD */
 	.textfield {
