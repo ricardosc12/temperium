@@ -2,6 +2,7 @@ import DashboardMode from "./routes/Dashboard";
 import TodoListRoute from "./routes/TodoList";
 import style from './style.module.css'
 import { Switch, Match, createSignal } from "solid-js";
+import HomeHeader from "./components/Header";
 
 export default function HomePage() {
 
@@ -10,10 +11,7 @@ export default function HomePage() {
 
     return (
         <div className={style.home}>
-            <div className="flex space-x-5">
-                <h3 onClick={()=>setMode('dashboard')} className="color-black-fundo cursor-pointer">Dashboard</h3>
-                <h3 onClick={()=>setMode('todolist')} className="color-black-fundo cursor-pointer">TodoList</h3>
-            </div>
+            <HomeHeader mode={mode} setMode={setMode}/>
             <Switch fallback={() => <div>Loading...</div>}>
                 <Match when={mode() == 'dashboard'}>
                     <DashboardMode />

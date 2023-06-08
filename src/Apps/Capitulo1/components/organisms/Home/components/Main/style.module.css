@@ -30,9 +30,9 @@
 
 .table {
     position: relative;
-    max-height: calc(100% - 22px);
+    max-height: calc(100% - 102px);
     width: 100%;
-    margin-top: 60px;
+    margin-top: 20px;
     margin-bottom: 30px;
     padding: 0px 30px 0px 10px;
 }

@@ -2,9 +2,9 @@
     display: flex;
     position: absolute;
     flex-direction: column;
-    top: 24px;
+    top: 0px;
     width: 350px;
-    height: calc(100% - 21px);
+    min-height: 100%;
     right: 0;
     transform: translateX(350px);
     background-color: var(--black-fundo);
@@ -26,8 +26,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: auto;
     padding: 0px 10px;
+    padding-top: 5px;
+    max-height: calc(100vh - 360px);
+    overflow-y: scroll;
 }
 
 .atividades_list > div:hover {

@@ -1,0 +1,97 @@
+.root_header {
+    display: flex;
+    width: 100%;
+}
+
+.root_header_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(251, 253, 255);
+    box-shadow: 0px 0px 2px 0.02rem rgba(0,0,0,.3),
+    0px 3px 8px rgba(200, 200, 220, .3);
+    padding: 0.475rem 1rem;
+}
+
+.item_mode {
+    position: relative;
+    cursor: pointer;
+}
+
+.item_mode::before{
+    content: '';
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 2px;
+    bottom: 0px;
+    transform: scaleX(0);
+    background-color: var(--primary);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.item_mode[class*='active']::before{
+    transform: scaleX(1);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.week_selector {
+    display: flex;
+    align-items: center;
+}
+
+.week_selector > h3 {
+    margin: 0px 10px;
+}
+
+.week_selector svg {
+    height: 15px;
+    margin-right: 1px;
+}
+
+.week_selector > :nth-child(1), .week_selector > :nth-child(3){
+    display: flex;
+    cursor: pointer;
+    width: 20px;
+    height: 19px;
+    border-radius: 0.375rem;
+    background-color: var(--primary);
+    padding: 2px;
+}
+
+.week_selector > :nth-child(1):hover {
+    box-shadow: 0px 4px 15px -5px var(--primary);
+}
+.week_selector > :nth-child(3):hover {
+    box-shadow: 0px -4px 15px -5px var(--primary);
+}
+
+.week_selector > :nth-child(3) {
+    transform: rotate(180deg);
+}
+.weeks {
+    display: flex;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+.weeks > span {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 6px;
+    width: auto;
+    min-width: 17px;
+    height: 17px;
+    padding: 0px 5px;
+    font-size: 12px;
+    color: rgba(0,0,0,.7);
+    border-radius: 0.175rem;
+    background-color: var(--fundo);
+    box-shadow: 0px 2px 3px rgba(172, 172, 180, 0.3);
+}
+
+.weeks > span[class*="active"] {
+    color: white;
+    background-color: var(--primary);
+}

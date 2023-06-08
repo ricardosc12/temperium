@@ -18,15 +18,16 @@ export default function SemanalSelector({handleWeek, semanas, week, dados}){
     })
 
     return (
-        <div className={style.main_selector_semanal}>
-            <For each={semanas}>
-                {(semana, index)=>(
-                        <div onClick={()=>handleWeek(semana)} style={`z-index: ${20-index()};`} className={`${week()==semana?'bg-text-primary':''}`}>
-                            <p className={`${week()==semana?'color-black-fundo':''}`}>{semana}</p>
-                            <span>{total_atividades()?.[semana] || 0}</span>
-                        </div>
-                    )}
-            </For>
-        </div>
+        <></>
+        // <div className={style.main_selector_semanal}>
+        //     {/* <For each={semanas}>
+        //         {(semana, index)=>(
+        //                 <div onClick={()=>handleWeek(semana)} style={`z-index: ${20-index()};`} className={`${week()==semana?'bg-text-primary':''}`}>
+        //                     <p className={`${week()==semana?'color-black-fundo':''}`}>{semana}</p>
+        //                     <span>{total_atividades()?.[semana] || 0}</span>
+        //                 </div>
+        //             )}
+        //     </For> */}
+        // </div>
     )
 }

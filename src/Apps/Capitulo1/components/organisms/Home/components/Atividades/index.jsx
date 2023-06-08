@@ -11,7 +11,7 @@ export default function Atividades({tags}) {
 
     let ref;
 
-    const [open, setOpen] = createSignal(true)
+    const [open, setOpen] = createSignal(false)
 
     const { dados } = useStorage()
 
@@ -50,12 +50,13 @@ export default function Atividades({tags}) {
 
     return (
         <>
-            <div className={`${style.button_colapse} ${open() ? style.colapse : ''}`}>
+            {/* <div className={`${style.button_colapse} ${open() ? style.colapse : ''}`}>
                 <button tabindex="-1" onClick={collapse} class="btn-base shadow-lg">
                     <AtividadeIcon/>
                     <p>Atividades</p>
                 </button>
-            </div>
+            </div> */}
+            <button className='none' onClick={collapse} id="btn-open-atividades"></button>
             <div ref={ref} tabindex="-1" className={`${style.atividades} ${open() ? style.colapse : ''}`} id="lateralbar-atividades">
                 <div className='m-3 ml-5 mb-6 flex-row flex justify-between'>
                     <div className='flex'>

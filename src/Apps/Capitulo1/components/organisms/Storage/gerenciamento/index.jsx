@@ -3,6 +3,7 @@ import { produce } from "solid-js/store"
 export const gerenciamentoStorage = (set) => ({
     inside: {},
     hash: {},
+    week: 'semana1',
     dispatch: {
         addInside: ({ atividade, drop: [semana, dia, intervalo], title, tags }) => set(produce((state) => {
             state.dados.inside =
@@ -86,6 +87,12 @@ export const gerenciamentoStorage = (set) => ({
         changeStatus: ({ atividade, from: [semana, dia, intervalo], status }) => set(produce((state) => {
 
             state.dados.inside[semana][dia][intervalo][atividade].status = status
+
+        })),
+
+        changeWeek: (payload) => set(produce((state) => {
+
+            state.dados.week = payload
 
         })),
     }

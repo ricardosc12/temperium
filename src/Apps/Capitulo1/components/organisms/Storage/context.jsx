@@ -18,6 +18,7 @@ export function StorageProvider(props) {
             inside: gerenciamentoStorage().inside,
             hash: gerenciamentoStorage().hash,
             tags: tagsStorage().tags,
+            week: gerenciamentoStorage().week
         }
     });
 
@@ -65,5 +66,6 @@ export const dias = [
 ];
 
 export const semanas = [
-    'semana1', 'semana2', 'semana3', 'semana4', 'semana5', 'semana6', 'semana7', 'semana8'
+    'semana1', 'semana2', 'semana3', 'semana4', 'semana5', 'semana6', 'semana7', 'semana8',
+    'semana9', 'semana10', 'semana11', 'semana12', 'semana13', 'semana14', 'semana15', 'semana16', 'semana17'
 ]

@@ -6,12 +6,14 @@
     flex-direction: column;
     overflow: hidden;
     max-height: var(--max-height);
+    min-height: var(--max-height);
     cursor: pointer;
     margin: 0px 0px 15px 0px;
     border-radius: 5px;
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
     transition: max-height 0.20s cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    min-height 0.20s cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     box-shadow 0.20s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
     box-shadow: 0px 0px 1px 0.03rem var(--text-secondary);
@@ -19,8 +21,10 @@
 
 .card_atividade.collapse {
     max-height: 40px;
-
+    min-height: 40px;
+    
     transition: max-height 0.20s cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    min-height 0.20s cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     box-shadow 0.20s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
     box-shadow: 0px 0px 1px 0.03rem transparent;

@@ -58,15 +58,15 @@ export default function Main(props) {
 
     const [week, setWeek] = createSignal(semanas[0])
 
-    function handleWeek(e) {
-        console.time('switching')
-        document.getElementById('loading-week').innerHTML = "Loading..."
-        setTimeout(() => {
-            setWeek(e)
-            document.getElementById('loading-week').innerHTML = ""
-            console.timeEnd('switching')
-        })
-    }
+    // function handleWeek(e) {
+    //     console.time('switching')
+    //     document.getElementById('loading-week').innerHTML = "Loading..."
+    //     setTimeout(() => {
+    //         setWeek(e)
+    //         document.getElementById('loading-week').innerHTML = ""
+    //         console.timeEnd('switching')
+    //     })
+    // }
 
     const id = (week, dia, interval) => {
         return () => `week:${week}dia:${dia}interval:${interval}`
@@ -114,12 +114,12 @@ export default function Main(props) {
     return (
         <div className={style.main} id="main_content">
 
-            <SemanalSelector semanas={semanas} week={week} dados={dados} handleWeek={handleWeek} />
+            {/* <SemanalSelector semanas={semanas} week={week} dados={dados} handleWeek={handleWeek} /> */}
             <h3 id="loading-week" className='color-black-fundo'></h3>
             <div className={`black-scroll ${style.table}`}>
                 <For each={semanas}>
                     {(semana) => (
-                        <Show when={semana == week()}>
+                        <Show when={semana == dados.week}>
                             <div className={`flex flex-row`}>
                                 <table className={style.root_table}>
                                     <tbody>
