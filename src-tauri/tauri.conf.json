@@ -68,7 +68,8 @@
         "height": 800,
         "resizable": true,
         "title": "temperium",
-        "width": 1340
+        "width": 1340,
+        "fileDropEnabled": false
       }
     ]
   }
