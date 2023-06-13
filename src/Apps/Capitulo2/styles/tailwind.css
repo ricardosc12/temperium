@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 @layer components {
-  .eve {
-    font-family: Everett;
+  .inter {
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
   }
-  .eve-li {
-    font-family: Everett;
+  .inter-light {
+    font-family: 'Inter', sans-serif;
     font-weight: 300;
   }
-  .eve-md {
-    font-family: Everett;
+  .inter-bold {
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
   }
-  .eve-jn {
-    font-family: Everett;
+  .inter-semibold {
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
   }
 }

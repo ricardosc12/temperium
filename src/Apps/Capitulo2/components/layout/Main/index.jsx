@@ -44,7 +44,7 @@ export default function MainApp(){
             <div className='card'></div>
             <div id="tour" className={style.content}>
                 <div id="tela1">
-                  <p id="font-custom" className="bg-gray-light text-gray-dark m-3 p-3 text-4xl eve">Mesma Coisa</p>
+                  <p id="font-custom" className="bg-gray-light text-gray-dark m-3 p-3 text-4xl inter">Mesma Coisa</p>
                   <p className="bg-gray-light text-gray-dark m-3 p-3 text-4xl">Mesma Coisa</p>
                 </div>
                 <div id="tela2"></div>

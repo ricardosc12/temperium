@@ -55,13 +55,13 @@
 }
 
 .introjs-tooltip-title {
-	font-family: Everett;
+	font-family: 'Inter', sans-serif;
 	font-size: 1.1rem;
 	letter-spacing: 0.05rem;
 }
 
 .introjs-tooltiptext {
-	font-family: Everett;
+	font-family: 'Inter', sans-serif;
 	font-weight: 300;
 	font-size: 1.1rem;
 	letter-spacing: 0.05rem;
