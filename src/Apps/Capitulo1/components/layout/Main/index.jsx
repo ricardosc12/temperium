@@ -15,7 +15,7 @@ export default function MainApp() {
 			<StorageProvider>
 				<div className={style.content}>
 
-					<Sidebar setRoute={setRoute} />
+					<Sidebar route={route} setRoute={setRoute} />
 
 					<div className={style.main_content}>
 						<Switch fallback={()=><div>Not Found</div>}>

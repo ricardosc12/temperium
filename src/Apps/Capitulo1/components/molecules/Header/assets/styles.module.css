@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: var(--black-fundo);
+    background: var(--app-header);
 }
 
 .header > svg {

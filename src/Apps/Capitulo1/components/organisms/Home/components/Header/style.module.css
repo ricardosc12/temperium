@@ -8,10 +8,11 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: rgb(251, 253, 255);
-    box-shadow: 0px 0px 2px 0.02rem rgba(0,0,0,.3),
-    0px 3px 8px rgba(200, 200, 220, .3);
+    background-color: var(--sidebar);
+    box-shadow: 2px 0px 2px 0.02rem rgba(0,0,0,.3),
+    8px 3px 8px rgba(200, 200, 220, .3);
     padding: 0.475rem 1rem;
+    height: var(--header-height);
 }
 
 .item_mode {

@@ -5,6 +5,11 @@
 }
 
 :root {
+  /* CORES */
+
+  --app-header: rgb(81 79 106);
+  --app-footer: rgb(73, 71, 92);
+
   --black-fundo: #171F23;
   --black-destaq: #2C3539;
   --black-border: #2C3539;
@@ -26,8 +31,8 @@
   --fundo: #F5F7FA;
 
   --sidebar: rgb(251, 253, 255);
-  --sidebar-icon: #F5F7FA;
-  --sidebar-icon-hover: #283039;
+  --sidebar-icon: var(--primary);
+  --sidebar-icon-hover: var(--roxinho);
 
   --btn-light: #F5F7FA;
   --btn-aux: var(--roxinho);
@@ -35,6 +40,12 @@
   --dots: #CCCFD3;
   
   --shadow-board-card: #F0F2F5;
+
+  /* WIDTH AND HEIGHT */
+
+  --sidebar-width: 55px;
+
+  --header-height: 60px;
   
 }
 
@@ -79,23 +90,24 @@ h5 {
 }
 
 .open_modal_animation {
-	transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-    -moz-transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-    -webkit-transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-    -o-transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+	transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
+    -moz-transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
+    -webkit-transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
+    -o-transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
 
 	background-color: rgba(0, 0, 0, 0.5) !important;
-	transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+	transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
 }
 
 .open_modal_animation > :nth-child(1) {
-	transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-    -moz-transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-    -webkit-transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-    -o-transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-	
-	transform: translateZ(0px) !important;
-	transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+	transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
+    -moz-transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
+    -webkit-transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
+    -o-transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
+
+	transform: translateY(0px) translateZ(0px) !important;
+  opacity: 1 !important;
+	transition: all 350ms cubic-bezier(0.15, 1, 0.3, 1) !important;
 }
 
 .icon-svg {
