@@ -63,7 +63,7 @@ export default function Atividades({tags}) {
                         <button onClick={collapse} tabindex="-1" className='btn-action-white mr-3'>
                             <ArrowIconSx className="rotate-90" />
                         </button>
-                        <h2 className='eve-md'>Atividades</h2>
+                        <h2 className='inter-semibold'>Atividades</h2>
                         <CreateAtividades />
                     </div>
                     <div className='flex justify-center items-center bg-black-destaq p-1 rounded-md'>

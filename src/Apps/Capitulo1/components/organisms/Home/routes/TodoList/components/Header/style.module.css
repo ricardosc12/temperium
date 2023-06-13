@@ -9,15 +9,16 @@
 }
 
 .bymode {
-    background-color: #e4e8ec;
+    background-color: var(--btn-aux);
     padding: 2px 16px;
     border-radius: 6px;
     cursor: pointer;
+    color: var(--primary);
     transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .bymode:hover {
-    box-shadow: 0px 4px 10px #e4e8ec;
+    box-shadow: 0px 4px 10px var(--btn-aux);
     transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 .bymode[class*="active"]:hover {

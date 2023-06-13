@@ -67,7 +67,7 @@ export default function HomeHeader(props) {
                     <div onClick={handleMode} id="todolist" className={`${style.item_mode} ${props.mode() == "todolist" ? "active" : ""}`}>Board</div>
                 </span>
                 <span className='flex space-x-4'>
-                    <div onClick={handleOpenCreate} className='flex justify-center items-center bg-[#F5F7FA] shadow-md px-3 rounded-md cursor-pointer'>
+                    <div onClick={handleOpenCreate} className='flex justify-center items-center bg-[var(--roxinho)] shadow-md px-3 rounded-md cursor-pointer'>
                         <AddIcon className="icon-svg color-main" />
                     </div>
                     <button onClick={handleOpen} className='btn-base bg-main'>

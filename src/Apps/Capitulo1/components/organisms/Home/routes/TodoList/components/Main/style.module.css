@@ -103,7 +103,7 @@
     padding: 10px 15px;
     margin-bottom: 20px;
     border-radius: 0.275rem;
-    box-shadow: 0px 4px 10px #f0f2f5;
+    box-shadow: 0px 4px 10px var(--shadow-board-card);
 }
 
 .board_item_header {
@@ -124,7 +124,7 @@
     width: 4px;
     height: 4px;
     border-radius: 20px;
-    background-color: #cccfd3;
+    background-color: var(--dots);
 }
 .board_item_header > span::after {
     content: '';
@@ -134,7 +134,7 @@
     height: 4px;
     border-radius: 20px;
     left: -6px;
-    background-color: #cccfd3;
+    background-color: var(--dots);
 }
 .board_item_header > span::before {
     content: '';
@@ -144,7 +144,7 @@
     height: 4px;
     border-radius: 20px;
     right: -6px;
-    background-color: #cccfd3;
+    background-color: var(--dots);
 }
 
 .board_item > h5 {

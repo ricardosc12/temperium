@@ -8,15 +8,38 @@
   --black-fundo: #171F23;
   --black-destaq: #2C3539;
   --black-border: #2C3539;
+
   --white-fundo: #FCFFFF;
   --text-primary: #FCFFFF;
   --text-secondary: #C1C5C7;
+  
   --black-shadow: #171F2380;
-  --disabled: #99a5aa;
-  --disabled-white: #cecece;
+
+  --disabled: #99A5AA;
+  --disabled-white: #CECECE;
+
   --primary: rgba(100,87,249);
   --primary-hover: rgb(110 98 245);
+
+  --roxinho: #ECEBFE;
+
   --fundo: #F5F7FA;
+
+  --sidebar: rgb(251, 253, 255);
+  --sidebar-icon: #F5F7FA;
+  --sidebar-icon-hover: #283039;
+
+  --btn-light: #F5F7FA;
+  --btn-aux: var(--roxinho);
+
+  --dots: #CCCFD3;
+  
+  --shadow-board-card: #F0F2F5;
+  
+}
+
+* {
+  font-family: 'inter', sans-serif;
 }
 
 ::-webkit-scrollbar {

@@ -8,7 +8,6 @@ export default function HomePage() {
 
     const [mode, setMode] = createSignal('dashboard')
 
-
     return (
         <div className={style.home}>
             <HomeHeader mode={mode} setMode={setMode}/>

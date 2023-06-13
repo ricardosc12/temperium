@@ -66,7 +66,7 @@
     top: 1rem;
     left: 1rem;
     border-radius: 12px;
-    background-color: #F5F7FA;
+    background-color: var(--btn-light);
     opacity: 1;
     transition: opacity 0.3s;
 }

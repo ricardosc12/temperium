@@ -40,7 +40,7 @@ export default function Footer() {
     return (
         <footer className={style.footer}>
             <div className='flex w-full h-full items-center justify-end px-4'>
-                <p className='eve color-text-secondary text-xs'><button className='tracking-wide' onClick={open}>Versão {VERSION}</button></p>
+                <p className='inter color-text-secondary text-xs'><button className='tracking-wide' onClick={open}>Versão {VERSION}</button></p>
             </div>
         </footer>
     )

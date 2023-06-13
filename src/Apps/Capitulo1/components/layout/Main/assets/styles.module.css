@@ -20,5 +20,5 @@
     position: relative;
     width: calc(100% - 65px);
     height: 100%;
-    background-color: #F5F7FA;
+    background-color: var(--fundo);
 }

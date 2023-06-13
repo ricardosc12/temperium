@@ -23,7 +23,7 @@ function App() {
 
 
 	return (
-		<div className="eve">
+		<div className="inter">
 			{/* <Switch>
 
 				<Match when={!true}>
