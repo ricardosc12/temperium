@@ -21,9 +21,5 @@ export default function Welcome(){
         }
     })
 
-    createEffect(()=>{
-        open()
-    })
-
     return <div onClick={open} id="modal-welcome-btn" className="hidden"></div>
 }
