@@ -1,0 +1,7 @@
+.header > h2 {
+    color: var(--black-fundo) !important;
+}
+
+.header > button > svg {
+    color: var(--black-fundo) !important;
+}

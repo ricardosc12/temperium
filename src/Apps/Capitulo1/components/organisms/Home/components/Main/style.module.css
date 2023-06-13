@@ -39,7 +39,7 @@
 
 .root_table > tbody > tr > td {
     /* border: 1px solid black;  */
-    background-color: rgb(229, 233, 238);
+    background-color: var(--table-td);
     min-width: 90px;
     height: 25px;
     border-radius: 4px;

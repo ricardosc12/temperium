@@ -36,8 +36,12 @@ export default function Tour(){
           }).start();
     }
 
+    function handleWelcome(){
+        document.getElementById('modal-welcome-btn')?.click()
+    }
+
     return (
-        <div className={style.tour} onClick={tour}>
+        <div className={style.tour} onClick={handleWelcome}>
             <TourIcon/>
             <p>Tour</p>
         </div>

@@ -30,6 +30,10 @@
 
   --fundo: #F5F7FA;
 
+  --bg-white: rgb(251, 253, 255);
+
+  --table-td: #EFEFF3;
+
   --sidebar: rgb(251, 253, 255);
   --sidebar-icon: var(--primary);
   --sidebar-icon-hover: var(--roxinho);
