@@ -29,7 +29,7 @@ export default function AuthPage(){
     }
 
     return (
-        <div className='flex flex-col w-full h-full justify-center items-center'>
+        <div className='flex flex-col w-full h-full justify-center items-center framer'>
             <h3 className="color-black-destaq">Nome: {auth()?.user?.nome}</h3>
             <h3 className="color-black-destaq">Email: {auth()?.user?.email}</h3>
             <div className="mt-5 w-20 rounded-full overflow-hidden">

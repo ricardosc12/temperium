@@ -11,7 +11,7 @@ import Welcome from './components/molecules/Welcome';
 export default function Cap1(){
 	return (
 		<div id='main' className="main">
-			<Tour/>
+			{/* <Tour/> */}
 			<Welcome/>
 			<Header/>
 			<MainApp/>

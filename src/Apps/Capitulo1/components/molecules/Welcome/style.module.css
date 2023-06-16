@@ -5,3 +5,16 @@
 .header > button > svg {
     color: var(--black-fundo) !important;
 }
+
+.step {
+    display: flex;
+    width: 10px;
+    height: 10px;
+    background-color: var(--roxinho);
+    border-radius: 10px;
+    box-shadow: 0px 3px 5px rgba(150,150,170,.1);
+}
+
+.step[active="true"]{
+    background-color: var(--primary);
+}

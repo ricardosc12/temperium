@@ -6,6 +6,8 @@ import MenuCapitulos from "./Components/Menu";
 import getLogin from "./utils/validateLogin";
 import { useAuth } from "./storage/Auth";
 import { createEffect } from "solid-js";
+import "@lottiefiles/lottie-player";
+import Helper from "./Apps/Capitulo1/components/molecules/Helper";
 
 function App() {
 
@@ -24,6 +26,7 @@ function App() {
 
 	return (
 		<div className="inter">
+			<Helper/>
 			{/* <Switch>
 
 				<Match when={!true}>

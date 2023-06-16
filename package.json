@@ -24,6 +24,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.294.0",
     "@aws-sdk/util-dynamodb": "^3.294.0",
+    "@lottiefiles/lottie-player": "^2.0.2",
     "@solidjs/router": "^0.8.0",
     "@tauri-apps/api": "^1.2.0",
     "@thisbeyond/solid-dnd": "^0.7.4",

@@ -7,7 +7,7 @@ export default function CalendarPage(){
     const col = 7;
 
     return (
-        <div className='flex items-center justify-center w-full'>
+        <div className='flex items-center justify-center w-full framer'>
              <table className={style.root_table}>
                 <tbody>
                     <For each={Array(lines)}>

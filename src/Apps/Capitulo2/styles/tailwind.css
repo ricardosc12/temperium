@@ -3,20 +3,24 @@
 @tailwind utilities;
 
 @layer components {
-  .inter {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-  }
-  .inter-light {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-  }
-  .inter-bold {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-  }
-  .inter-semibold {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-  }
+	.inter {
+		font-family: 'Inter', sans-serif;
+		font-weight: 400;
+	}
+	.inter-medium {
+		font-family: 'Inter', sans-serif;
+		font-weight: 500;
+	}
+	.inter-light {
+		font-family: 'Inter', sans-serif;
+		font-weight: 300;
+	}
+	.inter-bold {
+		font-family: 'Inter', sans-serif;
+		font-weight: 700;
+	}
+	.inter-semibold {
+		font-family: 'Inter', sans-serif;
+		font-weight: 600;
+	}
 }
