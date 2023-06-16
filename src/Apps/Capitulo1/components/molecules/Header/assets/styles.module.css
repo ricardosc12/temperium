@@ -5,6 +5,7 @@
     align-items: center;
     width: 100%;
     background: var(--app-header);
+    padding: 0px 5px;
 }
 
 .header > svg {
@@ -19,8 +20,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     /* background-color: red; */
 }
 
@@ -36,8 +37,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     /* background-color: red; */
 }
 
@@ -53,8 +54,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     transform-origin: center;
     transform: rotateZ(45deg);
     /* background-color: red; */
