@@ -12,7 +12,17 @@
   },
   "tauri": {
     "allowlist": {
+      "app": {
+        "all": true
+      },
       "all": false,
+      "window": {
+        "close": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "startDragging": true
+      },
       "shell": {
         "all": false,
         "open": true
@@ -69,7 +79,8 @@
         "resizable": true,
         "title": "temperium",
         "width": 1340,
-        "fileDropEnabled": false
+        "fileDropEnabled": false,
+        "decorations": false
       }
     ]
   }
