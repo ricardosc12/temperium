@@ -26,7 +26,7 @@ function App() {
 
 	return (
 		<div className="inter">
-			<Helper/>
+			{/* <Helper/> */}
 			{/* <Switch>
 
 				<Match when={!true}>

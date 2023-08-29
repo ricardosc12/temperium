@@ -12,7 +12,7 @@ export default function Cap1(){
 	return (
 		<div id='main' className="main">
 			{/* <Tour/> */}
-			<Welcome/>
+			{/* <Welcome/> */}
 			<Header/>
 			<MainApp/>
 			<Footer/>
