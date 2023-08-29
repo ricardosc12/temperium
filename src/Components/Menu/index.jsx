@@ -31,7 +31,7 @@ export default function MenuCapitulos({handleChange}) {
                 </For>
             </div>
 
-            <div onClick={handleExpand} className={`${style.button} ${expand()===true?style.button_disable:''}`}>
+            <div id="button-menu-caps" onClick={handleExpand} className={`${style.button} ${expand()===true?style.button_disable:''}`}>
                 <MenuIcon/>
             </div>
 

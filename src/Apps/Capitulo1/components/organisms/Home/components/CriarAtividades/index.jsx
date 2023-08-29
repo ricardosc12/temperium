@@ -143,7 +143,7 @@ function Modal(props) {
 
 
     return (
-        <div className="modal" id="form-atv-create">
+        <div className="modal bg-main-dark" id="form-atv-create">
             <HeaderModal id="modal-create-atividades" title="Criar Atividade" />
             <div className={style.content_modal}>
                 <h4 className="color-text-secondary">Crie atividades e gerencie em conjunto com as tarefas acadêmicas.</h4>

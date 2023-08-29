@@ -1,13 +1,19 @@
 import { createSignal } from "solid-js";
 import Cap1 from "./Apps/Capitulo1";
 import LoginPage from "./Apps/Capitulo1/components/organisms/Login";
-import Cap2 from "./Apps/Capitulo2";
+// import Cap2 from "./Apps/Capitulo2";
 import MenuCapitulos from "./Components/Menu";
 import getLogin from "./utils/validateLogin";
 import { useAuth } from "./storage/Auth";
 import { createEffect } from "solid-js";
 import "@lottiefiles/lottie-player";
 import Helper from "./Apps/Capitulo1/components/molecules/Helper";
+import { getName } from '@tauri-apps/api/app';
+
+try {
+	var appName = await getName();
+}
+catch { }
 
 function App() {
 
@@ -15,17 +21,17 @@ function App() {
 
 	const { auth, setAuthStorage } = useAuth()
 
-	createEffect(()=>{
+	createEffect(() => {
 		const login = getLogin()
 
-		if(!login) return
+		if (!login) return
 
-		setAuthStorage(prev=>({...prev, user: login}))
+		setAuthStorage(prev => ({ ...prev, user: login }))
 	})
 
 
 	return (
-		<div className="inter">
+		<div className={`inter${appName ? " app-desktop" : ""}`}>
 			{/* <Helper/> */}
 			{/* <Switch>
 
@@ -34,23 +40,26 @@ function App() {
 				</Match>
 
 				<Match when={true}> */}
-					<Switch fallback={<div>Not Found</div>}>
-						
-						<Match when={cap() === 1}>
-							<Cap1 />
-						</Match>
+			{/* <Switch fallback={<div>Not Found</div>}>
 
-						<Match when={cap() === 2}>
-							<Cap2 />
-						</Match>
+				<Match when={cap() === 1}>
+					<Cap1 />
+				</Match>
 
-					</Switch>
-				{/* </Match>
+				<Match when={cap() === 2}>
+					<Cap2 />
+				</Match>
+
+			</Switch> */}
+
+			<Cap1 />
+
+			{/* </Match>
 
 			</Switch> */}
 
 
-			<MenuCapitulos handleChange={setCap}/>
+			<MenuCapitulos handleChange={setCap} />
 		</div>
 	)
 }
