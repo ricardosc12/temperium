@@ -1,7 +1,7 @@
 import style from './style.module.css'
 
 import SemanalSelector from '../SemanalSelector';
-import { createEffect, createMemo, createSignal, For, Show, batch } from 'solid-js';
+import { createEffect, createMemo, createSignal, For, Show, batch, onMount, onCleanup } from 'solid-js';
 import { useStorage } from '../../../Storage/context';
 import { Draggable as DraggableHook, Droppable as DroppableHook } from '@/Apps/Capitulo1/components/hooks/DragAndDrop';
 import { createMenu } from '@/Apps/Capitulo1/components/hooks/Menu';
@@ -52,11 +52,37 @@ const DroppableArea = ({ id, title, dados, semana, dia, interval, tags, menu, ..
     )
 }
 
+function getHourIndex(hour) {
+    if (hour <= 6) return 0
+    else if (hour >= 23) return 17
+    else return hour - 6
+}
+
 export default function Main(props) {
 
     const { dados, dispatch: { addInside, removeInside } } = useStorage()
 
     const [week, setWeek] = createSignal(semanas[0])
+
+    let actualDay;
+    let interval;
+
+    function setActualDay() {
+        const date = new Date()
+        const query = date.getDay() + ":" + getHourIndex(date.getHours())
+        if (actualDay) actualDay.classList.remove(style.actualDay)
+        actualDay = document.querySelector(`td[id='${query}']`)
+        actualDay.classList.add(style.actualDay)
+    }
+
+    onMount(() => {
+        setActualDay()
+        interval = setInterval(setActualDay, 1000);
+    })
+
+    onCleanup(()=>{
+        clearInterval(interval)
+    })
 
     // function handleWeek(e) {
     //     console.time('switching')
@@ -131,12 +157,12 @@ export default function Main(props) {
                                             </For>
                                         </tr>
                                         <For each={horarios}>
-                                            {(interval) => (
+                                            {(interval, i) => (
                                                 <tr>
                                                     <td><p className='color-black-destaq text-xs text-center'>{interval}</p></td>
                                                     <For each={dias}>
-                                                        {(dia) => (
-                                                            <td>
+                                                        {(dia, j) => (
+                                                            <td id={j() + ":" + i()}>
                                                                 <DroppableArea menu={menu} tags={props.tags} id={id(semana, dia, interval)} dia={dia}
                                                                     semana={semana} interval={interval} dados={dados}
                                                                     atividades={props.atividades} />

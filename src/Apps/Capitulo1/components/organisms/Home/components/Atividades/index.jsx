@@ -1,7 +1,7 @@
 import style from './style.module.css'
-import { AtividadeIcon, ArrowIconSx, AddIcon } from '@/Apps/Capitulo1/assets/Icons';
+import { AtividadeIcon, ArrowIconSx, } from '@/Apps/Capitulo1/assets/Icons';
 import { CardAtividade } from './Card';
-import { createEffect, createMemo, createSignal, For } from 'solid-js';
+import { createEffect, createSignal, For } from 'solid-js';
 import CreateAtividades from '../CriarAtividades';
 import { useStorage } from '../../../Storage/context';
 import ModalRecorrencia from '../Modais/recorrency';

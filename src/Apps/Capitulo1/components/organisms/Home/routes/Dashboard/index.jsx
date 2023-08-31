@@ -1,7 +1,6 @@
 import Atividades from "../../components/Atividades";
 import Main from "../../components/Main"
 import style from './style.module.css'
-import { createMemo } from "solid-js";
 import { DragAndDrop } from "@/Apps/Capitulo1/components/hooks/DragAndDrop";
 import { useStorage } from "../../../Storage/context";
 import { createAtividades } from "../../hooks/createAtividades";
@@ -93,7 +92,7 @@ export default function DashboardMode() {
 
                 <Main tags={tags} atividades={atividades} />
 
-                <Atividades tags={tags}/>
+                {/* <Atividades tags={tags}/> */}
 
             </DragAndDrop>
         </div>
