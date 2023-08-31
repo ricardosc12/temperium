@@ -7,6 +7,7 @@ import { createBacklog } from './hooks/createBacklog'
 import { createBackgroundColor } from '@/Apps/Capitulo1/utils/color'
 import { createMenuWrapper } from '@/Apps/Capitulo1/components/hooks/MenuWrapper'
 import MenuTodo from '../Menus/todo_menu'
+import { notify } from '@/Apps/Capitulo1/utils/notification/notification'
 
 function Card(props) {
     const atividade = props.atividades().get(props.id)
@@ -78,6 +79,10 @@ export default function MainTodo(props) {
 
     async function onDragEnd({ draggable, droppable }) {
         const [id, from] = draggable.data.split('::')
+        if(!from) {
+            notify("Cards de atividades devem ser movidas primeiro para a grade !")
+            return
+        }
         const status = droppable.data
         const to = backlog()[from].find(item => item.id == id)
 
