@@ -11,18 +11,22 @@ import ModalRecorrencia from '../Modais/recorrency';
 import { horarios, semanas, dias } from '../../../Storage/context';
 
 const Draggable = (props) => {
-    const atividade = createMemo(() => props.atividades().get(props.id))
-
+    const atividade = createMemo(() => props.atividades().get(props.id) || {})
     return (
         <DraggableHook id={atividade()?.parentId} data={props.id + '::' + props.drop}>
-            <div className='w-fit flex py-1 cursor-pointer' onContextMenu={(e) => props.menu(e, props, atividade)}>
-                <For each={atividade()?.tags}>
-                    {(tag) => <div className='tag-sm color-black-fundo' style={{
-                        background: props.tags()[tag.id] ? props.tags()[tag.id].color : tag.color
-                    }}
-                    >{props.tags()[tag.id] ? props.tags()[tag.id].title : tag.title}
-                    </div>}
-                </For>
+            <div className={style.card} onContextMenu={(e) => props.menu(e, props, atividade)}>
+                <h3>{atividade().title}</h3>
+                <p>{atividade().description}</p>
+                <span>
+                    <For each={atividade()?.tags}>
+                        {(tag) => <div className='tag-sm color-black-fundo' style={{
+                            background: props.tags()[tag.id] ? props.tags()[tag.id].color : tag.color
+                        }}
+                        >{props.tags()[tag.id] ? props.tags()[tag.id].title : tag.title}
+                        </div>}
+                    </For>
+                </span>
+
             </div>
         </DraggableHook>
     );
@@ -80,7 +84,7 @@ export default function Main(props) {
         interval = setInterval(setActualDay, 1000);
     })
 
-    onCleanup(()=>{
+    onCleanup(() => {
         clearInterval(interval)
     })
 
