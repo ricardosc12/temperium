@@ -102,3 +102,17 @@ export function PesquisaIcon(props) {
         <svg width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M13 14H9a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2Zm4-10h-1.18A3 3 0 0 0 13 2h-2a3 3 0 0 0-2.82 2H7a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-7 1a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1h-4Zm8 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1v1a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6h1a1 1 0 0 1 1 1Zm-3-9H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z"></path></svg>
     )
 }
+
+
+export function GridIcon(props) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M5 11q-.825 0-1.413-.588T3 9V5q0-.825.588-1.413T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.588 1.413T9 11H5Zm0 10q-.825 0-1.413-.588T3 19v-4q0-.825.588-1.413T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.588 1.413T9 21H5Zm10-10q-.825 0-1.413-.588T13 9V5q0-.825.588-1.413T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.588 1.413T19 11h-4Zm0 10q-.825 0-1.413-.588T13 19v-4q0-.825.588-1.413T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.588 1.413T19 21h-4Z"></path></svg>
+    )
+}
+
+
+export function ColumnIcon(props) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M4 19q-.425 0-.713-.288T3 18V6q0-.425.288-.713T4 5h3.325q.425 0 .713.288T8.325 6v12q0 .425-.287.713T7.325 19H4Zm6.325 0q-.425 0-.713-.288T9.325 18V6q0-.425.288-.713T10.325 5h3.325q.425 0 .713.288T14.65 6v12q0 .425-.288.713T13.65 19h-3.325Zm6.325 0q-.425 0-.713-.288T15.65 18V6q0-.425.288-.713T16.65 5h3.325q.425 0 .713.288t.287.712v12q0 .425-.288.713t-.712.287H16.65Z"></path></svg>
+    )
+}

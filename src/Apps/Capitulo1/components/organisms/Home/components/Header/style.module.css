@@ -9,31 +9,10 @@
     align-items: center;
     width: 100%;
     background-color: var(--sidebar);
-    box-shadow: 2px 0px 2px 0.02rem rgba(0,0,0,.3),
-    8px 3px 8px rgba(200, 200, 220, .3);
+    box-shadow: 2px 0px 2px 0.02rem rgba(0, 0, 0, .3),
+        8px 3px 8px rgba(200, 200, 220, .3);
     padding: 0.475rem 1rem;
     height: var(--header-height);
-}
-
-.item_mode {
-    position: relative;
-    cursor: pointer;
-}
-
-.item_mode::before{
-    content: '';
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 2px;
-    bottom: 0px;
-    transform: scaleX(0);
-    background-color: var(--primary);
-    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-}
-.item_mode[class*='active']::before{
-    transform: scaleX(1);
-    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .week_selector {
@@ -41,7 +20,7 @@
     align-items: center;
 }
 
-.week_selector > h3 {
+.week_selector>h3 {
     margin: 0px 10px;
 }
 
@@ -50,7 +29,8 @@
     margin-right: 1px;
 }
 
-.week_selector > :nth-child(1), .week_selector > :nth-child(3){
+.week_selector> :nth-child(1),
+.week_selector> :nth-child(3) {
     display: flex;
     cursor: pointer;
     width: 20px;
@@ -60,22 +40,25 @@
     padding: 2px;
 }
 
-.week_selector > :nth-child(1):hover {
+.week_selector> :nth-child(1):hover {
     box-shadow: 0px 4px 15px -5px var(--primary);
 }
-.week_selector > :nth-child(3):hover {
+
+.week_selector> :nth-child(3):hover {
     box-shadow: 0px -4px 15px -5px var(--primary);
 }
 
-.week_selector > :nth-child(3) {
+.week_selector> :nth-child(3) {
     transform: rotate(180deg);
 }
+
 .weeks {
     display: flex;
     margin-top: 4px;
     margin-left: 4px;
 }
-.weeks > span {
+
+.weeks>span {
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -86,13 +69,99 @@
     height: 17px;
     padding: 0px 5px;
     font-size: 12px;
-    color: rgba(0,0,0,.7);
+    color: rgba(0, 0, 0, .7);
     border-radius: 0.175rem;
     background-color: var(--fundo);
     box-shadow: 0px 2px 3px rgba(172, 172, 180, 0.3);
 }
 
-.weeks > span[class*="active"] {
+.weeks>span[class*="active"] {
     color: white;
     background-color: var(--primary);
+}
+
+
+.item_mode {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--primary);
+    width: 68px;
+    min-width: 68px;
+    max-width: 68px;
+
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
+}
+
+.item_mode> :nth-child(1) {
+    margin-right: 5px;
+}
+
+.item_mode::before {
+    content: '';
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 2px;
+    bottom: 0px;
+    transform: scaleX(0);
+    background-color: var(--primary);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+/* .item_mode[class*='active']::before {
+    transform: scaleX(1);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+} */
+
+
+.switch {
+    display: flex;
+    align-items: center;
+    background-color: var(--roxinho);
+    border-radius: var(--border-radius);
+    padding: 3px 10px;
+    box-shadow: inset 0px 0px 9px rgba(100, 87, 249, 0.1);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.switch>* {
+    margin: 0px 0.75rem;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.switch> :nth-child(1) {
+    color: var(--primary);
+}
+
+.switch> :nth-child(2) {
+    color: var(--white-fundo);
+}
+
+.switch.dash> :nth-child(2) {
+    color: var(--primary);
+}
+
+.switch.dash> :nth-child(1) {
+    color: var(--white-fundo);
+}
+
+.switch::before {
+    content: '';
+    display: flex;
+    position: absolute;
+    width: 90px;
+    height: 24px;
+    background-color: var(--primary);
+    border-radius: var(--border-radius);
+    box-shadow: 0px 0px 5px rgba(100, 87, 249, 0.5);
+    transform: translateX(94px);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.switch.dash::before {
+    transform: translateX(0px);
 }
