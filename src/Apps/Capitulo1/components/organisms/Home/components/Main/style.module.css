@@ -11,7 +11,8 @@
 
 .area {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     min-height: 100%;
     height: auto;
     width: 100%;
@@ -84,16 +85,61 @@
     background-color: var(--white-fundo);
     border-radius: var(--border-radius);
     padding: 0.25rem 0.5rem;
+    box-shadow: 0px 0px 10px rgba(115, 113, 161, 0.08);
 }
-.card > h3 {
-    color: black !important;
+
+.card>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card>div>span>svg {
+    color: var(--text-secondary);
+    z-index: 1;
+}
+
+.card>div>span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card>div>span::before {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: var(--border-radius);
+    z-index: 0;
+    transform: scale(0);
+    background-color: rgba(115, 113, 161, 0.06);
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.card:hover>div>span::before {
+    transform: scale(1);
+}
+
+.card>div>h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+    color: var(--black-fundo) !important;
     font-size: 0.8rem !important;
-} 
-.card > p {
-    color: black !important;
+}
+
+.card>p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    color: var(--black-fundo) !important;
     font-size: 0.62rem !important;
-} 
-.card > span {
+}
+
+.card>span {
     display: flex;
     width: 100%;
     align-items: center;

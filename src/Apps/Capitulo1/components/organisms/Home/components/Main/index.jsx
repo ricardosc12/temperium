@@ -9,13 +9,20 @@ import { MenuAtividadeInside } from '@/Apps/Capitulo1/components/hooks/Menu/ativ
 import { createModal } from '@/Apps/Capitulo1/components/molecules/Modal';
 import ModalRecorrencia from '../Modais/recorrency';
 import { horarios, semanas, dias } from '../../../Storage/context';
+import { BookIcon } from '@/Apps/Capitulo1/assets/Icons';
+import ModalMoreInfo from '../Modais/moreInfo';
 
 const Draggable = (props) => {
+
     const atividade = createMemo(() => props.atividades().get(props.id) || {})
+
     return (
         <DraggableHook id={atividade()?.parentId} data={props.id + '::' + props.drop}>
-            <div className={style.card} onContextMenu={(e) => props.menu(e, props, atividade)}>
-                <h3>{atividade().title}</h3>
+            <div className={style.card} onContextMenu={(e) => props.menu(e, props, atividade)} onClick={_ => props.openMoreInfo({ id: atividade().id })}>
+                <div>
+                    <h3>{atividade().title}</h3>
+                    <span><BookIcon /></span>
+                </div>
                 <p>{atividade().description}</p>
                 <span>
                     <For each={atividade()?.tags}>
@@ -41,14 +48,14 @@ const Droppable = ({ id, ...props }) => {
     );
 };
 
-const DroppableArea = ({ id, title, dados, semana, dia, interval, tags, menu, ...props }) => {
+const DroppableArea = ({ id, title, dados, semana, dia, interval, tags, menu, openMoreInfo, ...props }) => {
 
     return (
         <Droppable id={id} className="w-full h-full p-2">
             <div className={style.area}>
                 <For each={Object.values(dados.inside[semana]?.[dia]?.[interval] || {})}>
                     {(item) => {
-                        return <Draggable menu={menu} tags={tags} atividades={props.atividades} {...item} />
+                        return <Draggable menu={menu} tags={tags} atividades={props.atividades} openMoreInfo={openMoreInfo} {...item} />
                     }}
                 </For>
             </div>
@@ -109,6 +116,11 @@ export default function Main(props) {
         }
     })
 
+    const { open: openMoreInfo } = createModal(ModalMoreInfo, {
+        id: 'modal-more-info',
+        props: { modalId: 'modal-more-info', atividades: props.atividades }
+    })
+
     async function menu(e, props, atividade) {
         e.stopPropagation()
         const menu_resp = await createMenu(e, MenuAtividadeInside)
@@ -167,7 +179,7 @@ export default function Main(props) {
                                                     <For each={dias}>
                                                         {(dia, j) => (
                                                             <td id={j() + ":" + i()}>
-                                                                <DroppableArea menu={menu} tags={props.tags} id={id(semana, dia, interval)} dia={dia}
+                                                                <DroppableArea openMoreInfo={openMoreInfo} menu={menu} tags={props.tags} id={id(semana, dia, interval)} dia={dia}
                                                                     semana={semana} interval={interval} dados={dados}
                                                                     atividades={props.atividades} />
                                                             </td>

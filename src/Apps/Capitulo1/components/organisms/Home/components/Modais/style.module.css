@@ -14,32 +14,43 @@
     flex-wrap: wrap;
 }
 
-.check_item > label {
+.check_item>label {
     margin-right: 0.75rem;
     margin-bottom: 0.75rem;
 }
 
 
-.check_item > label > p {
+.check_item>label>p {
     cursor: pointer;
     padding: 0px 10px 2px 10px;
     border-radius: 0.375rem;
-    background-color: rgba(255,255,255,.1);
+    background-color: rgba(255, 255, 255, .1);
     color: var(--text-primary) !important;
     transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
 }
 
-.check_item > label > p:hover {
+.check_item>label>p:hover {
     transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-    box-shadow: 0px 2px 12px -2px rgba(255,255,255,.1);
+    box-shadow: 0px 2px 12px -2px rgba(255, 255, 255, .1);
     transform: translateY(-1px);
 }
 
-.check_item > label > input {
+.check_item>label>input {
     display: none;
 }
 
-.check_item > label > input:checked + p {
-    background-color: rgba(100,87,249) !important;
-    box-shadow: 0px 2px 12px -2px rgba(100,87,249,.5);
+.check_item>label>input:checked+p {
+    background-color: rgba(100, 87, 249) !important;
+    box-shadow: 0px 2px 12px -2px rgba(100, 87, 249, .5);
+}
+
+.moreInfo .card {
+    padding: 10px 14px;
+    border-radius: var(--border-radius);
+    margin-right: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 3px 0px rgba(196, 193, 235, 0.603);
+}
+.moreInfo .card.target {
+    box-shadow: 0px 0px 5px 0px rgb(100, 87, 249);
 }
