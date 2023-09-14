@@ -25,9 +25,9 @@ export default function Header() {
         <header data-tauri-drag-region className={styles.header}>
             <div></div>
             <div className={styles.windowOptions}>
-                <div onClick={handleMinimize} className="bar"></div>
-                <div onClick={handleMaximize} className="box"></div>
-                <div onClick={handleClose} className="close"></div>
+                <div onClick={handleMinimize} className="bar"><span></span></div>
+                <div onClick={handleMaximize} className="box"><span></span></div>
+                <div onClick={handleClose} className="close"><span></span></div>
             </div>
         </header>
     )

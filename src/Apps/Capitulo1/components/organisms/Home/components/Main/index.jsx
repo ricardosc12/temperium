@@ -118,7 +118,7 @@ export default function Main(props) {
 
     const { open: openMoreInfo } = createModal(ModalMoreInfo, {
         id: 'modal-more-info',
-        props: { modalId: 'modal-more-info', atividades: props.atividades }
+        props: { modalId: 'modal-more-info', atividades: props.atividades, tags: props.tags }
     })
 
     async function menu(e, props, atividade) {
