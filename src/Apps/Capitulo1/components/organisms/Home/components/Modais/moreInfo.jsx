@@ -29,7 +29,7 @@ export default function ModalMoreInfo(props) {
                 </h4>
             </div>
             <h2 className="px-2 mt-3">Atividades</h2>
-            <div className="flex mt-3 px-2">
+            <div className="flex mt-3 px-2 flex-wrap">
                 <For each={parentAtividade().atividades}>
                     {(atv) => {
                         const tag = props.tags()[atv.tag?.id]
