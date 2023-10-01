@@ -1,17 +1,23 @@
-import { createEffect, createSignal, For, onCleanup, onMount } from 'solid-js';
+import { createEffect, createMemo, createRenderEffect, createSignal, For, onCleanup, onMount } from 'solid-js';
+import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification';
 import style from './style.module.css'
 import readingAnimation from '@/Apps/Capitulo1/assets/animations/reading'
+import catSleepingAnimation from '@/Apps/Capitulo1/assets/animations/cat_sleeping'
+import { useStorage } from '../Storage/context';
+import { PauseIcon, PlayIcon, RestoreIcon, SkipIcon } from '@/Apps/Capitulo1/assets/Icons';
 
-let timeRemaining = 25 * 60;
-let time = 25 * 60;
-let interval;
+
 
 export default function CalendarPage() {
 
+    const { dados, dispatch: { setPomoState, setPomoNotify, setPomoTime, setPomoInterval, setPomoTimeRemaining } } = useStorage()
+
+    let timeRemaining;
+    let time;
+    let interval;
+
     let isBreak = false;
     let pomodoroCount = 0;
-
-    const [state, setState] = createSignal(true)
 
     function startPomodoro() {
         if (!interval) {
@@ -20,47 +26,63 @@ export default function CalendarPage() {
     }
 
     function handlePomo() {
-        if (state()) {
+        if (dados.pomodoro.state) {
             stopPomodoro()
-            setState(false)
+            setPomoState(false)
         }
         else {
             startPomodoro()
-            setState(true)
+            setPomoState(true)
         }
     }
 
     onMount(() => {
-        startPomodoro()
+        timeRemaining = dados.pomodoro.timeRemaining;
+        time = dados.pomodoro.time;
+        interval = dados.pomodoro.interval;
         displayTime()
+        if (dados.pomodoro.state) {
+            startPomodoro()
+        }
     })
 
-    onCleanup(() => {
-        console.log("CLEAN UP")
-        // stopPomodoro()
-    })
 
     function stopPomodoro() {
         clearInterval(interval);
         interval = null;
+        setPomoTime({ time, timeRemaining, interval })
     }
 
     function resetPomodoro() {
-        stopPomodoro();
-        timeRemaining = 25 * 60;
+        timeRemaining = dados.pomodoro.time;
+        time = dados.pomodoro.time;
         isBreak = false;
         pomodoroCount = 0;
+        stopPomodoro();
+        setPomoState(false)
+        setPomoTime({ time, timeRemaining, interval })
         displayTime();
     }
 
-    function updateTimer() {
-        if (timeRemaining > 0) {
+    function updateTimer(next) {
+        if (timeRemaining > 0 && !next) {
             timeRemaining--;
         } else {
             pomodoroCount++;
             isBreak = !isBreak;
-            timeRemaining = isBreak ? (pomodoroCount % 4 === 0 ? 15 * 60 : 5 * 60) : 25 * 60;
+            timeRemaining = isBreak ? (pomodoroCount % 4 === 0 ?
+                dados.pomodoro.longBreak : dados.pomodoro.shortBreak)
+                :
+                dados.pomodoro.time;
+            time = timeRemaining;
+            if (isBreak) {
+                sendNotification({ title: 'Pomodoro', body: 'Hora do descanso!'});
+            }
+            else {
+                sendNotification({ title: 'Pomodoro', body: 'De volta ao foco!'});
+            }
         }
+        setPomoTimeRemaining({ timeRemaining })
         displayTime();
     }
 
@@ -77,11 +99,17 @@ export default function CalendarPage() {
         }
     }
 
+    function handleNotify(){
+        updateTimer(true)
+    }
+
     return (
         <div className='flex flex-col items-center justify-center w-full framer'>
             <div class={style.container}>
                 <div class={style.card}>
+
                     <div class={style.box}>
+                        <h2 class={style.text}>Pomodoro</h2>
                         <div class={style.percent}>
                             <svg>
                                 <circle cx="70" cy="70" r="70"></circle>
@@ -91,21 +119,52 @@ export default function CalendarPage() {
                                 <h2 id="timer">25:00</h2>
                             </div>
                         </div>
-                        {/* <h2 class={style.text}>estudando...</h2> */}
                     </div>
                 </div>
             </div>
             <div className={style.animation}>
-                <lottie-player
-                    autoplay
-                    loop
-                    mode="normal"
-                    src={readingAnimation}
-                    className="h-full w-full"
-                >
-                </lottie-player>
+                {dados.pomodoro.state ?
+
+                    <lottie-player
+                        autoplay
+                        loop
+                        mode="normal"
+                        src={readingAnimation}
+                        className="w-full"
+                    >
+                    </lottie-player> :
+                    <lottie-player
+                        autoplay
+                        loop
+                        mode="normal"
+                        src={catSleepingAnimation}
+                        className="w-[60px] mb-2"
+                    >
+                    </lottie-player>
+            }
             </div>
-            <button onClick={handlePomo} className='btn-base bg-main'>{state() ? "Stop" : "Start"}</button>
+            <div className='flex space-x-3 mt-10'>
+                <button onClick={resetPomodoro} className='btn-base bg-[var(--roxinho)] color-main'>
+                    <RestoreIcon class="text-xl" />
+                </button>
+                <button onClick={handlePomo} className='btn-base bg-main'>
+                    {dados.pomodoro.state ? (
+                        <>
+                            <PauseIcon class="-ml-1 mr-2" />
+                            Stop
+                        </>
+                    ) : (
+                        <>
+                            <PlayIcon class="-ml-1 mr-2" />
+                            Start
+                        </>
+                    )}
+
+                </button>
+                <button onClick={handleNotify} className='btn-base bg-[var(--roxinho)] color-main'>
+                    <SkipIcon class="text-xl" />
+                </button>
+            </div>
         </div>
     )
 }

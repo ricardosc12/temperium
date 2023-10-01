@@ -3,6 +3,7 @@ import { createStore } from "solid-js/store";
 import { atividadesStorage } from "./atividades";
 import { disciplinasStorage } from "./disciplinas";
 import { gerenciamentoStorage } from "./gerenciamento";
+import { pomodoroStorage } from "./pomodoro";
 import { tagsStorage } from "./tags";
 
 const CounterContext = createContext();
@@ -18,7 +19,8 @@ export function StorageProvider(props) {
             inside: gerenciamentoStorage().inside,
             hash: gerenciamentoStorage().hash,
             tags: tagsStorage().tags,
-            week: gerenciamentoStorage().week
+            week: gerenciamentoStorage().week,
+            pomodoro: pomodoroStorage().pomodoro
         }
     });
 
@@ -28,6 +30,7 @@ export function StorageProvider(props) {
             ...atividadesStorage(setState).dispatch,
             ...gerenciamentoStorage(setState).dispatch,
             ...tagsStorage(setState).dispatch,
+            ...pomodoroStorage(setState).dispatch
         }
     }
 

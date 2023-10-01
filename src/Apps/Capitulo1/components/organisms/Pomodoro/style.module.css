@@ -1,8 +1,13 @@
 .container {
     position: relative;
-    width: 900px;
+    width: 30vw;
+    min-width: 530px;
     display: flex;
     justify-content: space-around;
+    border-radius: 30px;
+    box-shadow: 5px 5px 13px rgba(200,200,220,.2),
+    inset 5px 5px 12px #fbfdffda
+    ;
 }
 
 .container .card {
@@ -11,7 +16,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: 260px;
 }
 
 .percent {
@@ -52,7 +57,7 @@
     position: relative;
     text-align: center;
     color: var(--primary) !important;
-    margin-top: 14px;
+    margin-bottom: 30px;
     font-weight: 700;
     font-size: 14px !important;
     letter-spacing: 1px;
@@ -97,16 +102,17 @@
 }
 
 .animation > :nth-child(1) {
-    transform: translateY(20px);
+    transform: translateY(30px);
 }
 
-@media (max-width: 991px) {
+@media (max-width: 675px) {
     .container {
-      width: 100%;
-      flex-direction: column;
+        width: 90%;
+        min-width: 100px;
+        /* flex-direction: column; */
     }
   
     .container .card {
-      margin: 20px auto;
+      /* margin: 20px auto; */
     }
   }
