@@ -3,7 +3,7 @@ import Sidebar from '../../molecules/Sidebar'
 import { createSignal } from 'solid-js'
 import HomePage from '../../organisms/Home'
 import AuthPage from '../../organisms/Auth'
-import CalendarPage from '../../organisms/Calendar'
+import PomodoroPage from '../../organisms/Pomodoro'
 import { StorageProvider } from '../../organisms/Storage/context'
 
 export default function MainApp() {
@@ -24,8 +24,8 @@ export default function MainApp() {
 								<HomePage />
 							</Match>
 
-							<Match when={route() === 'calendar'}>
-								<CalendarPage />
+							<Match when={route() === 'pomodoro'}>
+								<PomodoroPage />
 							</Match>
 
 							<Match when={route() === 'auth'}>

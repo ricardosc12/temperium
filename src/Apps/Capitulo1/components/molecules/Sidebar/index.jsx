@@ -1,5 +1,5 @@
 import style from './style.module.css'
-import { HomeIcon, CalendarIcon, ConfigIcon, LogoIcon, AccountIcon } from './icons'
+import { HomeIcon, ConfigIcon, AccountIcon, ClockIcon } from './icons'
 
 export default function Sidebar({ setRoute, route }) {
 
@@ -13,7 +13,7 @@ export default function Sidebar({ setRoute, route }) {
             </div>
             <div className={style.modules}>
                 <div className={`${style.icon} ${route() == "home" ? "active" : ""} `} onClick={() => setRoute('home')}><HomeIcon /></div>
-                <div className={`${style.icon} ${route() == "calendar" ? "active" : ""} `} onClick={() => setRoute('calendar')}><CalendarIcon /></div>
+                <div className={`${style.icon} ${route() == "pomodoro" ? "active" : ""} `} onClick={() => setRoute('pomodoro')}><ClockIcon /></div>
                 <div className={`${style.icon} ${route() == "auth" ? "active" : ""} `} onClick={() => setRoute('auth')}><AccountIcon /></div>
             </div>
             <div className={style.config}>
