@@ -100,7 +100,10 @@ export default function CalendarPage() {
     }
 
     function handleNotify(){
+        clearInterval(interval);
+        interval = null;
         updateTimer(true)
+        startPomodoro()
     }
 
     return (
