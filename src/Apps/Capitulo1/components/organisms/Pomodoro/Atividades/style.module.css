@@ -1,0 +1,30 @@
+
+.atividadesList {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 300px;
+    margin-top: 1.25rem;
+    border-radius: 15px;
+    box-shadow: 5px 5px 13px rgba(200, 200, 220, .2),
+        inset 5px 5px 12px #fbfdffda;
+}
+
+.atividadesList .header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    padding: 20px 18px;
+}
+
+.atividadesList .header > h4 {
+    font-weight: 500;
+    color: var(--primary) !important;
+}
+
+.atividadesList .header > div > h4 {
+    font-weight: 500;
+    color: var(--primary) !important;
+}

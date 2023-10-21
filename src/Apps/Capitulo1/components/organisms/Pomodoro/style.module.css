@@ -5,9 +5,8 @@
     display: flex;
     justify-content: space-around;
     border-radius: 30px;
-    box-shadow: 5px 5px 13px rgba(200,200,220,.2),
-    inset 5px 5px 12px #fbfdffda
-    ;
+    box-shadow: 5px 5px 13px rgba(200, 200, 220, .2),
+        inset 5px 5px 12px #fbfdffda;
 }
 
 .container .card {
@@ -101,7 +100,7 @@
     position: absolute;
 }
 
-.animation > :nth-child(1) {
+.animation> :nth-child(1) {
     transform: translateY(30px);
 }
 
@@ -111,8 +110,8 @@
         min-width: 100px;
         /* flex-direction: column; */
     }
-  
+
     .container .card {
-      /* margin: 20px auto; */
+        /* margin: 20px auto; */
     }
-  }
+}

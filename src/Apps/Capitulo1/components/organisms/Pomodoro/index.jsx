@@ -5,12 +5,17 @@ import readingAnimation from '@/Apps/Capitulo1/assets/animations/reading'
 import catSleepingAnimation from '@/Apps/Capitulo1/assets/animations/cat_sleeping'
 import { useStorage } from '../Storage/context';
 import { PauseIcon, PlayIcon, RestoreIcon, SkipIcon } from '@/Apps/Capitulo1/assets/Icons';
+import Atividades from './Atividades';
 
 
 
 export default function CalendarPage() {
 
-    const { dados, dispatch: { setPomoState, setPomoNotify, setPomoTime, setPomoInterval, setPomoTimeRemaining } } = useStorage()
+    const { dados, dispatch: {
+        setPomoState, setPomoNotify,
+        setPomoTime, setPomoInterval, setPomoTimeRemaining,
+        setPomoCountBreak, setPomoJustTime
+    } } = useStorage()
 
     let timeRemaining;
     let time;
@@ -40,10 +45,16 @@ export default function CalendarPage() {
         timeRemaining = dados.pomodoro.timeRemaining;
         time = dados.pomodoro.time;
         interval = dados.pomodoro.interval;
+        pomodoroCount = dados.pomodoro.pomodoroCount;
+        isBreak = dados.pomodoro.isBreak;
         displayTime()
         if (dados.pomodoro.state) {
             startPomodoro()
         }
+    })
+
+    onCleanup(() => {
+        setPomoInterval(interval)
     })
 
 
@@ -54,8 +65,8 @@ export default function CalendarPage() {
     }
 
     function resetPomodoro() {
-        timeRemaining = dados.pomodoro.time;
-        time = dados.pomodoro.time;
+        timeRemaining = dados.pomodoro.timeFocus;
+        time = dados.pomodoro.timeFocus;
         isBreak = false;
         pomodoroCount = 0;
         stopPomodoro();
@@ -67,22 +78,28 @@ export default function CalendarPage() {
     function updateTimer(next) {
         if (timeRemaining > 0 && !next) {
             timeRemaining--;
+            setPomoTimeRemaining({ timeRemaining })
         } else {
-            pomodoroCount++;
             isBreak = !isBreak;
+            if (isBreak) {
+                pomodoroCount++;
+
+            }
             timeRemaining = isBreak ? (pomodoroCount % 4 === 0 ?
                 dados.pomodoro.longBreak : dados.pomodoro.shortBreak)
                 :
-                dados.pomodoro.time;
+                dados.pomodoro.timeFocus;
             time = timeRemaining;
+            setPomoJustTime({ time })
+            setPomoCountBreak({ isBreak, pomodoroCount })
             if (isBreak) {
-                sendNotification({ title: 'Pomodoro', body: 'Hora do descanso!'});
+                sendNotification({ title: 'Pomodoro', body: 'Hora do descanso!' });
             }
             else {
-                sendNotification({ title: 'Pomodoro', body: 'De volta ao foco!'});
+                sendNotification({ title: 'Pomodoro', body: 'De volta ao foco!' });
             }
         }
-        setPomoTimeRemaining({ timeRemaining })
+
         displayTime();
     }
 
@@ -99,75 +116,79 @@ export default function CalendarPage() {
         }
     }
 
-    function handleNotify(){
+    function handleNotify() {
         clearInterval(interval);
         interval = null;
         updateTimer(true)
+        setPomoState(true)
         startPomodoro()
     }
 
     return (
         <div className='flex flex-col items-center justify-center w-full framer'>
-            <div class={style.container}>
-                <div class={style.card}>
+            <div className='flex flex-col items-center justify-center'>
+                <div class={style.container}>
+                    <div class={style.card}>
 
-                    <div class={style.box}>
-                        <h2 class={style.text}>Pomodoro</h2>
-                        <div class={style.percent}>
-                            <svg>
-                                <circle cx="70" cy="70" r="70"></circle>
-                                <circle id="progress" cx="70" cy="70" r="70"></circle>
-                            </svg>
-                            <div class={style.number}>
-                                <h2 id="timer">25:00</h2>
+                        <div class={style.box}>
+                            <h2 class={style.text}>Pomodoro</h2>
+                            <div class={style.percent}>
+                                <svg>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                    <circle id="progress" cx="70" cy="70" r="70"></circle>
+                                </svg>
+                                <div class={style.number}>
+                                    <h2 id="timer">25:00</h2>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className={style.animation}>
-                {dados.pomodoro.state ?
+                <div className={style.animation}>
+                    {dados.pomodoro.state ?
 
-                    <lottie-player
-                        autoplay
-                        loop
-                        mode="normal"
-                        src={readingAnimation}
-                        className="w-full"
-                    >
-                    </lottie-player> :
-                    <lottie-player
-                        autoplay
-                        loop
-                        mode="normal"
-                        src={catSleepingAnimation}
-                        className="w-[60px] mb-2"
-                    >
-                    </lottie-player>
-            }
-            </div>
-            <div className='flex space-x-3 mt-10'>
-                <button onClick={resetPomodoro} className='btn-base bg-[var(--roxinho)] color-main'>
-                    <RestoreIcon class="text-xl" />
-                </button>
-                <button onClick={handlePomo} className='btn-base bg-main'>
-                    {dados.pomodoro.state ? (
-                        <>
-                            <PauseIcon class="-ml-1 mr-2" />
-                            Stop
-                        </>
-                    ) : (
-                        <>
-                            <PlayIcon class="-ml-1 mr-2" />
-                            Start
-                        </>
-                    )}
+                        <lottie-player
+                            autoplay
+                            loop
+                            mode="normal"
+                            src={readingAnimation}
+                            className="w-full"
+                        >
+                        </lottie-player> :
+                        <lottie-player
+                            autoplay
+                            loop
+                            mode="normal"
+                            src={catSleepingAnimation}
+                            className="w-[60px] mb-2"
+                        >
+                        </lottie-player>
+                    }
+                </div>
+                <div className='flex space-x-3 mt-5'>
+                    <button onClick={resetPomodoro} className='btn-base bg-[var(--roxinho)] color-main'>
+                        <RestoreIcon class="text-xl" />
+                    </button>
+                    <button onClick={handlePomo} className='btn-base bg-main'>
+                        {dados.pomodoro.state ? (
+                            <>
+                                <PauseIcon class="-ml-1 mr-2" />
+                                Stop
+                            </>
+                        ) : (
+                            <>
+                                <PlayIcon class="-ml-1 mr-2" />
+                                Start
+                            </>
+                        )}
 
-                </button>
-                <button onClick={handleNotify} className='btn-base bg-[var(--roxinho)] color-main'>
-                    <SkipIcon class="text-xl" />
-                </button>
+                    </button>
+                    <button onClick={handleNotify} className='btn-base bg-[var(--roxinho)] color-main'>
+                        <SkipIcon class="text-xl" />
+                    </button>
+                </div>
             </div>
+            <Atividades />
         </div>
     )
 }

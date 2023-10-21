@@ -10,7 +10,6 @@ export const createAtividades = ( dados ) => {
         newMap.forEach((value, key) => {
             disciplinas.set(key, value)
         })
-        console.log(disciplinas)
         return disciplinas
     })
 
