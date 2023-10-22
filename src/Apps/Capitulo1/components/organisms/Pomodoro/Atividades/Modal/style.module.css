@@ -1,0 +1,23 @@
+.list {
+    height: 60vh;
+    overflow: auto;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+}
+
+.list_item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    padding-left: 0;
+    height: 40px;
+    border-radius: 17px;
+}
+
+.list_item:hover {
+    background-color: rgba(255,255,255,.03);
+}

@@ -33,6 +33,16 @@ export const AddIcon = ({ ...props }) => {
     )
 }
 
+export function MinusIcon(props) {
+    return (
+        <svg width="32" height="32" viewBox="0 0 256 256" {...props}><path fill="currentColor" d="M228 128a12 12 0 0 1-12 12H40a12 12 0 0 1 0-24h176a12 12 0 0 1 12 12Z"></path></svg>
+    )
+}
+export function BackIcon(props) {
+    return (
+        <svg width="32" height="32" viewBox="0 0 256 256" {...props}><path fill="currentColor" d="M244 88v64a12 12 0 0 1-12 12h-64a12 12 0 0 1 0-24h34.9l-15.48-15.37A84 84 0 0 0 44 184a12 12 0 0 1-24 0a108 108 0 0 1 184.37-76.37L220 123.16V88a12 12 0 0 1 24 0Z"></path></svg>
+    )
+}
 export const CheckIcon = ({ ...props }) => {
     return (
         <svg width="32" height="32" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M9 16.17L5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z" /></svg>
@@ -140,9 +150,9 @@ export function PauseIcon(props) {
 
 export function SkipIcon(props) {
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M17.5 18q-.425 0-.713-.288T16.5 17V7q0-.425.288-.713T17.5 6q.425 0 .713.288T18.5 7v10q0 .425-.288.713T17.5 18ZM7.05 16.975q-.5.35-1.025.05t-.525-.9v-8.25q0-.6.525-.888t1.025.038l6.2 4.15q.45.3.45.825t-.45.825l-6.2 4.15Z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M17.5 18q-.425 0-.713-.288T16.5 17V7q0-.425.288-.713T17.5 6q.425 0 .713.288T18.5 7v10q0 .425-.288.713T17.5 18ZM7.05 16.975q-.5.35-1.025.05t-.525-.9v-8.25q0-.6.525-.888t1.025.038l6.2 4.15q.45.3.45.825t-.45.825l-6.2 4.15Z"></path></svg>
     )
-  }
+}
 
 export function BookIcon(props) {
     return (

@@ -13,10 +13,23 @@ export const pomodoroStorage = (set) => ({
         interval: null,
         notification: false,
         autoInterval: false,
+        activitiesList: []
     },
     dispatch: {
         setPomoState: (payload) => set(produce((state) => {
             state.dados.pomodoro.state = payload
+        })),
+        setPomoActivitiesState: (payload) => set(produce((state) => {
+            state.dados.pomodoro.activitiesList = payload
+        })),
+        addPomoActivitiesState: (payload) => set(produce((state) => {
+            state.dados.pomodoro.activitiesList = [...state.dados.pomodoro.activitiesList, payload]
+        })),
+        removePomoActivitiesState: (payload) => set(produce((state) => {
+            state.dados.pomodoro.activitiesList = state.dados.pomodoro.activitiesList.filter(item => item.id != payload)
+        })),
+        setPomoActivityState: ({ idx, activityState }) => set(produce((state) => {
+            state.dados.pomodoro.activitiesList[idx].statePomo = activityState
         })),
         setPomoNotify: (payload) => set(produce((state) => {
             state.dados.pomodoro.notification = payload
