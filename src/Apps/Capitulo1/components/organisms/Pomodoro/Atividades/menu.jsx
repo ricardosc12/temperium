@@ -1,6 +1,5 @@
 import { PenIcon, TrashIcon } from "@/Apps/Capitulo1/assets/Icons";
 
-
 export function MenuAtividade() {
     return (
         <>

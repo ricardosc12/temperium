@@ -1,7 +1,6 @@
 import { AddIcon, DotsIcon } from '@/Apps/Capitulo1/assets/Icons'
 import { createBackgroundColor } from '@/Apps/Capitulo1/utils/color'
-import { batch, createEffect, createMemo, createSignal, For, onMount } from 'solid-js'
-import { unescapeLeadingUnderscores } from 'typescript'
+import { batch, createMemo, createSignal, For } from 'solid-js'
 import { createMenu } from '../../../hooks/Menu'
 import { createModal } from '../../../molecules/Modal'
 import { createTags } from '../../Home/hooks/createTags'

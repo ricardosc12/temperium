@@ -1,5 +1,5 @@
 import { HeaderModal } from "@/Apps/Capitulo1/components/molecules/Modal";
-import { createBackgroundColor, createDarkBackgroundColor } from "@/Apps/Capitulo1/utils/color";
+import { createDarkBackgroundColor } from "@/Apps/Capitulo1/utils/color";
 import { createMemo, For } from "solid-js";
 import style from './style.module.css'
 
