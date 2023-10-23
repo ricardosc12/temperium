@@ -12,7 +12,7 @@ export function createBackgroundColor(cor, fator=0.85){
     return "#" + ((1 << 24) | (corClaraR << 16) | (corClaraG << 8) | corClaraB).toString(16).slice(1);
 }
 
-export function createDarkBackgroundColor(cor, fator=0.85){
+export function createDarkBackgroundColor(cor, fator=0.4){
 
     var hex = cor.replace("#", "");
     var r = parseInt(hex.substring(0, 2), 16);

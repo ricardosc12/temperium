@@ -1,5 +1,5 @@
 import { HeaderModal } from "@/Apps/Capitulo1/components/molecules/Modal";
-import { createBackgroundColor } from "@/Apps/Capitulo1/utils/color";
+import { createBackgroundColor, createDarkBackgroundColor } from "@/Apps/Capitulo1/utils/color";
 import { createMemo, For } from "solid-js";
 import style from './style.module.css'
 
@@ -16,8 +16,8 @@ export default function ModalMoreInfo(props) {
                 <div className="flex">
                     <span className="mr-5">{parentAtividade().title}</span>
                     {parentTag ? <div style={{
-                        background: createBackgroundColor(parentTag?.color),
-                        color: parentTag?.color
+                        background: parentTag?.color,
+                        color: createDarkBackgroundColor(parentTag?.color)
                     }}
                         className="tag-md">{parentTag?.title}
                     </div> : ""}
@@ -39,8 +39,8 @@ export default function ModalMoreInfo(props) {
                                     <h3 className="mr-5">{atv.title}</h3>
                                     {tag ? (
                                         <div style={{
-                                            background: createBackgroundColor(tag.color),
-                                            color: tag.color
+                                            background: tag.color,
+                                            color: createDarkBackgroundColor(tag.color)
                                         }}
                                             className="tag">{tag.title}
                                         </div>
