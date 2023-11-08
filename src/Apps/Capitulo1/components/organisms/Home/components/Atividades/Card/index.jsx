@@ -83,13 +83,13 @@ export function CardAtividade({ id, title, atividades, atividade_description, ta
             })
         }
         else if (menu_resp == "repeat") {
-            const atividade = atividades.find(item=>item.id==atividadeId)
+            const atividade = atividades.find(item => item.id == atividadeId)
             openRecurrence(atividade)
         }
     }
 
     return (
-        <div ref={ref} className={`${style.card_atividade} ${open() ? style.collapse : ''}`} onContextMenu={menu}>
+        <div aria-label={props['aria-label']} tabindex={props.tabindex} ref={ref} className={`${style.card_atividade} ${open() ? style.collapse : ''}`} onContextMenu={menu}>
             <div onClick={collapse} className="flex items-center justify-between w-full">
                 <div className="flex space-x-3">
                     <h2 className="text-sm">{title}</h2>

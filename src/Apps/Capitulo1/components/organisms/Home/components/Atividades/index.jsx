@@ -7,7 +7,7 @@ import { useStorage } from '../../../Storage/context';
 import ModalRecorrencia from '../Modais/recorrency';
 import { createModal } from '@/Apps/Capitulo1/components/molecules/Modal';
 
-export default function Atividades({tags}) {
+export default function Atividades({ tags }) {
 
     let ref;
 
@@ -56,11 +56,11 @@ export default function Atividades({tags}) {
                     <p>Atividades</p>
                 </button>
             </div> */}
-            <button className='none' onClick={collapse} id="btn-open-atividades"></button>
-            <div ref={ref} tabindex="-1" className={`${style.atividades} ${open() ? style.colapse : ''}`} id="lateralbar-atividades">
+            <button aria-label="abrir atividades" tabIndex="-1" className='none' onClick={collapse} id="btn-open-atividades"></button>
+            <div ref={ref} className={`${style.atividades} ${open() ? style.colapse : ''}`} id="lateralbar-atividades">
                 <div className='m-3 ml-5 mb-6 flex-row flex justify-between'>
                     <div className='flex'>
-                        <button onClick={collapse} tabindex="-1" className='btn-action-white mr-3'>
+                        <button aria-label="fechar lista" onClick={collapse} tabindex="-1" className='btn-action-white mr-3'>
                             <ArrowIconSx className="rotate-90" />
                         </button>
                         <h2 className='inter-semibold'>Atividades</h2>
@@ -70,11 +70,11 @@ export default function Atividades({tags}) {
                         <AtividadeIcon />
                     </div>
                 </div>
-                <div className={style.atividades_list}>
+                {open() ? <div id="lista_atividades@" tabindex={open() ? "1" : "-1"} aria-label="lista de atividades" className={style.atividades_list}>
                     <For each={[...dados.disciplinas, ...dados.tarefas]}>
-                        {(item) => <CardAtividade openRecurrence={openRecurrence} hash={dados.hash} tagsMap={tags} {...item} />}
+                        {(item) => <CardAtividade aria-label={item.title} openRecurrence={openRecurrence} hash={dados.hash} tagsMap={tags} {...item} />}
                     </For>
-                </div>
+                </div> : ''}
             </div>
         </>
     )

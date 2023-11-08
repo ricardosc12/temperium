@@ -1,10 +1,11 @@
 import style from './assets/styles.module.css'
 import Sidebar from '../../molecules/Sidebar'
-import { createSignal } from 'solid-js'
-import HomePage from '../../organisms/Home'
-import AuthPage from '../../organisms/Auth'
-import PomodoroPage from '../../organisms/Pomodoro'
+import { createSignal, lazy } from 'solid-js'
 import { StorageProvider } from '../../organisms/Storage/context'
+
+const HomePage = lazy(() => import("../../organisms/Home"))
+const AuthPage = lazy(() => import("../../organisms/Auth"))
+const PomodoroPage = lazy(() => import("../../organisms/Pomodoro"))
 
 export default function MainApp() {
 
@@ -18,7 +19,7 @@ export default function MainApp() {
 					<Sidebar route={route} setRoute={setRoute} />
 
 					<div className={style.main_content}>
-						<Switch fallback={()=><div>Not Found</div>}>
+						<Switch fallback={() => <div>Not Found</div>}>
 
 							<Match when={route() === 'home'}>
 								<HomePage />

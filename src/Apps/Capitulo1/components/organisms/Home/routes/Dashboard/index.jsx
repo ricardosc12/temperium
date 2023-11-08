@@ -1,4 +1,3 @@
-import Atividades from "../../components/Atividades";
 import Main from "../../components/Main"
 import style from './style.module.css'
 import { DragAndDrop } from "@/Apps/Capitulo1/components/hooks/DragAndDrop";

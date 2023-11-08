@@ -7,7 +7,7 @@ export default function Sidebar({ setRoute, route }) {
         <div className={style.sidebar} id="sidebar">
             <div className={style.logo}>
                 <div className={style.icon}>
-                    <img src='/profile-img.png' className="rounded-full shadow-md" width={35}/>
+                    <img alt='imagem de perfil' src='/profile-img.png' className="rounded-full shadow-md" width={35} height={35}/>
                     <p className="text-gray-dark text-[10px]">Cronos</p>
                 </div>
             </div>

@@ -168,17 +168,18 @@ export default function Main(props) {
                                         <tr>
                                             <For each={Array(dias.length + 1)}>
                                                 {(_, index) => (
-                                                    <td>{`${index() != 0 ? dias[index() - 1] : ''}`}</td>
+                                                    <td scope='col'>{`${index() != 0 ? dias[index() - 1] : ''}`}</td>
                                                 )}
                                             </For>
                                         </tr>
                                         <For each={horarios}>
                                             {(interval, i) => (
                                                 <tr>
-                                                    <td><p className='color-black-destaq text-xs text-center'>{interval}</p></td>
+                                                    <td scope="row"><p className='color-black-destaq text-xs text-center'>{interval}</p></td>
                                                     <For each={dias}>
                                                         {(dia, j) => (
-                                                            <td id={j() + ":" + i()}>
+                                                            <td
+                                                                id={j() + ":" + i()}>
                                                                 <DroppableArea openMoreInfo={openMoreInfo} menu={menu} tags={props.tags} id={id(semana, dia, interval)} dia={dia}
                                                                     semana={semana} interval={interval} dados={dados}
                                                                     atividades={props.atividades} />
